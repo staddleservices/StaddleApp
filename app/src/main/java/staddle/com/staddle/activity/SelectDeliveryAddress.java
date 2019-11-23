@@ -420,7 +420,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
     class AddressResultReceiver extends ResultReceiver {
         public AddressResultReceiver(android.os.Handler handler) {
             super(handler);
-            Toast.makeText(mContext, "..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
         }
 
         /**
