@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#265A90"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ll_beauty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_beauty"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/saloon1"
+            app:riv_border_color="@android:color/white"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="5dp" />
+
+        <TextView
+            android:id="@+id/tv_beauty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Beauty Salon"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <!-- android:textColor="@drawable/text_color_change"-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_spa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_spa"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/spa"
+            app:riv_border_color="@android:color/white"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="5dp" />
+
+        <TextView
+            android:id="@+id/tv_spa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Spa"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_house"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_house"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/housekeeping"
+            app:riv_border_color="@android:color/white"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="5dp" />
+
+        <TextView
+            android:id="@+id/tv_house"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="House Keeping"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_security"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_security"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/security_guard"
+            app:riv_border_color="@android:color/white"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="5dp" />
+
+        <TextView
+            android:id="@+id/tv_security"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Security Guard"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    app:contentPadding="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_offer_image"
+            android:layout_width="115dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/saloon1"
+            app:riv_border_color="@android:color/white"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="5dp"
+            app:riv_oval="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="Item Name"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:typeface="serif"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="location"
+                android:textSize="14sp"
+                android:typeface="serif"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="3dp"
+                android:text="20 % OFF"
+                android:textColor="#FF4500"
+                android:textSize="15sp"
+                android:typeface="serif"
+                tools:ignore="HardcodedText" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTiming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/tv_item_rating"
+                    android:singleLine="true"
+                    android:text="location"
+                    android:textSize="16sp"
+                    android:typeface="serif"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_item_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:drawableLeft="@drawable/ic_action_star_org"
+                    android:gravity="center"
+                    android:text="4.3"
+                    android:textAlignment="center"
+                    android:textColor="#FF8C00"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

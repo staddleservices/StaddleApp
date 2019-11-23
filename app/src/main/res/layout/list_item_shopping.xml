@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:padding="5dp"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mainthinfont"
+                android:text="name"
+                android:textSize="13dp"
+                android:maxLines="2"
+                android:layout_toLeftOf="@+id/layout_inc"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                />
+
+            <RelativeLayout
+                android:id="@+id/layout_inc"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+               android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+
+                android:background="@drawable/mobileotpedittext"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/img_decrease"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_action_minus"
+                    android:layout_centerVertical="true"
+                    tools:ignore="ContentDescription" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkGrey" />
+
+                <TextView
+                    android:id="@+id/tv_quantity_old"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="20dp"
+                    android:typeface="serif" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkGrey" />
+
+                <ImageView
+                    android:id="@+id/img_increase"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/ic_action_add"
+                    android:layout_marginLeft="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/layout_inc"
+                android:text="500"
+                android:fontFamily="@font/mainthinfont"
+                android:textSize="13dp"
+                android:textColor="@color/black" />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

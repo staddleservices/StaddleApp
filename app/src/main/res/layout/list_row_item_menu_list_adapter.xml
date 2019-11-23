@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/app_color"
+    android:orientation="vertical"
+    android:padding="2dp"
+    tools:ignore="UseCompoundDrawables">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="105dp"
+        android:layout_height="90dp"
+        android:src="@drawable/saloon1"
+        android:layout_marginTop="@dimen/margin_5"
+        app:riv_corner_radius="5dp"
+        app:riv_border_width="2dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        app:riv_oval="false"
+        app:riv_border_color="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/tv_menu_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Name"
+        android:textColor="@color/white" />
+
+</LinearLayout>

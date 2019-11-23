@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "819544222004",
+    "firebase_url": "https://staddle-80f08.firebaseio.com",
+    "project_id": "staddle-80f08",
+    "storage_bucket": "staddle-80f08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819544222004:android:0b423d1c2e7959a6",
+        "android_client_info": {
+          "package_name": "staddle.com.staddle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819544222004-516m3qlqbkej7jcnjl7t23c8bqg0mav6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "staddle.com.staddle",
+            "certificate_hash": "d35d8a6f0ef994462519d449e3f54a91fcae189b"
+          }
+        },
+        {
+          "client_id": "819544222004-qslr9qngdjakqi9mqd984h3nqsv2fovb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "staddle.com.staddle",
+            "certificate_hash": "2fa1b28e8583c5218b1d7e8ce1d0312802d09d58"
+          }
+        },
+        {
+          "client_id": "819544222004-220uu2aku1ku7quel6butr9sl1i8t5as.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5cRKF3zszl2sxKICKp_4-qYF6pJ7yNEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819544222004-imqa7bna7g02ev753tlhf61rv63144ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

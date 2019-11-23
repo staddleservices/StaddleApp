@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MobileOtpActivity">
+
+
+    <ImageButton
+        android:id="@+id/backbtnotp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backarrowbtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"/>
+
+    <RelativeLayout
+        android:id="@+id/headlayoutotp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/backbtnotp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/boldheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainboldfont"
+            android:textColor="#000000"
+            android:text="Enter verification code"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/thinheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="We have sent you 6 digits verification code on"
+            android:textColor="#000000"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/boldheading"/>
+        <TextView
+            android:id="@+id/mobilenumbertext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="+91123456789"
+            android:textColor="@color/app_color_2"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/thinheading"/>
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:src="@drawable/otpverification"
+            android:layout_below="@+id/mobilenumbertext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+    </RelativeLayout>
+
+
+        <com.goodiebag.pinview.Pinview
+            android:id="@+id/pinview"
+            android:layout_centerHorizontal="true"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:pinWidth="40dp"
+            app:pinHeight="40dp"
+            app:pinLength="6"
+            android:layout_below="@+id/headlayoutotp"
+            android:layout_marginTop="20dp"
+            app:cursorVisible="false"
+            app:forceKeyboard="true"
+            app:inputType="number"
+            app:password="true"/>
+
+    <RelativeLayout
+        android:id="@+id/verifyblock"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pinview">
+    <Button
+        android:id="@+id/verifybtnotp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/mainboldfont"
+        android:text="Verify"
+        android:textColor="#ffffff"
+        android:textSize="10dp"
+        android:background="@drawable/loginscreenmobile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mainthinfont"
+        android:text="Resend Otp"
+        android:textColor="@color/app_color_2"
+        android:layout_below="@+id/verifybtnotp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
+        android:layout_alignParentLeft="true"/>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

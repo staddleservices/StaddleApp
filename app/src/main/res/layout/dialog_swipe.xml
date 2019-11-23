@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/shape_dialog_delete_post"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_centerHorizontal="true"
+        android:text="Please select date and time for booking !"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/llDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitle"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btn_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Select date"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_line"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text=""
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btnTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Select time"
+                android:visibility="visible"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_line"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text=""
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select time slot for booking"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:id="@+id/ll_AllSlots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_slot1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+                    android:clickable="false"
+                    android:padding="10dp"
+                    android:text="8 AM - 10 AM" />
+
+                <TextView
+                    android:id="@+id/txt_slot2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+                    android:clickable="false"
+                    android:padding="10dp"
+                    android:text="10 AM - 12 AM" />
+                <!--
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/border_line"
+                                    android:padding="10dp"
+                                    android:text="12 PM - 2 PM" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_slot3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+                    android:clickable="false"
+                    android:padding="10dp"
+                    android:text="12 PM - 2 PM" />
+
+                <TextView
+                    android:id="@+id/txt_slot4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+                    android:clickable="false"
+                    android:padding="10dp"
+                    android:text="2 PM - 4 PM" />
+
+                <!--   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:background="@drawable/border_line"
+                       android:padding="10dp"
+                       android:text="7 PM - 9 PM" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_slot5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+
+                    android:clickable="false"
+                    android:padding="10dp"
+                    android:text="4 PM - 6 PM" />
+
+                <TextView
+                    android:id="@+id/txt_slot6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+                    android:clickable="false"
+                    android:padding="10dp"
+
+                    android:text="6 PM - 8 PM" />
+
+                <!-- <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:background="@drawable/border_line"
+                     android:padding="10dp"
+                     android:text="12 PM - 2 PM" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_slot7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/border_line_slot"
+                    android:clickable="false"
+                    android:padding="10dp"
+                    android:text="8 PM - 10 PM" />
+
+                <TextView
+                    android:id="@+id/txt_slot8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_line_slot"
+                    android:padding="10dp"
+                    android:text="10 PM - 12 PM"
+
+                    android:visibility="gone" />
+
+                <!-- <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:background="@drawable/border_line"
+                     android:padding="10dp"
+                     android:text="12 PM - 2 PM" />-->
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/rl_NoSlots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_line_slot"
+            android:text="Please select time for showing available slots !"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llDetails"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/txt_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_line"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Cancel"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_conform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_line_fill"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Confirm"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:singleLine="false"
+            android:text="Service Name"
+            android:layout_marginLeft="5dp"
+            android:maxLines="2"
+            android:fontFamily="@font/mainthinfont"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/txt_rupee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="₹"
+            android:layout_below="@+id/txt_menu_name"
+            android:fontFamily="@font/mainthinfont"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:fontFamily="@font/mainthinfont"
+            android:singleLine="true"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/txt_rupee"
+            android:layout_below="@+id/txt_menu_name"
+            android:text="400"
+
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="Service Description"
+            android:textSize="10dp"
+            android:layout_below="@+id/txt_price"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <RelativeLayout
+            android:id="@+id/ll_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="end">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:background="@drawable/mobileotpedittext"
+                android:gravity="center"
+
+                android:fontFamily="@font/mainthinfont"
+                android:text="Add"
+                android:textColor="@color/colorGreen" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_inc"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_weight="2"
+            android:background="@drawable/mobileotpedittext"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone">
+
+
+
+            <ImageView
+                android:id="@+id/img_decrease"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_action_minus"
+                android:layout_centerVertical="true"
+                tools:ignore="ContentDescription" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorDarkGrey" />
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:fontFamily="@font/mainthinfont"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:typeface="serif" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorDarkGrey" />
+
+            <ImageView
+                android:id="@+id/img_increase"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical|right"
+                android:src="@drawable/ic_action_add"
+                android:layout_marginLeft="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                tools:ignore="ContentDescription" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

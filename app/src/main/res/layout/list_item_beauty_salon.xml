@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="@dimen/margin_10"
+    android:layout_marginRight="15dp"
+    android:background="@drawable/shape_expand_bg">
+
+    <ImageView
+        android:id="@+id/iv_beauty"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:src="@drawable/makeover"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/txtSubCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/iv_beauty"
+        android:padding="5dp"
+        android:text="Beauty Salon"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>

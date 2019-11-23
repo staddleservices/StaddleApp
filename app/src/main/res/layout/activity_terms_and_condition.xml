@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/app_bg_theme_no_corner"
+    tools:context=".activity.TermsAndConditionActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/app_color"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_vector_back_white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_action_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:padding="5dp"
+            android:text="Terms and Conditions"
+            android:textColor="@color/white"
+            android:textSize="@dimen/header_title_txt_size_" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_actionbar"
+        android:layout_marginTop="0dp"
+        android:background="@color/app_color"
+        android:orientation="vertical">
+
+        <WebView
+            android:id="@+id/wv_term_condition"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:background="@drawable/shape_t_and_c"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_5"
+            android:paddingRight="@dimen/padding_5" />
+
+        <LinearLayout
+            android:id="@+id/ll_check_checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@assets/Ubuntu-Light"
+                android:text="I accept all the Terms and Conditions"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_color_2"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Next"
+            android:textSize="@dimen/btn_txt_size"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:id="@+id/toolbar_searchh"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/rl_search"
+                style="@android:style/Widget.ActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <SearchView
+                    android:layout_height="@dimen/margin_40"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:background="@drawable/mobileotpedittext"
+                    android:id="@+id/searchViewHomee"
+                    android:searchIcon="@drawable/searchiconfragment"
+                    android:searchHintIcon="@null"
+                    android:queryHint="search by name"
+                    android:queryBackground="@null"
+                    android:layout_centerInParent="true"
+                    android:iconifiedByDefault="false"
+                    android:layout_alignParentTop="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/showtextnearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="Top Brand and Stores near you"
+            android:textSize="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/app_color_2"
+            android:layout_below="@+id/toolbar_searchh"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/beautysalon_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/showtextnearby"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF" />
+
+    </RelativeLayout>
+
+</FrameLayout>

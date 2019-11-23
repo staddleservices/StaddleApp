@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbanner"
+    tools:context=".activity.MobileLoginActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/headLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/mainlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_logo"
+        android:layout_centerHorizontal="true"
+
+        />
+
+    <TextView
+        android:id="@+id/mainLogoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainlogo"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/mainboldfont"
+        android:textColor="#000000"
+        android:text="Staddle"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="35dp"
+        />
+
+    <TextView
+        android:id="@+id/quicktext"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mainlight"
+        android:layout_below="@+id/mainLogoTitle"
+        android:textColor="@color/app_color_2"
+        android:text="Meet  your  longings"
+        android:textSize="10dp" />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/middleslineslayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/alternativetexts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="Salon • Spa •  House cleaning •  Security"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/middleslineslayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/enterphnHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="Enter 10 digits phone number to proceed"
+            android:textSize="8dp"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/app_color_2"
+            />
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/mobileeditetxt"
+            android:layout_width="300dp"
+            android:fontFamily="@font/mainlight"
+            android:textSize="12dp"
+            android:textAlignment="center"
+            android:background="@drawable/mobileotpedittext"
+            android:hint="Mobile number"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/enterphnHeading"
+            android:layout_height="50dp"
+            android:maxLength="10"
+            />
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/tccheckbox"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/mobileeditetxt"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:text="I am agree with Terms and conditions and Privacy Policy"-->
+<!--            android:textColor="@color/app_color_2"-->
+<!--            android:textSize="8dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:shadowColor="@color/app_color_2"-->
+<!--            android:fontFamily="@font/mainthinfont"-->
+<!--            android:layout_alignParentLeft="true"/>-->
+
+
+        <Button
+            android:id="@+id/proceedbtnmobile"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/mainboldfont"
+            android:text="Proceed"
+            android:textColor="#ffffff"
+            android:textSize="10dp"
+            android:layout_below="@+id/mobileeditetxt"
+            android:background="@drawable/loginscreenmobile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

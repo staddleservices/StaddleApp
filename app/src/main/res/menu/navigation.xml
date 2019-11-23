@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/homenewicon"
+        android:title="Home" />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/searchiconnew"
+        android:title="Search"
+         />
+    <item
+        android:id="@+id/navigation_Favorite"
+        android:icon="@drawable/hearticonnew"
+        android:title="Favorite"
+        />
+    <item
+        android:id="@+id/navigation_shopping"
+        android:icon="@drawable/shoppingcartnew"
+        android:title="Cart"
+         />
+    <item
+        android:id="@+id/navigation_wallet"
+        android:icon="@drawable/walletnew"
+        android:title="Wallet"
+        android:visible="false"
+        />
+
+</menu>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <color name="colorPrimary">#008577</color>
+  <!--  <color name="colorPrimary">#265A90</color>-->
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#2a6eb4</color>
+
+
+    <color name="white">#FFFFFF</color>
+    <color name="red">#2a6eb4</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="grey_background">#4e4c4c</color>
+    <color name="background_grey">#7A868C</color>
+    <color name="colorRed">#e79391</color>
+    <color name="colorGreen">#43c73e</color>
+    <color name="colorDarkRed">#fa5b57</color>
+
+
+    <color name="app_color">#265A90</color>
+    <color name="app_color_2">#2a6eb4</color>
+    <color name="app_color_3">#4c8eb3</color>
+    <color name="app_splash">#0A345C</color>
+    <color name="app_bg">#C5CFDA</color>
+    <color name="app_bg_white">#C4CED8</color>
+    <color name="app_status_bar_color">#FF2C6BAC</color>
+    <color name="app_bg_dark">#0A345C</color>
+
+    <color name="color_black">#000102</color>
+    <color name="color_white">#f7f8f9</color>
+
+    <color name="color_button_bg">#265A90</color>
+    <color name="color_text_color">#265A90</color>
+    <color name="color_app_bg">#C5CFDA</color>
+    <color name="color_change_pass">#9DB9D5</color>
+    <color name="color_change_pas">#a1c4e7</color>
+    <color name="dialog_background">#e6e1e1</color>
+    <color name="colorDarkGrey">#FFABA6A6</color>
+</resources>
