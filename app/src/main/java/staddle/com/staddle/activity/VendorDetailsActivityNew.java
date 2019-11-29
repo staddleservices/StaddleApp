@@ -180,6 +180,7 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
             intent1.putExtra("Category", Category);
             intent1.putExtra("CID", cid);
             intent1.putExtra("vid",vid);
+            intent.putExtra("vname",vname);
 
             overridePendingTransition(0, 0);
             intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

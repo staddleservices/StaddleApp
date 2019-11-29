@@ -59,6 +59,7 @@ public class PromoCodeActivity extends AppCompatActivity {
     String ttlpriceafterdiscount;
     String vid;
     public static float discount;
+    public static String promovalue="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

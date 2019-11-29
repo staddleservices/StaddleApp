@@ -16,6 +16,9 @@
     <color name="colorRed">#e79391</color>
     <color name="colorGreen">#43c73e</color>
     <color name="colorDarkRed">#fa5b57</color>
+ <color name="background">#dddddd</color>
+
+    <color name="graybtns">#c9c9c9</color>
 
 
     <color name="app_color">#265A90</color>

@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -75,6 +76,9 @@ public class HomeFragment extends Fragment {
 
     VendorListNewAdapter vendorListNewAdapter;
     private ProgressDialog progressDialog;
+
+    //Faceboook Shimmer
+    private ShimmerFrameLayout mShimmerViewContainer;
 
 
     public HomeFragment() {
@@ -171,7 +175,7 @@ public class HomeFragment extends Fragment {
         ll_dots = view.findViewById(R.id.ll_dots);
 
         txtNoMeassage = view.findViewById(R.id.txtNoMeassage);
-
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         productlist_recyclerview = view.findViewById(R.id.productlist_recyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -308,6 +312,8 @@ public class HomeFragment extends Fragment {
     private void hideProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();
+            mShimmerViewContainer.stopShimmer();
+            mShimmerViewContainer.setVisibility(View.GONE);
         }
     }
 

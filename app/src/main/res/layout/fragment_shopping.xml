@@ -323,47 +323,115 @@
     </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
+        android:id="@+id/addresslayoutcheckout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="90dp"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
         android:background="#FFFFFF"
         >
+
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp">
-        <TextView
-            android:id="@+id/paymentdropdowntag"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mainthinfont"
-            android:text="Pay using"
-            android:layout_marginTop="10dp"
-            android:drawableRight="@drawable/dropdownpaymentselection"
-            android:textSize="12dp"/>
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            >
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pc01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mainthinfont"
-                android:text="Cash"
-                android:textColor="@color/app_color_2"
-                android:layout_below="@+id/paymentdropdowntag"
-                android:layout_marginBottom="10dp"/>
+                android:text="Let us know your address"
+                android:textSize="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="#000000"
+
+                />
         </RelativeLayout>
-        <Button
-            android:id="@+id/btn_checkout"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/loginscreenmobile"
-            android:fontFamily="@font/mainboldfont"
-            android:textSize="13dp"
-            android:text="pay and checkout"
-            android:layout_alignParentRight="true"
-            android:textColor="@android:color/white"
-            android:layout_centerVertical="true"
-            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/pc01"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <Button
+                            android:id="@+id/selectaddressbtn"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="Select Address"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:textColor="#FFFFFF"
+                            android:background="@drawable/loginscreenmobile"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <Button
+                            android:id="@+id/addaddressbtn"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="Add Address"
+                            android:textColor="@color/app_color_2"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
@@ -389,5 +457,127 @@
             android:textColor="@color/black" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/paychckoutlayout"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:visibility="visible"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/cat1salon"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/locationcheckright"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/point"/>
+
+            <TextView
+                android:id="@+id/bookingheadline"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/locationcheckright"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/mainthinfont"
+                android:textSize="11dp"
+                android:textColor="#000000"
+                android:text=" "/>
+            <TextView
+                android:id="@+id/salonnamecat1"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/bookingheadline"
+                android:layout_marginLeft="2dp"
+                android:fontFamily="@font/mainboldfont"
+                android:textSize="11dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/app_color_2"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/showdatecat1salon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/mainthinfont"
+                android:textSize="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/locationcheckright"
+                android:layout_below="@+id/locationcheckright"
+                android:text="On "/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:background="#FFFFFF"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp">
+                <TextView
+                    android:id="@+id/paymentdropdowntag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mainthinfont"
+                    android:text="Pay using"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp"/>
+
+                <Spinner
+                    android:id="@+id/payment_spinner"
+                    android:layout_width="100dp"
+
+                    android:layout_below="@+id/paymentdropdowntag"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <Button
+                android:id="@+id/btn_checkout"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/loginscreenmobile"
+                android:fontFamily="@font/mainboldfont"
+                android:textSize="13dp"
+                android:text="Add details"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/white"
+                android:layout_centerVertical="true"
+                />
+            <Button
+                android:id="@+id/btn_placeorder"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:visibility="gone"
+                android:background="@drawable/loginscreenmobile"
+                android:fontFamily="@font/mainboldfont"
+                android:textSize="13dp"
+                android:text="Pay and checkout"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/white"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

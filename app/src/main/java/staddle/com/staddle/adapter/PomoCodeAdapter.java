@@ -59,7 +59,8 @@ public class PomoCodeAdapter extends RecyclerView.Adapter<PomoCodeAdapter.ViewHo
                progressDialog.setCancelable(false);
                progressDialog.setMessage("Loading...");
                progressDialog.show();
-                CreateDialogBox(listdata.get(position).getPromovalue(),listdata.get(position).getPromoname());
+               PromoCodeActivity.promovalue=listdata.get(position).getPromovalue();
+                CreateDialogBox( PromoCodeActivity.promovalue,listdata.get(position).getPromoname());
            }
        });
     }
@@ -112,6 +113,7 @@ public class PomoCodeAdapter extends RecyclerView.Adapter<PomoCodeAdapter.ViewHo
                 ShoppingFragment.appliedcoupontag.setText(promoname);
                 Intent intent = new Intent();
                 intent.putExtra(ShoppingFragment.DISCOUNTKEY, PromoCodeActivity.discount+"");
+                intent.putExtra("promovalue",promovalue);
 
                 contextt.setResult(ShoppingFragment.RESULT_CODE, intent); // You can also send result without any data using setResult(int resultCode)
                 contextt.finish();

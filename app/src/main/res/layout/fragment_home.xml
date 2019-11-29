@@ -265,6 +265,30 @@
             </LinearLayout>
 
         </LinearLayout>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/llMain"
+            android:orientation="vertical"
+            app:shimmer_duration="800">
+
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+            <include layout="@layout/shimmerplaceholderlandingactivity" />
+        </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/productlist_recyclerview"
@@ -292,5 +316,8 @@
             tools:ignore="HardcodedText" />
 
     </RelativeLayout>
+
+
+
 
 </android.support.v4.widget.NestedScrollView>

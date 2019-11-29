@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -24,7 +23,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,7 +32,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,10 +49,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
-import com.linkedin.platform.LISessionManager;
 import com.squareup.picasso.Picasso;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,8 +71,6 @@ import staddle.com.staddle.activity.OfferAndPromoActivity;
 import staddle.com.staddle.activity.PolicyActivity;
 import staddle.com.staddle.activity.ProfileActivity;
 import staddle.com.staddle.activity.SettingActivity;
-import staddle.com.staddle.activity.SplashActivity;
-import staddle.com.staddle.activity.TermsAndConditionActivity;
 import staddle.com.staddle.activity.WalletActivity;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.UserInfoModule;
@@ -98,7 +90,6 @@ import staddle.com.staddle.sheardPref.AppPreferences;
 import staddle.com.staddle.utils.AppConstants;
 
 import static android.graphics.Color.TRANSPARENT;
-import static staddle.com.staddle.sheardPref.AppPreferences.PREFS_NAME;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
         BottomNavigationView.OnNavigationItemSelectedListener {
@@ -129,6 +120,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     List<Address> list;
     String currLat, currLong, address;
     String cid="";
+    String vaname="";
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
@@ -144,6 +136,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Fragment fragmentShopping = null;
     LinearLayout toolbar;
     private String Category = "";
+
 
     //SearchBox
     EditText searchBox;
@@ -179,6 +172,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             discount = extras.getString("discount");
             commision = extras.getString("commision");
             vid=extras.getString("vid");
+            cid=extras.getString("CID");
+            vaname=extras.getString("vname");
         }
         if (openF2) {
             Bundle bundle = new Bundle();
@@ -186,6 +181,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putString("Category", Category);
             bundle.putString("CID", cid);
             bundle.putString("vid",vid);
+            bundle.putString("vname",vaname);
             fragmentShopping = ShoppingFragment.newInstance(bundle);
             navigation.setSelectedItemId(R.id.navigation_shopping);
             replaceFragment(fragmentShopping);
@@ -543,8 +539,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     fragment = new HomeFragment();
                     toolbar.setVisibility(View.VISIBLE);
                     break;
-                case R.id.navigation_search:
-                    fragment = new SearchFragment();
+                case R.id.navigation_profile:
+                    Intent intent=new Intent(HomeActivity.this,ProfileActivity.class);
+                    //fragment = new SearchFragment();
                     toolbar.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_wallet:
@@ -662,4 +659,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
+
+
 }

@@ -1,6 +1,7 @@
 package staddle.com.staddle.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +10,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -17,21 +17,22 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -39,7 +40,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
@@ -48,18 +48,25 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.LogRecord;
+import java.util.Map;
 
 import staddle.com.staddle.R;
+import staddle.com.staddle.bean.MySingleton;
+import staddle.com.staddle.bean.SavedAddressList;
+import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.retrofitApi.EndApi;
+import staddle.com.staddle.sheardPref.AppPreferences;
+
+import static staddle.com.staddle.activity.AllAddressActivity.noaddressfoundlayout;
+import static staddle.com.staddle.activity.AllAddressActivity.savedAddressLists;
+
 public class SelectDeliveryAddress extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     private GoogleMap mMap;
     View mapView;
@@ -88,9 +95,22 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
     protected String mAreaOutput;
     protected String mCityOutput;
     protected String mStateOutput;
+    String AddressString;
+    EditText houseplot;
+    EditText landmark;
+    EditText pincode;
+    EditText nickname;
+
+    public static final String DATEKEY="dateaddress";
+    public static final String TIMEKEY="timeaddress";
+    public static final int GETTIME=5;
+    public static String date;
+    public static String time;
 
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private LocationManager AppUtils;
+    private Button saveaddressToDatabaseBtn;
+    private ProgressDialog progressDialog;
 
 
 
@@ -99,12 +119,12 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_delivery_address);
         mContext = this;
+        init();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapView = mapFragment.getView();
-        mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
-        getMyCurrentLocation=findViewById(R.id.currentlocfab);
+
         getMyCurrentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,9 +135,25 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
                 }
             }
         });
+
+        saveaddressToDatabaseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(houseplot.getText().toString().equals("") || landmark.getText().toString().equals("") || pincode.getText().toString().equals("") || nickname.getText().toString().equals("")) {
+                    Toast.makeText(mContext, "All fields required", Toast.LENGTH_SHORT).show();
+                }else{
+                    progressDialog=new ProgressDialog(SelectDeliveryAddress.this);
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                    String completeAddress = houseplot.getText().toString() + "," + landmark.getText().toString() + "," + AddressString + "," + pincode.getText().toString();
+                    saveAddressOnServer(nickname.getText().toString(), completeAddress);
+
+                }
+            }
+        });
 //        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        bottom_sheet=findViewById(R.id.bottom_sheet);
-        fetchedaddress=findViewById(R.id.locateaddress);
+
 
         sheetBehavior=BottomSheetBehavior.from(bottom_sheet);
 
@@ -191,6 +227,73 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
             Toast.makeText(mContext, "Location not supported in this device", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void saveAddressOnServer(String nickname, String completeAddress) {
+        String uid = AppPreferences.loadPreferences(SelectDeliveryAddress.this, "USER_ID");
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, EndApi.SAVE_ADDRESS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.e("response",response);
+                        progressDialog.dismiss();
+                        int size=savedAddressLists.size();
+
+                        savedAddressLists.add(new SavedAddressList(nickname,completeAddress));
+                        AllAddressActivity.fetchAddressAdapter.notifyDataSetChanged();
+                        AllAddressActivity.fetchAddressAdapter.notifyItemInserted(size);
+                        noaddressfoundlayout.setVisibility(View.GONE);
+                        //fetchAddressAdapter.notifyAll();
+                        finish();
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responce", error.toString() );
+                new android.app.AlertDialog.Builder(getApplicationContext())
+                        .setTitle("Connection failed!")
+                        .setCancelable(false)
+                        .setMessage("Please check your internet connection or restart the App!")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+                //Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<String,String>();
+                params.put("UID",uid);
+                params.put("NICKNAME",nickname);
+                params.put("ADDRESS",completeAddress);
+
+
+
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
+    }
+
+    private void init(){
+        mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
+        getMyCurrentLocation=findViewById(R.id.currentlocfab);
+        bottom_sheet=findViewById(R.id.bottom_sheet);
+        fetchedaddress=findViewById(R.id.locateaddress);
+        saveaddressToDatabaseBtn=findViewById(R.id.saveaddressToDatabaseBtn);
+        houseplot=findViewById(R.id.houseplotfield);
+        landmark=findViewById(R.id.landmarkfield);
+        pincode=findViewById(R.id.pincodeField);
+        nickname=findViewById(R.id.nickname);
     }
 
 
@@ -517,6 +620,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         // Check that the result was from the autocomplete widget.
         if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
             if (resultCode == RESULT_OK) {
@@ -559,6 +663,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
             // Indicates that the activity closed before a selection was made. For example if
             // the user pressed the back button.
         }
+
     }
 
     private void getAddress(double latitude, double longitude) {
@@ -573,6 +678,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
                 String country = list.get(0).getCountryName();
                 String postalCode = list.get(0).getPostalCode();
                 knownName = list.get(0).getFeatureName();
+                AddressString=address;
                 fetchedaddress.setText(address);
             }
         } catch (IOException e) {

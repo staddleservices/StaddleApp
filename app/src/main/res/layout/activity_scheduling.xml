@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SchedulingActivity">
+
+    <RelativeLayout
+        android:id="@+id/HeaderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/backbtntiming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backarrowbtn"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainboldfont"
+            android:text="When would you like your services?"
+            android:layout_toEndOf="@+id/backbtntiming"
+            android:layout_marginTop="25dp"
+            android:textSize="15dp"
+            android:layout_marginRight="25dp"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5sp"
+        android:layout_marginTop="15dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:fontFamily="@font/mainthinfont"
+            android:text="Select the day or date"
+            android:textSize="13dp"/>
+
+        <EditText
+            android:id="@+id/getDateEditext"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/mobileotpedittext"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:hint="Select date"
+            android:textSize="15dp"
+            android:textAlignment="center"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:maxLines="1"
+            android:fontFamily="@font/mainboldfont"
+            android:textColor="@color/app_color_2"
+            android:textColorHint="@color/app_color_2"
+            android:layout_marginTop="10dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/selecttimetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mainthinfont"
+            android:text="At what time professionals should arrive?"
+            android:textSize="13dp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selecttimetxt"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp1"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="10 - 10:30 am"
+                            android:textSize="13dp"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp2"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="10:30 - 11 am"
+                            android:textSize="13dp"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp3"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="11 - 11:30 am"
+                            android:textSize="13dp"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp4"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="11:30 - 12 pm"
+                            android:textSize="13dp"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp5"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="12 - 12:30 pm"
+                            android:textSize="13dp"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp6"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="12:30 - 1 pm"
+                            android:textSize="13dp"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp7"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="1 - 1:30 pm"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp8"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="1:30 - 2 pm"
+                            android:textColor="#c9c9c9"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp9"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="2 - 2:30 pm"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp10"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="2:30 - 3 pm"
+                            android:textColor="#c9c9c9"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp11"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="3 - 3:30 pm"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp12"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="3:30 - 4 pm"
+                            android:textColor="#c9c9c9"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp13"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="4 - 4:30 pm"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:textColor="#c9c9c9"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_marginBottom="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/tp14"
+                            android:textAlignment="center"
+                            android:gravity="center_vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="40dp"
+                            android:fontFamily="@font/mainboldfont"
+                            android:text="4:30 - 5 pm"
+                            android:textColor="#c9c9c9"
+                            android:textSize="13dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:background="@drawable/mobileotpedittext"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/dateSelectBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/loginscreenmobile"
+            android:fontFamily="@font/mainboldfont"
+            android:textSize="13dp"
+            android:text="select and proceed"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

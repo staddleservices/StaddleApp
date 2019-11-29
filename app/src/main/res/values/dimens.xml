@@ -26,6 +26,10 @@
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_45">45dp</dimen>
     <dimen name="margin_50">50dp</dimen>
+    <dimen name="activityPadding">16dp</dimen>
+    <dimen name="placeholderImage">60dp</dimen>
+    <dimen name="placeholderTextHeight">8dp</dimen>
+
 
 
     <dimen name="padding_1">1dp</dimen>

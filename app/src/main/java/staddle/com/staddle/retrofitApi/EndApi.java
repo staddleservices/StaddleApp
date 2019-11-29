@@ -44,4 +44,6 @@ public class EndApi extends BaseApi {
     public static final String CHECK_USERS="http://staddle.in/mobileapp/api/checkuserexist.php";
     public static final String FETCH_COUPONS="http://staddle.in/mobileapp/api/fetchoffers.php";
     public static final String SEARCH_COUPONS="http://staddle.in/mobileapp/api/searchpromo.php";
+    public static final String FETCH_SAVED_ADDRESS="http://staddle.in/mobileapp/api/fetchsavedaddress.php";
+    public static final String SAVE_ADDRESS="http://staddle.in/mobileapp/api/insertaddresses.php";
 }
