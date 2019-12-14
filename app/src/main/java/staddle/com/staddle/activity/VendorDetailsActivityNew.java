@@ -65,9 +65,9 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
     private ApiInterface apiInterface;
     private ImageView img_back, iv_vendor, img1, img2, img3, img4, img5, img_vendor_logo ;
     public static  RelativeLayout img_cart;
-    private String vid = "", rating = "", cid = "", vname = "", location = "", image = "", closingTime = "", openingTime = "",
+    private String vid = "", rating = "", cid = "",  location = "", image = "", closingTime = "", openingTime = "",
             image1 = "", image2 = "", image3 = "", image4 = "", image5 = "", userId, discount = "", commision = "";
-
+    public static String vname = "";
     //private ru.dimorinny.floatingtextbutton.FloatingTextButton floatingTextButton;
     private FloatingActionButton floatingTextButton;
     private ProgressDialog progressDialog;
@@ -97,7 +97,7 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
             rating = intent.getStringExtra("rating");
             image = intent.getStringExtra("image");
             vid = intent.getStringExtra("vid");
-            Log.e("VIDDETAILS:",vid);
+            //Log.e("VIDDETAILS:",vid);
             cid = intent.getStringExtra("cid");
             discount = intent.getStringExtra("discount");
             commision = intent.getStringExtra("commision");

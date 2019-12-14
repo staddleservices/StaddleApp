@@ -304,7 +304,7 @@ public class MobileOtpActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("responce", error.toString() );
-                new AlertDialog.Builder(getApplicationContext())
+                new AlertDialog.Builder(MobileOtpActivity.this)
                         .setTitle("Connection failed!")
                         .setCancelable(false)
                         .setMessage("Please check your internet connection or restart the App!")

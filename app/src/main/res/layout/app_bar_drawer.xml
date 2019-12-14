@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:background="@color/white"
+        android:background="@color/app_color_2"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible">
@@ -33,23 +33,24 @@
                 android:layout_marginStart="@dimen/margin_7"
                 android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/iv_menu_toolbar"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/menuicon" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_menu_toolbar"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:src="@drawable/menuicon" />-->
 
                 <RelativeLayout
                     android:id="@+id/relSearch"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="0dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toEndOf="@+id/iv_menu_toolbar"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal">
+<!--                    android:layout_toEndOf="@+id/iv_menu_toolbar"-->
+
 
 
                     <ImageView
@@ -57,7 +58,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/locationiconblue"
+                        android:src="@drawable/locationtagwhite"
                         android:layout_marginTop="5dp"/>
 
                     <TextView
@@ -71,7 +72,7 @@
                         android:textSize="12dp"
                         android:textAlignment="viewStart"
                         android:layout_centerVertical="true"
-                        android:textColor="#000000"/>
+                        android:textColor="@color/white"/>
 
 <!--                    <ImageView-->
 <!--                        android:id="@+id/iv_search"-->
@@ -100,7 +101,7 @@
                     android:layout_height="20dp"
                     android:layout_marginTop="5dp"
                     android:contentDescription="bell"
-                    android:src="@drawable/notificationbelltag" />
+                    android:src="@drawable/notificationbell" />
 
 
                 <TextView

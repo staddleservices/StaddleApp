@@ -78,6 +78,7 @@ import staddle.com.staddle.fragment.BeautyFragment;
 import staddle.com.staddle.fragment.FavoriteFragment;
 import staddle.com.staddle.fragment.HomeFragment;
 import staddle.com.staddle.fragment.HouseKeepingFragment;
+import staddle.com.staddle.fragment.ProfileFragment;
 import staddle.com.staddle.fragment.SearchFragment;
 import staddle.com.staddle.fragment.SecurityFragment;
 import staddle.com.staddle.fragment.ShoppingFragment;
@@ -91,7 +92,7 @@ import staddle.com.staddle.utils.AppConstants;
 
 import static android.graphics.Color.TRANSPARENT;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
+public class HomeActivity extends AppCompatActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {
     ApiInterface apiInterface;
     String TAG = getClass().getSimpleName();
@@ -130,11 +131,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             doubleBackToExitPressedOnce = false;
         }
     };
-    private FirebaseAuth mAuth;
-    GoogleSignInClient mGoogleSignInClient;
+    public static  FirebaseAuth mAuth;
+    public static GoogleSignInClient mGoogleSignInClient;
     boolean openF2;
     Fragment fragmentShopping = null;
-    LinearLayout toolbar;
+    public static LinearLayout toolbar;
     private String Category = "";
 
 
@@ -193,15 +194,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(HomeActivity.this, "Check your internet connection !", Toast.LENGTH_SHORT).show();
         }
 
-        tv_user_name.setText(userName);
-        tv_user_email.setText(userEmail);
+//        tv_user_name.setText(userName);
+//        tv_user_email.setText(userEmail);
 
-        rl_edt_profile.setOnClickListener(v -> {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        });
+//        rl_edt_profile.setOnClickListener(v -> {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        });
 
         searchBox.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -220,21 +221,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         et_location.setOnClickListener(view -> ChangeLocation(1));
         relSearch.setOnClickListener(view -> ChangeLocation(1));
-        ll_nav_home.setOnClickListener(this);
-        iv_menu_toolbar.setOnClickListener(this);
-        ll_nav_my_profile.setOnClickListener(this);
-        ll_nav_my_order.setOnClickListener(this);
-        rl_nav_my_wish_list.setOnClickListener(this);
-        ll_nav_promo_or_offer.setOnClickListener(this);
-        ll_nav_wallet.setOnClickListener(this);
-        ll_nav_notification.setOnClickListener(this);
-        ll_nav_invite_friends.setOnClickListener(this);
-        ll_nav_rate_and_review.setOnClickListener(this);
-        ll_nav_settings.setOnClickListener(this);
-        ll_nav_24_x_7_help.setOnClickListener(this);
-        rl_nav_policy.setOnClickListener(this);
-        ll_nav_about.setOnClickListener(this);
-        ll_nav_logout.setOnClickListener(this);
+//        ll_nav_home.setOnClickListener(this);
+//        iv_menu_toolbar.setOnClickListener(this);
+//        ll_nav_my_profile.setOnClickListener(this);
+//        ll_nav_my_order.setOnClickListener(this);
+//        rl_nav_my_wish_list.setOnClickListener(this);
+//        ll_nav_promo_or_offer.setOnClickListener(this);
+//        ll_nav_wallet.setOnClickListener(this);
+//        ll_nav_notification.setOnClickListener(this);
+//        ll_nav_invite_friends.setOnClickListener(this);
+//        ll_nav_rate_and_review.setOnClickListener(this);
+//        ll_nav_settings.setOnClickListener(this);
+//        ll_nav_24_x_7_help.setOnClickListener(this);
+//        rl_nav_policy.setOnClickListener(this);
+//        ll_nav_about.setOnClickListener(this);
+//        ll_nav_logout.setOnClickListener(this);
 
         rl_notification.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
@@ -337,74 +338,74 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.ll_nav_home) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.ll_nav_my_profile) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_my_order) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, MyOrderActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.rl_nav_my_wish_list) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, MyWishListActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_promo_or_offer) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, OfferAndPromoActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_wallet) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, WalletActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_notification) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_invite_friends) {
-            drawer.closeDrawer(GravityCompat.START);
-            share();
-        } else if (id == R.id.ll_nav_settings) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_24_x_7_help) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, HelpActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_rate_and_review) {
-            drawer.closeDrawer(GravityCompat.START);
-            openAppRatingg(HomeActivity.this);
-        } else if (id == R.id.rl_nav_policy) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, PolicyActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_about) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        } else if (id == R.id.ll_nav_logout) {
-            drawer.closeDrawer(GravityCompat.START);
-            logOut();
-        } else if (id == R.id.iv_menu_toolbar) {
-            drawer.openDrawer(GravityCompat.START);
-        }
-    }
+//    @Override
+//    public void onClick(View view) {
+//        int id = view.getId();
+//        if (id == R.id.ll_nav_home) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else if (id == R.id.ll_nav_my_profile) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_my_order) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, MyOrderActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.rl_nav_my_wish_list) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, MyWishListActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_promo_or_offer) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, OfferAndPromoActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_wallet) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, WalletActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_notification) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_invite_friends) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            share();
+//        } else if (id == R.id.ll_nav_settings) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_24_x_7_help) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, HelpActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_rate_and_review) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            openAppRatingg(HomeActivity.this);
+//        } else if (id == R.id.rl_nav_policy) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, PolicyActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_about) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//        } else if (id == R.id.ll_nav_logout) {
+//            drawer.closeDrawer(GravityCompat.START);
+//            logOut();
+//        } else if (id == R.id.iv_menu_toolbar) {
+//            drawer.openDrawer(GravityCompat.START);
+//        }
+//    }
 
     public static void openAppRatingg(Context context) {
         try {
@@ -466,7 +467,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                     Picasso.get().load(R.drawable.user_profile).error(R.drawable.user_profile).into(iv_user_profile_pic);
                                 } else if (userProfilePicture.contains(".png")) {
                                     Picasso.get()
-                                            .load("http://staddle.in/mobileapp/post_image/"
+                                            .load("http://127.0.0.1/mobileapp/post_image/"
                                                     + userProfilePicture)
                                             .error(R.drawable.user_profile)
                                             .into(iv_user_profile_pic);
@@ -524,7 +525,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private  void replaceFragment(Fragment fragment) {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.fragment_container, fragment);
         ft.commit();
@@ -540,8 +541,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     toolbar.setVisibility(View.VISIBLE);
                     break;
                 case R.id.navigation_profile:
-                    Intent intent=new Intent(HomeActivity.this,ProfileActivity.class);
-                    //fragment = new SearchFragment();
+                    fragment = new ProfileFragment();
                     toolbar.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_wallet:

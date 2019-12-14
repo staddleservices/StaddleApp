@@ -78,6 +78,7 @@ import staddle.com.staddle.activity.PromoCodeActivity;
 import staddle.com.staddle.activity.SchedulingActivity;
 import staddle.com.staddle.activity.SelectDeliveryAddress;
 import staddle.com.staddle.activity.SignUpActivity;
+import staddle.com.staddle.activity.VendorDetailsActivityNew;
 import staddle.com.staddle.adapter.CustomSpinnerAdapter;
 import staddle.com.staddle.adapter.ShoppingAdapter;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
@@ -155,6 +156,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     TextView couponminuspromo;
     TextView couponminusprice;
     String promoValue="";
+    public static AlertDialog quantAlert;
 
     public static TextView appliedcoupontag;
     public static ImageView AppliedCouponCancelTag;
@@ -1457,22 +1459,22 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         pd.show();
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        android.util.Log.e("PARAMETERS",userId);
-        android.util.Log.e("PARAMETERS",vid_Selected_items);
-        android.util.Log.e("PARAMETERS",order_list);
-        android.util.Log.e("PARAMETERS",order_price);
-        android.util.Log.e("PARAMETERS",String.valueOf(discounts));
-        android.util.Log.e("PARAMETERS",appliedpomodes);
-        android.util.Log.e("PARAMETERS",appliedpromovalue);
-        android.util.Log.e("PARAMETERS",promotiondiscount);
-        android.util.Log.e("PARAMETERS",String.valueOf(discountsPrice));
-        android.util.Log.e("PARAMETERS",commision);
-        android.util.Log.e("PARAMETERS",String.valueOf(totalPrice));
-        android.util.Log.e("PARAMETERS",NICKNAME);
-        android.util.Log.e("PARAMETERS",ADDRESSSTRING);
-        android.util.Log.e("PARAMETERS",SELECTEDTIME);
-        android.util.Log.e("PARAMETERS",SELECTEDDATE);
-        android.util.Log.e("PARAMETERS",paymentmethod);
+//        android.util.Log.e("PARAMETERS",userId);
+//        android.util.Log.e("PARAMETERS",vid_Selected_items);
+//        android.util.Log.e("PARAMETERS",order_list);
+//        android.util.Log.e("PARAMETERS",order_price);
+//        android.util.Log.e("PARAMETERS",String.valueOf(discounts));
+//        android.util.Log.e("PARAMETERS",appliedpomodes);
+//        android.util.Log.e("PARAMETERS",appliedpromovalue);
+//        android.util.Log.e("PARAMETERS",promotiondiscount);
+//        android.util.Log.e("PARAMETERS",String.valueOf(discountsPrice));
+//        android.util.Log.e("PARAMETERS",commision);
+//        android.util.Log.e("PARAMETERS",String.valueOf(totalPrice));
+//        android.util.Log.e("PARAMETERS",NICKNAME);
+//        android.util.Log.e("PARAMETERS",ADDRESSSTRING);
+//        android.util.Log.e("PARAMETERS",SELECTEDTIME);
+//        android.util.Log.e("PARAMETERS",SELECTEDDATE);
+//        android.util.Log.e("PARAMETERS",paymentmethod);
 
 //        placeorderwithcashvolley(userId, vid_Selected_items,
 //                order_list,String.valueOf(discountsPrice) , String.valueOf(discounts),appliedpomodes,appliedpromovalue,promotiondiscount, order_price,
@@ -1494,11 +1496,11 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                             int status = responsee.getStatus();
                             if (status == 1) {
                                 myCartArrayList.clear();
-                                Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
                                 new Handler().postDelayed(() -> {
-                                    Intent intent = new Intent(mContext, HomeActivity.class);
-                                    startActivity(intent);
-                                }, 1000);
+                                    CreateDialogBox(VendorDetailsActivityNew.vname);
+
+                                }, 0);
                             } else {
                                 Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
                             }
@@ -1770,5 +1772,31 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 //        stringRequest.setShouldCache(false);
 //        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
 //    }
+
+    public  void CreateDialogBox(String vendorname) {
+
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View formElementsView = inflater.inflate(R.layout.placeorderconfirmtion,
+                null, false);
+        final  TextView vendornametxt=(TextView)formElementsView.findViewById(R.id.tag2orderplaced);
+        final  TextView okaywesometext=(TextView)formElementsView.findViewById(R.id.okaywesometextorderplaced);
+        vendornametxt.setText("You will get notified when "+vendorname+" confirm your order");
+        okaywesometext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HomeActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        quantAlert=new AlertDialog.Builder(getContext()).setView(formElementsView)
+                .setCancelable(false)
+                .show();
+        quantAlert.getWindow().getAttributes().windowAnimations = R.anim.zoom_out;
+        quantAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //progressDialog.dismiss();
+    }
 
 }

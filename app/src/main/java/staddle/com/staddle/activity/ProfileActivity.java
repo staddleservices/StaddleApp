@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
     MyOrderListAdapter myOrderListAdapter;
     RecyclerView myorderlist;
     ShimmerFrameLayout shimmerFrameLayout;
-
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -87,6 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (CheckNetwork.isNetworkAvailable(ProfileActivity.this)) {
             // ======== Api Call =============
             getUserInfo(userId);
+            getMyOrderList(userId);
         } else {
             Toast.makeText(ProfileActivity.this, "Check your internet connection !", Toast.LENGTH_SHORT).show();
         }
@@ -97,9 +98,10 @@ public class ProfileActivity extends AppCompatActivity {
     private void find_All_IDs() {
         username=findViewById(R.id.usernameprofile);
         number=findViewById(R.id.emailcontactprofile);
-        myorderlist=findViewById(R.id.MyOrderList);
+        myorderlist=findViewById(R.id.RecyclerviewMyOrders);
         myorderlist.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));
         shimmerFrameLayout=findViewById(R.id.shimmerviewprofile);
+        myOrderListModelArrayList=new ArrayList<>();
 
     }
 
@@ -411,6 +413,7 @@ public class ProfileActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         myOrderListModelArrayList.clear();
                         MyOrderListResponse myOrderListResponse = response.body();
+                        Log.d("MYORDERRESPONSE",response+"");
                         if (myOrderListResponse != null) {
                             String status = myOrderListResponse.getStatus();
                             String message = myOrderListResponse.getMessage();
@@ -419,7 +422,6 @@ public class ProfileActivity extends AppCompatActivity {
                                 myOrderListAdapter = new MyOrderListAdapter(ProfileActivity.this, myOrderListModelArrayList);
                                 myorderlist.setAdapter(myOrderListAdapter);
                                 myorderlist.setVisibility(View.VISIBLE);
-                                //rl_no.setVisibility(View.GONE);
                                 myorderlist.setHasFixedSize(true);
                                 myOrderListAdapter.notifyDataSetChanged();
                                 shimmerFrameLayout.stopShimmer();
@@ -445,5 +447,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

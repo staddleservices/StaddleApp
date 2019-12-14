@@ -14,7 +14,7 @@ public class EndApi extends BaseApi {
     public static final String GET_USER_INFO = "getUserInfoDeatils.php";
     public static final String GET_CATEGORY_SUBCATEGORY_LIST = "wsGetCategorySubcategoryList.php";
     public static final String GET_SLIDER_IMAGES = "getHomeSilderList.php";
-    public static final String GET_VENDOR_LIST = "getVenderList.php";
+    public static final String GET_VENDOR_LIST ="getVenderList.php";
     public static final String GET_CATEGORY_SUBCATEGORY_TREE_LIST = "wsGetSubcategoryTreeList.php";
     public static final String GET_VENDOR_MENU_LIST = "getVendermenulist.php";
     public static final String GET_PRODUCT_LIST_CATEGORY = "wsProductListCategory.php";
@@ -28,8 +28,10 @@ public class EndApi extends BaseApi {
     public static final String UPDATE_PRODUCT_STATUS_REJECTED = "wsUpdateProductStatusRejected.php";
     public static final String HELP = "add_help.php";
     public static final String GET_FAVOURITE_LIST = "getFavList.php";
+    public static final String GET_FAVOURITE_LISTVID="http://staddle.in/mobileapp/api/getFavVendorlist.php";
     public static final String ADD_OFFER_SAVE = "add_offer_save.php";
     public static final String ADD_ORDER_DETAILS = "add_order_details.php";
+    public static final String CHECKPOSTORDER = "chechpostorder.php";
     public static final String GET_OFFER_PROMO_LIST = "promoProductList.php";
     public static final String GET_MY_ORDER_LIST_USER = "getMyOrderListUser.php";
     public static final String GET_MY_ORDER_LIST_USER_NEW = "get_My_Order_list.php";

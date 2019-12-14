@@ -40,6 +40,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        ArrayList<MyOrderListModel.Data> dataArrayList = myOrderListModelArrayList.get(position).getData();
         MyOrderListModel myOrderListModel = myOrderListModelArrayList.get(position);
         setAnimation(holder.itemView, position);
 
@@ -56,6 +57,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
         holder.tv_total_amount.setText("₹  " + totalPrice);
         holder.tv_order_date.setText(myOrderListModel.getCreate_date());
         holder.txtBookBook.setText(myOrderListModel.getBooked_date() + " " + myOrderListModel.getBooking_slot());
+        holder.xItems.setText(dataArrayList.size()+" X Items");
 
         if (myOrderListModel.getStatus().equalsIgnoreCase("A"))
             holder.txtStatus.setText("Accepted");
@@ -68,7 +70,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, MyOrderDetailsActivity.class);
-            ArrayList<MyOrderListModel.Data> dataArrayList = myOrderListModelArrayList.get(position).getData();
+
 
             intent.putParcelableArrayListExtra("DATA_LIST", dataArrayList);
             intent.putExtra("NAME", myOrderListModelArrayList.get(position).getvName());
@@ -93,7 +95,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, tv_total_amount, tv_order_date, txtBookBook, txtStatus;
+        TextView txtName, tv_total_amount, tv_order_date, txtBookBook, txtStatus,xItems;
         Button btnRate;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -104,6 +106,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             txtBookBook = itemView.findViewById(R.id.txtBookBook);
             txtStatus = itemView.findViewById(R.id.txtStatus);
             btnRate = itemView.findViewById(R.id.btnRate);
+            xItems=itemView.findViewById(R.id.xItems);
         }
     }
 

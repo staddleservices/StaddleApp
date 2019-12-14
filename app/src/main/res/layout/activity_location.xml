@@ -143,12 +143,13 @@
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_below="@+id/tv_current_location"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/mainthinfont"
                 android:textSize="10dp"
                 android:background="@drawable/loginscreenmobile"
                 android:text="Next"
                 android:textColor="@color/white"
+                android:layout_marginBottom="15dp"
                 android:layout_centerHorizontal="true"
                 />
 

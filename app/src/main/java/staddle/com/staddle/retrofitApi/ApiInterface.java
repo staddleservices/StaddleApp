@@ -125,10 +125,12 @@ public interface ApiInterface {
     Call<AddFavouriteResponse> addFavourite(@Query("uid") String uid,
                                             @Query("vid") String vid);
 
-    @GET(EndApi.GET_FAVOURITE_LIST)
+    @GET(EndApi.GET_FAVOURITE_LISTVID)
     Call<FavouriteListResponse> getFavouriteList(@Query("uid") String uid);
+//    @GET(EndApi.GET_FAVOURITE_LISTVID)
+//    Call<FavouriteListResponse> getFavouriteListVid(@Query("uid") String uid);
 
-    @GET(EndApi.ADD_ORDER_DETAILS)
+    @GET(EndApi.CHECKPOSTORDER)
     Call<AddFavouriteResponse> addOfferSave(@Query("uid") String uid,
                                             @Query("vid") String vid,
                                             @Query("order_list") String order_list,

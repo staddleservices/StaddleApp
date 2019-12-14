@@ -1,31 +1,58 @@
 package staddle.com.staddle.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import staddle.com.staddle.R;
 import staddle.com.staddle.ResponseClasses.FavouriteListResponse;
+import staddle.com.staddle.activity.LocationActivity;
+import staddle.com.staddle.activity.MobileOtpActivity;
+import staddle.com.staddle.activity.MyWishListActivity;
+import staddle.com.staddle.activity.SignUpActivity;
 import staddle.com.staddle.adapter.FavouriteListAdapter;
 import staddle.com.staddle.bean.FavouriteListModel;
+import staddle.com.staddle.bean.MySingleton;
+import staddle.com.staddle.bean.VendorListModel;
 import staddle.com.staddle.retrofitApi.ApiClient;
 import staddle.com.staddle.retrofitApi.ApiInterface;
+import staddle.com.staddle.retrofitApi.EndApi;
 import staddle.com.staddle.sheardPref.AppPreferences;
 import staddle.com.staddle.utils.Alerts;
+import staddle.com.staddle.utils.RequestQueueHelper;
 
 public class FavoriteFragment extends Fragment {
     View view;
@@ -38,6 +65,7 @@ public class FavoriteFragment extends Fragment {
     String userId;
     RelativeLayout rl_no_fav;
     TextView txt_no_fav;
+
 
     public FavoriteFragment() {
         // Required empty public constructor
@@ -54,7 +82,7 @@ public class FavoriteFragment extends Fragment {
         find_All_IDs(view);
 
         if (staddle.com.staddle.utils.CheckNetwork.isNetworkAvailable(mContext)) {
-            getFavouriteList(userId);
+            getFavouriteListVid(userId);
         } else {
             Alerts.showAlert(mContext);
         }
@@ -72,11 +100,15 @@ public class FavoriteFragment extends Fragment {
         yourfavstores=view.findViewById(R.id.yourfavtext);
     }
 
-    private void getFavouriteList(String uid) {
+    private void getFavouriteListVid(String uid) {
+
+        Log.d("UIDFAVFRAGMENT",uid);
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false); // set cancelable to false
         progressDialog.setMessage("Loading Please Wait..."); // set message
         progressDialog.show();
+
+
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -91,26 +123,29 @@ public class FavoriteFragment extends Fragment {
                         favouriteListModelslist.clear();
                         FavouriteListResponse favouriteListResponse = response.body();
                         if (favouriteListResponse != null) {
+                            Log.d("RXP",favouriteListResponse.getStatus());
                             String status = favouriteListResponse.getStatus();
                             String message = favouriteListResponse.getMessage();
                             if (status.equalsIgnoreCase("1")) {
                                 favouriteListModelslist = favouriteListResponse.getInfo();
-                                favouriteListAdapter = new FavouriteListAdapter(mContext, favouriteListModelslist);
+                                for(int i=0;i<favouriteListModelslist.size();i++){
+                                    Log.e("RXP",favouriteListModelslist.get(i).getBusiness_name());
+                                }
+
+                                favouriteListAdapter = new FavouriteListAdapter(getContext(), favouriteListModelslist);
                                 rvFavourite.setAdapter(favouriteListAdapter);
                                 rvFavourite.setVisibility(View.VISIBLE);
-                                yourfavstores.setVisibility(View.VISIBLE);
-                                rl_no_fav.setVisibility(View.GONE);
+                                //rl_no_fav.setVisibility(View.GONE);
                                 rvFavourite.setHasFixedSize(true);
                                 favouriteListAdapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
-                                rl_no_fav.setVisibility(View.VISIBLE);
-                                rvFavourite.setVisibility(View.GONE);
-                                yourfavstores.setVisibility(View.GONE);
+                                Toast.makeText(getContext(), "" + message, Toast.LENGTH_SHORT).show();
+                                //rl_no_fav.setVisibility(View.VISIBLE);
+                                //rvFavourite.setVisibility(View.GONE);
                             }
                         }
                     } else {
-                        Toast.makeText(mContext, "Response Fail !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Response Fail !!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -119,8 +154,12 @@ public class FavoriteFragment extends Fragment {
             @Override
             public void onFailure(Call<FavouriteListResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
     }
+
 }

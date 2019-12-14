@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "819544222004-ppc5isiju1ha2b0nthd918grsecli588.apps.googleusercontent.com",
+          "client_id": "819544222004-e7ago1lk4fqcg017ajs3ej62e9hk1e99.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "staddle.com.staddle",
@@ -23,23 +23,7 @@
           }
         },
         {
-          "client_id": "819544222004-eq312qaci2n4p3kvl8cms7jq5djmpa12.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "staddle.com.staddle",
-            "certificate_hash": "c1e9467c3ab82eaac91755ec90c5f9b2788d663a"
-          }
-        },
-        {
-          "client_id": "819544222004-sivjic9hgrlofglv1mag2cl7pv37leu6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "staddle.com.staddle",
-            "certificate_hash": "68547f44be53e3fc04a84a59b01a43a083451945"
-          }
-        },
-        {
-          "client_id": "819544222004-49pki81ffmmed4o15hc56q1321ldfn8n.apps.googleusercontent.com",
+          "client_id": "819544222004-fk22ppulg9kr7hpdijmfs3g80651jj9d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "staddle.com.staddle",
@@ -47,11 +31,11 @@
           }
         },
         {
-          "client_id": "819544222004-qslr9qngdjakqi9mqd984h3nqsv2fovb.apps.googleusercontent.com",
+          "client_id": "819544222004-ni8an5qvsda21tn9kank1sof7pi4e25l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "staddle.com.staddle",
-            "certificate_hash": "2fa1b28e8583c5218b1d7e8ce1d0312802d09d58"
+            "certificate_hash": "68547f44be53e3fc04a84a59b01a43a083451945"
           }
         },
         {

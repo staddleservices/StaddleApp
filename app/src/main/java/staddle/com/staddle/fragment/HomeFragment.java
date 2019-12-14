@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
 
     public RecyclerView productlist_recyclerview;
     ApiInterface apiInterface;
-    private static ArrayList<VendorListModel> vendorListModelArrayList;
+    public static ArrayList<VendorListModel> vendorListModelArrayList;
     TextView txtNoMeassage;
 
     VendorListNewAdapter vendorListNewAdapter;
@@ -108,6 +108,7 @@ public class HomeFragment extends Fragment {
 
         vendorListModelArrayList = new ArrayList<>();
         imageUrl = new ArrayList<>();
+        productlist_recyclerview.setNestedScrollingEnabled(false);
 
         init();
 
@@ -191,7 +192,8 @@ public class HomeFragment extends Fragment {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         String currLat = AppPreferences.loadPreferences(mContext, "LATTITUDE");
         String currLng = AppPreferences.loadPreferences(mContext, "LONGITUDE");
-        Call<VendorListResponse> call = apiInterface.getVendorList(currLat, currLng);
+        Toast.makeText(mContext, currLat+currLng, Toast.LENGTH_LONG).show();
+        Call<VendorListResponse> call = apiInterface.getVendorList("26.867805", "75.818736 ");
 
         call.enqueue(new Callback<VendorListResponse>() {
             @Override
@@ -231,7 +233,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<VendorListResponse> call, Throwable t) {
                 hideProgressDialog();
-                Toast.makeText(mContext, "server error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "server error"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

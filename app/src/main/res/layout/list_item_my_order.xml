@@ -25,63 +25,86 @@
                 android:weightSum="2">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Name:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:maxLines="1"
-                    android:text="" />
+                    android:fontFamily="@font/mainthinfont"
+                    android:textStyle="bold"
+                    android:textColor="@color/app_color"
+                    android:textSize="12dp"
+                    android:text="Venkat Spa and Beauty Services" />
 
             </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_order_dateee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/mainthinfont"
+                    android:layout_centerVertical="true"
+                    android:textSize="10dp"
+                    android:text="jaipur" />
+
+                <TextView
+                    android:id="@+id/tv_order_date"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mainthinfont"
+                    android:layout_alignParentRight="true"
+                    android:textSize="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="10/9/2019"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/xItems"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Order Date:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:text="3 X items"
+                    android:fontFamily="@font/mainboldfont"
+                    android:textColor="@color/app_color_2"
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_order_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:text="" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/bookingdatetxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="Booking Date:"
+                    android:fontFamily="@font/mainboldfont"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
                     android:textStyle="bold" />
 
                 <TextView
@@ -89,14 +112,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/mainthinfont"
+                    android:textSize="12dp"
                     android:maxLines="1"
-                    android:text="" />
-            </LinearLayout>
+                    android:layout_toEndOf="@+id/bookingdatetxt"
+                    android:layout_centerVertical="true"
+                    android:text="12/9/2019" />
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="5dp"
                 android:weightSum="2">
 
                 <TextView
@@ -106,8 +134,10 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="Total amount:"
+                    android:fontFamily="@font/mainboldfont"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
                     android:textStyle="bold" />
 
                 <TextView
@@ -115,14 +145,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/mainthinfont"
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/tv_total_amounttt"
                     android:maxLines="1"
-                    android:text="" />
+                    android:text="220 rs" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -133,8 +168,10 @@
                     android:layout_marginBottom="5dp"
                     android:text="Order Status:"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/mainboldfont"
+                     />
 
                 <TextView
                     android:id="@+id/txtStatus"
@@ -144,7 +181,10 @@
                     android:layout_toEndOf="@+id/txtStaus"
                     android:layout_toStartOf="@+id/btnRate"
                     android:maxLines="1"
-                    android:text=""
+                    android:fontFamily="@font/mainthinfont"
+                    android:layout_centerVertical="true"
+                    android:text="pending"
+                    android:textSize="12dp"
                     tools:ignore="RelativeOverlap" />
 
                 <Button
