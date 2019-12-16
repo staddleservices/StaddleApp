@@ -41,7 +41,7 @@ public class CategoryDetailsAdpater extends RecyclerView.Adapter<CategoryDetails
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_items_swiggy_like_offerlist, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_recy_swiggy_like_vendorlist, parent, false);
         return new MyViewHolder(view);
     }
 

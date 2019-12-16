@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -70,11 +71,12 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
     public static String vname = "";
     //private ru.dimorinny.floatingtextbutton.FloatingTextButton floatingTextButton;
     private FloatingActionButton floatingTextButton;
-    private ProgressDialog progressDialog;
     private int lastPosition = -1;
     private Dialog dialog;
     private String fav;
     private String tag = "", Category = "";
+    private ShimmerFrameLayout mShimmerViewContainer;
+    private CoordinatorLayout container;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -280,6 +282,8 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
 
         updateCart(VendorSubCategoryListAdapter.getCartList());
 
+        container.setVisibility(View.VISIBLE);
+
     }
 
     private void find_All_IDs() {
@@ -294,7 +298,9 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
         txtClosingTime = findViewById(R.id.txtClosingTime);
         txtVendorLocation = findViewById(R.id.txtVendorLocation);
         txtCart = findViewById(R.id.txtCart);
-
+        mShimmerViewContainer = findViewById(R.id.shimmerviewprofile_vendor);
+        container = findViewById(R.id.vendordetailslayoutcontainer);
+        container.setVisibility(View.GONE);
         img1 = findViewById(R.id.img1);
         img2 = findViewById(R.id.img2);
         img3 = findViewById(R.id.img3);
@@ -320,7 +326,7 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
     }
 
     private void getVendorSubCategoryMenuListApi(String vid) {
-        showProgressDialog();
+
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<GetVendorSubCategoryMenuListResponse> call = apiInterface.getVenderSubCatgoryMenuList(vid);
@@ -417,21 +423,20 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 
-    private void showProgressDialog() {
-        progressDialog = new ProgressDialog(VendorDetailsActivityNew.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading Please Wait...");
-        progressDialog.show();
-    }
+//    private void showProgressDialog() {
+//        progressDialog = new ProgressDialog(VendorDetailsActivityNew.this);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setMessage("Loading Please Wait...");
+//        progressDialog.show();
+//    }
 
     private void hideProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+        mShimmerViewContainer.stopShimmer();
+        mShimmerViewContainer.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
     }
 
     private void addFavourite(String userId, String vid) {
-        showProgressDialog();
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 

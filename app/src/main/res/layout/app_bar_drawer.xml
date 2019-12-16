@@ -44,8 +44,8 @@
                 <RelativeLayout
                     android:id="@+id/relSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal">
@@ -55,8 +55,8 @@
 
                     <ImageView
                         android:id="@+id/locationtag"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerVertical="true"
                         android:src="@drawable/locationtagwhite"
                         android:layout_marginTop="5dp"/>
@@ -64,12 +64,13 @@
                     <TextView
                         android:id="@+id/et_location"
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/locationtag"
                         android:layout_marginRight="2dp"
                         android:fontFamily="@font/mainthinfont"
                         android:text="401,Roshni Enclave,Mansrover"
-                        android:textSize="12dp"
+                        android:textSize="13dp"
+                        android:maxLines="1"
                         android:textAlignment="viewStart"
                         android:layout_centerVertical="true"
                         android:textColor="@color/white"/>
@@ -152,6 +153,8 @@
 
     </LinearLayout>
 
+
     <include layout="@layout/content_home" />
+
 
 </LinearLayout>

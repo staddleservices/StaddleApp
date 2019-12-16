@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
     tools:context=".activity.VendorDetailsActivityNew">
+
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/vendordetailslayoutcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        android:visibility="visible">
+
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -509,5 +519,24 @@
     </RelativeLayout>
 
 
+    </android.support.design.widget.CoordinatorLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerviewprofile_vendor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_base_color="#FFFFFF"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:shimmer_duration="800">
+
+        <!-- Adding 7 rows of placeholders -->
+
+        <include layout="@layout/vendordetailsactivityshimmer"
+            />
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</RelativeLayout>

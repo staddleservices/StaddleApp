@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +68,7 @@ public class FavoriteFragment extends Fragment {
     TextView txt_no_fav;
 
 
+
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -98,6 +100,7 @@ public class FavoriteFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvFavourite.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
         yourfavstores=view.findViewById(R.id.yourfavtext);
+
     }
 
     private void getFavouriteListVid(String uid) {

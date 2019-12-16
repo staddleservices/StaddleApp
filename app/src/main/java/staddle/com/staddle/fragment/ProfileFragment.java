@@ -19,6 +19,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +65,6 @@ import static staddle.com.staddle.HomeActivity.toolbar;
 public class ProfileFragment extends Fragment {
     View view;
     Context mContext;
-    ProgressDialog pd;
     ApiInterface apiInterface;
     String TAG = getClass().getSimpleName();
     String userId;
@@ -75,6 +76,9 @@ public class ProfileFragment extends Fragment {
     private RelativeLayout myfavLayout;
     Activity activity;
     private RelativeLayout helpLayout;
+    private RelativeLayout MyOrdersRcvLayout;
+    ImageView dropdown;
+    ImageView dropup;
 
     ArrayList<MyOrderListModel> myOrderListModelArrayList;
     ArrayList<MyOrderListModel.Data> dataArrayList;
@@ -88,6 +92,8 @@ public class ProfileFragment extends Fragment {
     RelativeLayout policyLayout;
     RelativeLayout aboutUsLayout;
     RelativeLayout layoutLogout;
+    LinearLayout contentlayout;
+
 
     TextView appVersionName;
 
@@ -122,6 +128,23 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 replaceFragment(new FavoriteFragment());
                 toolbar.setVisibility(View.VISIBLE);
+            }
+        });
+
+        dropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyOrdersRcvLayout.setVisibility(View.VISIBLE);
+                dropup.setVisibility(View.VISIBLE);
+                dropdown.setVisibility(View.GONE);
+            }
+        });
+        dropup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyOrdersRcvLayout.setVisibility(View.GONE);
+                dropdown.setVisibility(View.VISIBLE);
+                dropup.setVisibility(View.GONE);
             }
         });
         helpLayout.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +198,9 @@ public class ProfileFragment extends Fragment {
         myfavLayout=view.findViewById(R.id.myfavlayourprofile);
         fragmentManager=getActivity().getSupportFragmentManager();
         helpLayout=view.findViewById(R.id.helpIntenttxt);
+        MyOrdersRcvLayout = view.findViewById(R.id.myordersRecyclerlayoutProfile);
+        dropdown = view.findViewById(R.id.arrowdropdownMyOrders);
+        dropup = view.findViewById(R.id.arrowdropupMyOrders);
         inviteFriendsLayout=view.findViewById(R.id.inviteFriendsLayout);
         policyLayout=view.findViewById(R.id.layoutPolicy);
         aboutUsLayout=view.findViewById(R.id.aboutUsLayout);
@@ -182,13 +208,13 @@ public class ProfileFragment extends Fragment {
         appVersionName=view.findViewById(R.id.appVersionName);
         String versionName = BuildConfig.VERSION_NAME;
         appVersionName.setText("App version : "+versionName);
+        contentlayout = view.findViewById(R.id.layoutprofilecontent);
+
 
     }
     private void getUserInfo(String userId) {
-        pd = new ProgressDialog(getContext());
-        pd.setCancelable(false);
-        pd.setMessage("Loading Please Wait...");
-        pd.show();
+
+
 
         Call<UserInfoResponse> call = apiInterface.getUserInfo(userId);
 
@@ -198,7 +224,6 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
-                pd.dismiss();
                 String str_response = new Gson().toJson(response.body());
                 Log.e("" + TAG, "Response >>>>" + str_response);
                 try {
@@ -257,14 +282,13 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onFailure(Call<UserInfoResponse> call, Throwable t) {
-                pd.dismiss();
+
                 Toast.makeText(getContext(), "Server Error :" + t, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
     private void getMyOrderList(String uid) {
-
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -291,6 +315,7 @@ public class ProfileFragment extends Fragment {
                                 myOrderListAdapter.notifyDataSetChanged();
                                 shimmerFrameLayout.stopShimmer();
                                 shimmerFrameLayout.setVisibility(View.GONE);
+                                contentlayout.setVisibility(View.VISIBLE);
                             } else {
                                 Toast.makeText(getContext(), "" + message, Toast.LENGTH_SHORT).show();
                                 //rl_no.setVisibility(View.VISIBLE);

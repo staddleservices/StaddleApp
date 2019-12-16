@@ -17,6 +17,11 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation" />
 
+    <View android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/toolbardropshadow"/>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"

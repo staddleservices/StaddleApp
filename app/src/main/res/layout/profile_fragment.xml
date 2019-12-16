@@ -2,45 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/graybtns"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+   <LinearLayout android:id="@+id/headerLayoutProfile"
+        android:background="#FFFFFF"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+    <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="50dp"
+        android:background="@color/app_color_2">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:fontFamily="@font/mainboldfont"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+
+
+            android:text="Profile"/>
+
+
+
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/headerLayoutProfile"
+        android:background="@drawable/toolbardropshadow"/>
+
+
+
 
         <LinearLayout
+            android:id="@+id/layoutprofilecontent"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/headerLayoutProfile"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="#FFFFFF">
 
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:fontFamily="@font/mainboldfont"
-                    android:textColor="#000000"
-                    android:textSize="15dp"
-
-
-                    android:text="Profile"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1sp"
-                    android:background="@color/graybtns"
-                    android:layout_alignParentBottom="true"/>
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -87,7 +97,7 @@
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -184,7 +194,7 @@
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -202,15 +212,33 @@
                             android:textSize="13dp"
                             />
 
+                        <ImageView
+                            android:id="@+id/arrowdropdownMyOrders"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/arrowdropdown"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"/>
+                        <ImageView
+                            android:id="@+id/arrowdropupMyOrders"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/arrowdropup"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:visibility="invisible"/>
+
 
 
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/myordersRecyclerlayoutProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
+                        android:visibility="gone"
                         android:layout_marginTop="0dp">
 
                         <android.support.v7.widget.RecyclerView
@@ -233,7 +261,7 @@
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -371,34 +399,32 @@
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
+
         </LinearLayout>
+       <com.facebook.shimmer.ShimmerFrameLayout
+           android:id="@+id/shimmerviewprofile"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           app:shimmer_base_color="#FFFFFF"
+           android:layout_gravity="center"
 
-    </ScrollView>
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerviewprofile"
-        android:layout_width="match_parent"
+           android:orientation="vertical"
+           android:visibility="visible"
+           app:shimmer_duration="800">
 
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_below="@+id/viewline"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:shimmer_duration="800">
+           <!-- Adding 7 rows of placeholders -->
 
-        <!-- Adding 7 rows of placeholders -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-            <include layout="@layout/shimmerplaceholderlandingactivity" />
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+               <include layout="@layout/profile_frag_shimmer"
+                   />
+
+
+       </com.facebook.shimmer.ShimmerFrameLayout>
+
+   </LinearLayout>
+
+
+
+
 
 
 </RelativeLayout>

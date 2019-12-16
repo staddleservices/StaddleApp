@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +77,7 @@ public class HomeFragment extends Fragment {
     TextView txtNoMeassage;
 
     VendorListNewAdapter vendorListNewAdapter;
-    private ProgressDialog progressDialog;
+    NestedScrollView nested_scroll_view;
 
     //Faceboook Shimmer
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -138,24 +140,25 @@ public class HomeFragment extends Fragment {
 
         linearLayout1.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, AtHomeActivity.class);
+            intent.putExtra("cid","1");
             startActivity(intent);
         });
 
         linearLayout2.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, SubCategoryDetailsActivity.class);
+            Intent intent = new Intent(mContext, AtHomeActivity.class);
             intent.putExtra("cid", "4");
             mContext.startActivity(intent);
         });
 
         linearLayout3.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, SubCategoryDetailsActivity.class);
+            Intent intent = new Intent(mContext, AtHomeActivity.class);
             intent.putExtra("cid", "2");
             intent.putExtra("Tag", "HOUSE");
             mContext.startActivity(intent);
         });
 
         linearLayout4.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, SubCategoryDetailsActivity.class);
+            Intent intent = new Intent(mContext, AtHomeActivity.class);
             intent.putExtra("cid", "3");
             intent.putExtra("Tag", "Security");
             startActivity(intent);
@@ -172,9 +175,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void find_All_IDs(View view) {
+        nested_scroll_view  = view.findViewById(R.id.nested_scroll_view);
         viewpager_home_slider = view.findViewById(R.id.viewpager_home_slider);
         ll_dots = view.findViewById(R.id.ll_dots);
-
         txtNoMeassage = view.findViewById(R.id.txtNoMeassage);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         productlist_recyclerview = view.findViewById(R.id.productlist_recyclerview);
@@ -188,7 +191,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void vendorList() {
-        showProgressDialog();
+
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         String currLat = AppPreferences.loadPreferences(mContext, "LATTITUDE");
         String currLng = AppPreferences.loadPreferences(mContext, "LONGITUDE");
@@ -304,19 +307,14 @@ public class HomeFragment extends Fragment {
             dots[currentPage].setTextColor(Color.parseColor("#000000"));
     }
 
-    private void showProgressDialog() {
-        progressDialog = new ProgressDialog(mContext);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading Please Wait...");
-        progressDialog.show();
-    }
+
 
     private void hideProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
+
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
-        }
+            nested_scroll_view.setVisibility(View.VISIBLE);
+
     }
 
 

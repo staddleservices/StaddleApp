@@ -29,7 +29,7 @@ public class SubCategoryDetailsAdapter extends RecyclerView.Adapter<SubCategoryD
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_sub_category, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.applyfilteritem, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -54,7 +54,7 @@ public class SubCategoryDetailsAdapter extends RecyclerView.Adapter<SubCategoryD
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtName = itemView.findViewById(R.id.txtName);
+            txtName = itemView.findViewById(R.id.filtertext);
         }
 
         void bind(final SubcategoryTreeListModel mInbox, final OnItemClickListener listener) {
