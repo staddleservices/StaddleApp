@@ -18,13 +18,19 @@
         android:layout_marginLeft="15dp"/>
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true">
+
+    <RelativeLayout
         android:id="@+id/headlayoutotp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backbtnotp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        >
 
         <TextView
             android:id="@+id/boldheading"
@@ -59,7 +65,7 @@
 
         <ImageView
             android:layout_width="120dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:src="@drawable/otpverification"
             android:layout_below="@+id/mobilenumbertext"
             android:layout_centerHorizontal="true"
@@ -70,11 +76,13 @@
         <com.goodiebag.pinview.Pinview
             android:id="@+id/pinview"
             android:layout_centerHorizontal="true"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:pinWidth="40dp"
             app:pinHeight="40dp"
             app:pinLength="6"
+            android:layout_marginStart="20dp"
+            android:layout_marginRight="20dp"
             android:layout_below="@+id/headlayoutotp"
             android:layout_marginTop="20dp"
             app:cursorVisible="false"
@@ -90,13 +98,15 @@
         android:layout_below="@+id/pinview">
     <Button
         android:id="@+id/verifybtnotp"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/mainboldfont"
         android:text="Verify"
         android:textColor="#ffffff"
         android:textSize="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/loginscreenmobile"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
@@ -112,10 +122,13 @@
         android:layout_below="@+id/verifybtnotp"
         android:layout_marginTop="10dp"
         android:textSize="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentLeft="true"/>
 
 
 
+    </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/white_bg_new"
+    android:background="#FFFFFF"
     tools:context=".activity.NotificationActivity">
 
     <RelativeLayout
         android:id="@+id/rel_actionbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/app_color"
+        android:background="@color/app_color_2"
         android:paddingStart="5dp"
         android:paddingEnd="5dp">
 
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_vector_back_white"
+            android:src="@drawable/icbackarrowbtn"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -27,26 +27,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/iv_back"
             android:padding="5dp"
+            android:fontFamily="@font/mainboldfont"
             android:text="Notification"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15dp" />
 
     </RelativeLayout>
+    <View android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/rel_actionbar"
+        android:background="@drawable/toolbardropshadow"/>
+
 
     <RelativeLayout
         android:id="@+id/rlv_notification"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@+id/rel_actionbar">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#265A90" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/notificationsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical"
+            />
         <LinearLayout
             android:id="@+id/ll_welcome"
             android:layout_width="match_parent"
@@ -55,6 +67,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:paddingBottom="20dp"
+            android:visibility="gone"
             android:background="@drawable/order_bg_shap"
             android:orientation="vertical">
 
