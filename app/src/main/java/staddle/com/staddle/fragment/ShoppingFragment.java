@@ -103,7 +103,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     private RecyclerView rvShopping;
     CardView cardView;
     RelativeLayout rl_no_fav;
-    public static TextView txtNoMeassage, txt_no_fav,  txt_percentage, txt_overallTotalprice;
+    public static TextView  txt_no_fav,  txt_percentage, txt_overallTotalprice;
     public static TextView tv_item_total;
     Button btn_checkout;
     String userId;
@@ -157,6 +157,8 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     TextView couponminusprice;
     String promoValue="";
     public static AlertDialog quantAlert;
+    public static RelativeLayout mainContainerLayout;
+    public static RelativeLayout txtEmptyCart;
 
     public static TextView appliedcoupontag;
     public static ImageView AppliedCouponCancelTag;
@@ -274,6 +276,19 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         spin = (Spinner)view.findViewById(R.id.payment_spinner);
         spin.setAdapter(new CustomSpinnerAdapter(getContext(), R.layout.spinneritemlayout, methods));
         spin.setOnItemSelectedListener(this);
+        myCartArrayList = new ArrayList<>();
+        myCartArrayList = HomeActivity.myCartArrayList;
+        if(myCartArrayList.size()==0){
+            mainContainerLayout.setVisibility(View.GONE);
+            txtEmptyCart.setVisibility(View.VISIBLE);
+            couponlayout.setVisibility(View.GONE);
+            paychckoutlayout.setVisibility(View.GONE);
+        }else {
+            mainContainerLayout.setVisibility(View.VISIBLE);
+            txtEmptyCart.setVisibility(View.GONE);
+            couponlayout.setVisibility(View.VISIBLE);
+            paychckoutlayout.setVisibility(View.VISIBLE);
+        }
 
 
 
@@ -320,8 +335,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
             }
         });
 
-        myCartArrayList = new ArrayList<>();
-        myCartArrayList = HomeActivity.myCartArrayList;
+
 
         discount = HomeActivity.discount;
         commision = HomeActivity.commision;
@@ -591,12 +605,12 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                         cardView.setVisibility(View.GONE);
                         //btn_checkout.setVisibility(View.GONE);
                         AddressLayoutCheckout.setVisibility(View.GONE);
-                        txtNoMeassage.setVisibility(View.VISIBLE);
+                        txtEmptyCart.setVisibility(View.VISIBLE);
                     } else {
                         cardView.setVisibility(View.VISIBLE);
                         //btn_checkout.setVisibility(View.VISIBLE);
                         AddressLayoutCheckout.setVisibility(View.VISIBLE);
-                        txtNoMeassage.setVisibility(View.GONE);
+                        txtEmptyCart.setVisibility(View.GONE);
                     }
                 }else{
                     couponlayoutapplied.setVisibility(View.GONE);
@@ -1305,7 +1319,6 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     private void find_All_IDs(View view) {
         cardView = view.findViewById(R.id.cardView);
         rvShopping = view.findViewById(R.id.rvShopping);
-        txtNoMeassage = view.findViewById(R.id.txtNoMeassage);
         txt_no_fav = view.findViewById(R.id.txt_no);
         tv_item_total = view.findViewById(R.id.tv_item_total);
         txt_percentage = view.findViewById(R.id.txt_percentage);
@@ -1318,6 +1331,8 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         couponminusprice=view.findViewById(R.id.discountminusprice);
         couponminuspromo=view.findViewById(R.id.couponminustext);
         couponlayout=view.findViewById(R.id.couponlayout);
+        mainContainerLayout=view.findViewById(R.id.maincontainercart);
+        txtEmptyCart = view.findViewById(R.id.emptycart);
         couponlayoutapplied=view.findViewById(R.id.couponlayoutapplied);
         appliedcoupontag=view.findViewById(R.id.AppliedTextCode);
         AppliedCouponCancelTag=view.findViewById(R.id.cancelcoupontag);

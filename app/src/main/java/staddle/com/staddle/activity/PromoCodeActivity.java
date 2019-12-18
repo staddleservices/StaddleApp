@@ -114,9 +114,9 @@ public class PromoCodeActivity extends AppCompatActivity {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String status = jsonObject.getString("status");
-                                if(Integer.parseInt(status)==1){
-                                    CreateDialogBoxError();
-                                }else if(Integer.parseInt(status)==0){
+                                //if(Integer.parseInt(status)==1){
+                                    //CreateDialogBoxError();}else
+                                if(Integer.parseInt(status)==0){
                                     String promoname = jsonObject.getString("promonames");
                                     String promovalue  = jsonObject.getString("promovalue");
                                     String mprice  = jsonObject.getString("mprice");
@@ -124,7 +124,7 @@ public class PromoCodeActivity extends AppCompatActivity {
 
                                     promoCodeList.add(new PromoList(promoname,promovalue,mprice,description));
                                 }else{
-                                    CreateDialogBoxError();
+                                    //CreateDialogBoxError();
                                 }
 
 

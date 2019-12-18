@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class HelpActivity extends AppCompatActivity {
 
     ImageView iv_back;
     EditText edt_comment;
-    Button btn_send;
+    RelativeLayout btn_send;
     ProgressDialog pd;
     ApiInterface apiInterface;
     String userId, comment;

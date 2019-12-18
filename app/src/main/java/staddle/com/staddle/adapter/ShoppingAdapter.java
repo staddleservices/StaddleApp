@@ -19,6 +19,12 @@ import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.SubcategoryTreeListModel;
 import staddle.com.staddle.fragment.ShoppingFragment;
 
+import static staddle.com.staddle.fragment.ShoppingFragment.AddressLayoutCheckout;
+import static staddle.com.staddle.fragment.ShoppingFragment.couponlayout;
+import static staddle.com.staddle.fragment.ShoppingFragment.mainContainerLayout;
+import static staddle.com.staddle.fragment.ShoppingFragment.paychckoutlayout;
+import static staddle.com.staddle.fragment.ShoppingFragment.txtEmptyCart;
+
 public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyViewHolder> {
 
     private Context mContext;
@@ -71,29 +77,55 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
         });
 
         holder.img_decrease.setOnClickListener(view -> {
-            GetVendorSubCategoryMenuListModule.MenuList menuList2 = myOrderListModelArrayList.get(position);
-            int count = menuList2.getCount();
-            if (count != 0) {
-                count = count - 1;
-                holder.tv_quantity_old.setText("" + count);
-                int totalPrice = menuList2.getTotalPrice() - Integer.parseInt(menuList2.getMenu_price());
 
-                menuList2.setMenu_name(menuList2.getMenu_name());
-                menuList2.setMenu_price(menuList2.getMenu_price());
-                menuList2.setCount(count);
-                menuList2.setVid(menuList2.getVid());
-                menuList2.setTotalPrice(totalPrice);
-                myOrderListModelArrayList.set(position, menuList2);
-            }
+            int  ci=myOrderListModelArrayList.size();
+            if(ci ==0){
+                mainContainerLayout.setVisibility(View.GONE);
+                txtEmptyCart.setVisibility(View.VISIBLE);
+                couponlayout.setVisibility(View.GONE);
+                paychckoutlayout.setVisibility(View.GONE);
+            }else{
+                mainContainerLayout.setVisibility(View.VISIBLE);
+                txtEmptyCart.setVisibility(View.GONE);
+                couponlayout.setVisibility(View.VISIBLE);
+                paychckoutlayout.setVisibility(View.VISIBLE);
+                GetVendorSubCategoryMenuListModule.MenuList menuList2 = myOrderListModelArrayList.get(position);
+                int count = menuList2.getCount();
+                if (count != 0) {
+                    count = count - 1;
+                    holder.tv_quantity_old.setText("" + count);
+                    int totalPrice = menuList2.getTotalPrice() - Integer.parseInt(menuList2.getMenu_price());
+                    menuList2.setMenu_name(menuList2.getMenu_name());
+                    menuList2.setMenu_price(menuList2.getMenu_price());
+                    menuList2.setCount(count);
+                    menuList2.setVid(menuList2.getVid());
+                    menuList2.setTotalPrice(totalPrice);
+                    myOrderListModelArrayList.set(position, menuList2);
 
-            if (count == 0) {
-                listener.onItemClick(myOrderListModel, position);
-            }
-            notifyDataSetChanged();
-            try {
-                plusButtonClickListener.onPlusButtonClickListener(position, myOrderListModel);
-            } catch (Exception e) {
-                e.printStackTrace();
+                }
+                if (count == 0) {
+                    listener.onItemClick(myOrderListModel, position);
+                    int  i=myOrderListModelArrayList.size();
+                    if(i==0){
+                        mainContainerLayout.setVisibility(View.GONE);
+                        txtEmptyCart.setVisibility(View.VISIBLE);
+                        couponlayout.setVisibility(View.GONE);
+                        paychckoutlayout.setVisibility(View.GONE);
+                    }
+
+                }else {
+
+
+
+
+                    notifyDataSetChanged();
+                    try {
+                        plusButtonClickListener.onPlusButtonClickListener(position, myOrderListModel);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
 
         });

@@ -41,17 +41,17 @@ public class MyHelpListAdapter extends RecyclerView.Adapter<MyHelpListAdapter.My
         MyHelpList myOrderListModel = myOrderListModelArrayList.get(position);
         setAnimation(holder.itemView, position);
 
-        holder.txtName.setText(myOrderListModel.getName());
+        //holder.txtName.setText(myOrderListModel.getName());
         holder.txtComment.setText(myOrderListModel.getComment());
 
         if (myOrderListModel.getName().equalsIgnoreCase("admin")) {
             holder.txtTag.setText("Admin");
             holder.txtTag.setGravity(Gravity.END);
-            holder.llMessage.setGravity(Gravity.END);
+            //holder.llMessage.setGravity(Gravity.END);
         } else {
             holder.txtTag.setText("Me");
             holder.txtTag.setGravity(Gravity.START);
-            holder.llMessage.setGravity(Gravity.START);
+           // holder.llMessage.setGravity(Gravity.START);
         }
 
     }
@@ -62,15 +62,16 @@ public class MyHelpListAdapter extends RecyclerView.Adapter<MyHelpListAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtComment, txtTag;
-        LinearLayout llMessage;
+        //TextView txtName;
+        TextView txtComment, txtTag;
+//        LinearLayout llMessage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtName = itemView.findViewById(R.id.txtName);
+            //txtName = itemView.findViewById(R.id.txtName);
             txtComment = itemView.findViewById(R.id.txtComment);
             txtTag = itemView.findViewById(R.id.txtTag);
-            llMessage = itemView.findViewById(R.id.llMessage);
+            //llMessage = itemView.findViewById(R.id.llMessage);
         }
     }
 

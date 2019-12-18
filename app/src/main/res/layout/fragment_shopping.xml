@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e7e6e8"
-    tools:context=".fragment.FavoriteFragment">
+    >
 
-
+    <RelativeLayout
+        android:id="@+id/maincontainercart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
     <TextView
-        android:id="@+id/txtNoMeassage"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -25,6 +29,7 @@
         android:id="@+id/nested_scroll_view_cart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         >
 
         <LinearLayout
@@ -521,6 +526,9 @@
                 android:text="On "/>
 
         </RelativeLayout>
+        <View android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/toolbarupshadow"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -579,5 +587,52 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/emptycart"
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/shoppingbagempty"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mainthinfont"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:text="Your cart is empty :("
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mainthinfont"
+                    android:textColor="@color/app_color_2"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/emoji"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

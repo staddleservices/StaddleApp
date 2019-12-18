@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg"
+    android:background="#e7e6e8"
     tools:context=".HomeActivity"
     tools:showIn="@layout/app_bar_drawer">
 
