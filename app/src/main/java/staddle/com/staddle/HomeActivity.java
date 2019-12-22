@@ -108,6 +108,7 @@ public class HomeActivity extends AppCompatActivity implements
     public static String vname = "";
     public static String vid="";
     public static String ttldiscount = "";
+    private ImageView iv_bell;
 
     public static ArrayList<GetVendorSubCategoryMenuListModule.MenuList> myCartArrayList = new ArrayList<>();
 
@@ -135,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements
     public static GoogleSignInClient mGoogleSignInClient;
     boolean openF2;
     Fragment fragmentShopping = null;
-    public static LinearLayout toolbar;
+    public static RelativeLayout toolbar;
     private String Category = "";
 
 
@@ -212,6 +213,14 @@ public class HomeActivity extends AppCompatActivity implements
                 replaceFragment(searchFragment);
             }
         });
+//        searchBox.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SearchFragment searchFragment=new SearchFragment();
+//                toolbar.setVisibility(View.GONE);
+//                replaceFragment(searchFragment);
+//            }
+//        });
 
         navigation.setOnNavigationItemSelectedListener(this);
 
@@ -237,7 +246,7 @@ public class HomeActivity extends AppCompatActivity implements
 //        ll_nav_about.setOnClickListener(this);
 //        ll_nav_logout.setOnClickListener(this);
 
-        rl_notification.setOnClickListener(view -> {
+        iv_bell.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
             startActivity(intent);
         });
@@ -259,11 +268,12 @@ public class HomeActivity extends AppCompatActivity implements
         drawer = findViewById(R.id.drawer_layout);
         iv_menu_toolbar = findViewById(R.id.iv_menu_toolbar);
         et_location = findViewById(R.id.et_location);
-        rl_notification = findViewById(R.id.rl_notification);
+        //rl_notification = findViewById(R.id.rl_notification);
 
 
         // ==================== Navigation View ============================
         relSearch = findViewById(R.id.relSearch);
+        iv_bell = findViewById(R.id.iv_bell);
         rl_edt_profile = findViewById(R.id.rl_edt_profile);
         tv_user_name = findViewById(R.id.tv_user_name);
         tv_user_email = findViewById(R.id.tv_user_email);
@@ -289,6 +299,7 @@ public class HomeActivity extends AppCompatActivity implements
         navigation = findViewById(R.id.navigation);
         toolbar = findViewById(R.id.toolbar);
         searchBox=findViewById(R.id.searchservicesbox);
+        replaceFragment(new HomeFragment());
 
     }
 

@@ -229,7 +229,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
             ADDRESSSTRING=data.getStringExtra("address");
             SELECTEDTIME=data.getStringExtra("time");
             SELECTEDDATE=data.getStringExtra("date");
-            Toast.makeText(mContext, NICKNAMESTRING+ADDRESSSTRING+SELECTEDTIME+SELECTEDDATE, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, NICKNAMESTRING+ADDRESSSTRING+SELECTEDTIME+SELECTEDDATE, Toast.LENGTH_SHORT).show();
             headline1.setText("Professionals will be at ");
             headline2.setText(NICKNAMESTRING);
             headline3.setText("At "+ADDRESSSTRING);
@@ -242,7 +242,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
             SELECTEDDATE=data.getStringExtra("date");
             SELECTEDTIME=data.getStringExtra("time");
-            Toast.makeText(mContext, NICKNAMESTRING+ADDRESSSTRING+SELECTEDTIME+SELECTEDDATE, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, NICKNAMESTRING+ADDRESSSTRING+SELECTEDTIME+SELECTEDDATE, Toast.LENGTH_SHORT).show();
             headline1.setText("Booking for "+myCartArrayList.size()+" items at ");
             headline2.setText(HomeActivity.vname);
             headline3.setText("on "+SELECTEDDATE+" ("+SELECTEDTIME+") ");
@@ -266,7 +266,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         Bundle bundle = getArguments();
          cid=bundle.getString("CID");
          category=bundle.getString("Category");
-        Toast.makeText(mContext, cid, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, cid, Toast.LENGTH_SHORT).show();
          vid=bundle.getString("vid");
          vname=bundle.getString("vname");
          Log.e("VID",vid);
@@ -306,7 +306,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
 
                 }else if(SelectedPaymentMethod.equals("Online")){
-
+                        Pay(totalp);
                 }else {
                     Toast.makeText(getContext(),"Please Select a payment method",Toast.LENGTH_LONG).show();
                 }
@@ -1517,7 +1517,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
                                 }, 0);
                             } else {
-                                Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

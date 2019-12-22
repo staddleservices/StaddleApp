@@ -6,14 +6,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 import staddle.com.staddle.R;
@@ -49,6 +55,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
     EditText editTextDate;
     String date;
     int atHome=0;
+    String crTime="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +120,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -135,7 +142,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -156,7 +163,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -177,7 +184,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -199,7 +206,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -220,7 +227,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -241,7 +248,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -263,7 +270,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -284,7 +291,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -305,7 +312,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -327,7 +334,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.tp12:
@@ -347,7 +354,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.app_color_2));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -368,7 +375,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.app_color_2));
                         tp14.setTextColor(getResources().getColor(R.color.graybtns));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -390,7 +397,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         tp12.setTextColor(getResources().getColor(R.color.graybtns));
                         tp13.setTextColor(getResources().getColor(R.color.graybtns));
                         tp14.setTextColor(getResources().getColor(R.color.app_color_2));
-                        Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, selectedTime, Toast.LENGTH_SHORT).show();
 
                         break;
                     }
@@ -435,7 +442,19 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
         tp13=findViewById(R.id.tp13);
         tp14=findViewById(R.id.tp14);
         dateSelectBtn=findViewById(R.id.dateSelectBtn);
+        Calendar calender = Calendar.getInstance();
+        calender.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
+        Log.d("CRTIME",calender.get(Calendar.HOUR_OF_DAY) + ":" + calender.get(Calendar.MINUTE) +  ":" + calender.getActualMinimum(Calendar.SECOND));
+
     }
+//    public static String Datetime()
+//    {
+//        String formattedDate;
+//        Calendar c = Calendar .getInstance().getTime();
+//        System.out.println("Current time => "+c.getTime());
+//        formattedDate=c.getTime()+"";
+//        return formattedDate;
+//    }
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -443,5 +462,10 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
             date=i2+"/"+i1+"/"+i;
             editTextDate.setText(date);
             SelectedDate=date;
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 }

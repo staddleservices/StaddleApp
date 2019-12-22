@@ -319,11 +319,15 @@ public class ProfileFragment extends Fragment {
                             } else {
                                 Toast.makeText(getContext(), "" + message, Toast.LENGTH_SHORT).show();
                                 //rl_no.setVisibility(View.VISIBLE);
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
                                 myorderlist.setVisibility(View.GONE);
                             }
                         }
                     } else {
                         Toast.makeText(getContext(), "Response Fail !!", Toast.LENGTH_SHORT).show();
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -334,6 +338,8 @@ public class ProfileFragment extends Fragment {
             public void onFailure(Call<MyOrderListResponse> call, Throwable t) {
 
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
             }
         });
     }

@@ -375,9 +375,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-                                Toast.makeText(ProfileActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ProfileActivity.this, "" + message, Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(ProfileActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ProfileActivity.this, "" + message, Toast.LENGTH_SHORT).show();
                             }
                         }
 

@@ -10,6 +10,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -201,26 +202,28 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
         if (checkPlayServices()) {
             // If this check succeeds, proceed with normal processing.
             // Otherwise, prompt user to get valid Play Services APK.
-            if (!AppUtils.isLocationEnabled()) {
-                // notify user
-                AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-                dialog.setMessage("Location not enabled!");
-                dialog.setPositiveButton("Open location settings", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(myIntent);
-                    }
-                });
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                if (!AppUtils.isLocationEnabled()) {
+                    // notify user
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+                    dialog.setMessage("Location not enabled!");
+                    dialog.setPositiveButton("Open location settings", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(myIntent);
+                        }
+                    });
+                    dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        // TODO Auto-generated method stub
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            // TODO Auto-generated method stub
 
-                    }
-                });
-                dialog.show();
+                        }
+                    });
+                    dialog.show();
+                }
             }
             buildGoogleApiClient();
         } else {
@@ -684,6 +687,11 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 
 

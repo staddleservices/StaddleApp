@@ -125,7 +125,7 @@ public class MyOrderActivity extends AppCompatActivity {
                                 rv_myOrderList.setHasFixedSize(true);
                                 myOrderListAdapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(MyOrderActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(MyOrderActivity.this, "" + message, Toast.LENGTH_SHORT).show();
                                 rl_no.setVisibility(View.VISIBLE);
                                 rv_myOrderList.setVisibility(View.GONE);
                             }

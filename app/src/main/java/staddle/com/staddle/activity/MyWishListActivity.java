@@ -106,7 +106,7 @@ public class MyWishListActivity extends AppCompatActivity {
                                 rv_myWishList.setHasFixedSize(true);
                                 favouriteListAdapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(MyWishListActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(MyWishListActivity.this, "" + message, Toast.LENGTH_SHORT).show();
                                 rl_no_fav.setVisibility(View.VISIBLE);
                                 rv_myWishList.setVisibility(View.GONE);
                             }
@@ -125,4 +125,5 @@ public class MyWishListActivity extends AppCompatActivity {
             }
         });
     }
+
 }

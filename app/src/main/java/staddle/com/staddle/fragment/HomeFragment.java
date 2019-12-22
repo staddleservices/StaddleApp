@@ -195,7 +195,7 @@ public class HomeFragment extends Fragment {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         String currLat = AppPreferences.loadPreferences(mContext, "LATTITUDE");
         String currLng = AppPreferences.loadPreferences(mContext, "LONGITUDE");
-        Toast.makeText(mContext, currLat+currLng, Toast.LENGTH_LONG).show();
+        //Toast.makeText(mContext, currLat+currLng, Toast.LENGTH_LONG).show();
         Call<VendorListResponse> call = apiInterface.getVendorList("26.867805", "75.818736 ");
 
         call.enqueue(new Callback<VendorListResponse>() {
@@ -216,7 +216,7 @@ public class HomeFragment extends Fragment {
                                     vendorListNewAdapter.setHasStableIds(true);
                                     productlist_recyclerview.setAdapter(vendorListNewAdapter);
                                 } else {
-                                    Toast.makeText(mContext, "" + vendorListResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(mContext, "" + vendorListResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 productlist_recyclerview.setVisibility(View.VISIBLE);
                                 txtNoMeassage.setVisibility(View.GONE);

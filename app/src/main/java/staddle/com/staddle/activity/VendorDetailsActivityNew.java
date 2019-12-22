@@ -119,7 +119,14 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
 
         txtVendorName.setText(vname + " ");
         txtUserEmail.setText(vname);
-        txtRating.setText(rating);
+        if(rating.equals("0.0")){
+            //Log.d("RATING_RUN","if");
+            txtRating.setText("New");
+        }else  {
+            //Log.d("RATING_RUN","else");
+            txtRating.setText(rating);
+        }
+
         txtOpeningTime.setText(openingTime);
         txtClosingTime.setText(closingTime);
         txtVendorLocation.setText(location);

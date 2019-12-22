@@ -89,6 +89,7 @@ public class TermsAndConditionActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //  super.onBackPressed();
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 }

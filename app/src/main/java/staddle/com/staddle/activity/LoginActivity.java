@@ -518,7 +518,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 AppPreferences.savePreferences(LoginActivity.this, "LOGIN_STATUS", "1");
                                 AppPreferences.savePreferences(LoginActivity.this, "isLogin", "Y");
 
-                                Toast.makeText(LoginActivity.this, message + " !!", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginActivity.this, message + " !!", Toast.LENGTH_SHORT).show();
                                 Login();
                             /*   Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);*/
@@ -526,7 +526,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 // finish();
 
                             } else if (status.equalsIgnoreCase("2")) {
-                                Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_SHORT).show();
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 LayoutInflater inflater = getLayoutInflater();
@@ -714,7 +714,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             AppPreferences.savePreferences(LoginActivity.this, "USER_EMAIL", userEmail);
                             AppPreferences.savePreferences(LoginActivity.this, "LOGIN_STATUS", "1");
 
-                            Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_LONG).show();
 
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
@@ -722,7 +722,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
                         } else {
-                            Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_LONG).show();
                         }
                     }
                 } else {

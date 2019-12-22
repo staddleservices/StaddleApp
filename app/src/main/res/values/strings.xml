@@ -42,7 +42,7 @@
     <string name="invalid_landmark">Invalid Landmark</string>
     <string name="location">Location</string>
     <string name="emoji">Lets start looking at our services &#128522;</string>
-    <!--    <string name="default_web_client_id">819544222004-220uu2aku1ku7quel6butr9sl1i8t5as.apps.googleusercontent.com</string>-->
+<!--        <string name="default_web_client_id">819544222004-220uu2aku1ku7quel6butr9sl1i8t5as.apps.googleusercontent.com</string>-->
 
 
 </resources>

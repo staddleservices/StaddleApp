@@ -59,6 +59,7 @@ public class AllAddressActivity extends AppCompatActivity {
     public static List<SavedAddressList> savedAddressLists;
     public static FetchAddressAdapter fetchAddressAdapter;
     TextView AddNewAddress;
+    TextView SearchAddress;
     private static ShimmerFrameLayout shimmerFrameLayout;
     public static RelativeLayout noaddressfoundlayout;
     @Override
@@ -75,6 +76,12 @@ public class AllAddressActivity extends AppCompatActivity {
                 startActivityForResult(intent, ShoppingFragment.REQUESTCODEREFRES);
             }
         });
+        SearchAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void init(){
@@ -82,6 +89,7 @@ public class AllAddressActivity extends AppCompatActivity {
 
         shimmerFrameLayout=findViewById(R.id.shimmerviewaddresses);
         AddNewAddress=findViewById(R.id.addnewunderSavedList);
+        SearchAddress = findViewById(R.id.addnewunderSavedListviasearch);
         addressListRecycler=findViewById(R.id.savedaddress);
         noaddressfoundlayout=findViewById(R.id.noaddressfoundlayout);
         addressListRecycler.setLayoutManager(new LinearLayoutManager(AllAddressActivity.this));

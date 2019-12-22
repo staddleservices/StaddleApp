@@ -66,9 +66,9 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void getnotifications(String uid){
-        notificationsDataModels.add(new NotificationsDataModels("Now save 20% on your first order!","New user? Get 20% off on your first order at any store.","0"));
-        notificationsDataModels.add(new NotificationsDataModels("Xyz Salon and Spa confirmed your order.","Your booking for 1 items at home at Xyz Salon and Spa has been confirmed.","0"));
-        notificationsDataModels.add(new NotificationsDataModels("Service Delivered!","Your booking for 1 items at home at Xyz Salon and Spa has been been delivered today at 2.30 pm at your home.Tap to rate Xyz Salon and Spa.","0"));
+//        notificationsDataModels.add(new NotificationsDataModels("Now save 20% on your first order!","New user? Get 20% off on your first order at any store.","0"));
+//        notificationsDataModels.add(new NotificationsDataModels("Xyz Salon and Spa confirmed your order.","Your booking for 1 items at home at Xyz Salon and Spa has been confirmed.","0"));
+//        notificationsDataModels.add(new NotificationsDataModels("Service Delivered!","Your booking for 1 items at home at Xyz Salon and Spa has been been delivered today at 2.30 pm at your home.Tap to rate Xyz Salon and Spa.","0"));
         NotificationsAdapter notificationsAdapter = new NotificationsAdapter(NotificationActivity.this,notificationsDataModels);
         notifications.setAdapter(notificationsAdapter);
         notifications.hasFixedSize();

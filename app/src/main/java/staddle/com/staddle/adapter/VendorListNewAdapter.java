@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -66,12 +68,20 @@ public class VendorListNewAdapter extends RecyclerView.Adapter<VendorListNewAdap
             holder.txt_discount.setText(vendorListModel.getUser_discount());
 
         holder.txtTiming.setText(vendorListModel.getOpening_time() + " To " + vendorListModel.getClosing_time());
-        holder.tv_item_rating.setText(vendorListModel.getRating());
+        //Toast.makeText(context, vendorListModel.getRating(), Toast.LENGTH_SHORT).show();
+        if(vendorListModel.getRating().equals("0.0")){
+            Log.d("RATING_RUN","if");
+            holder.tv_item_rating.setText("New");
+        }else  {
+            Log.d("RATING_RUN","else");
+            holder.tv_item_rating.setText(vendorListModel.getRating());
+        }
+        //holder.tv_item_rating.setText(vendorListModel.getRating());
 
         String image_url = BaseApi.IMAGE_BASE_POST_URL + vendorListModel.getImage();
         Picasso.get()
                 .load(image_url)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_app_logo)
                 .error(R.mipmap.ic_launcher)
                 .into(holder.iv_offer_image);
 

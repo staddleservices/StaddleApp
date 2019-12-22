@@ -16,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_app_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -25,10 +25,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.AllAddressActivity"></activity>
+        <activity android:name=".activity.SearchAddressActivity">
+
+        </activity>
+        <activity android:name=".activity.AllAddressActivity" />
         <activity
             android:name=".activity.SchedulingActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.SelectDeliveryAddress"
             android:theme="@style/AppTheme.NoActionBar"

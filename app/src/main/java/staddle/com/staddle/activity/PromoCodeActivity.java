@@ -124,7 +124,7 @@ public class PromoCodeActivity extends AppCompatActivity {
 
                                     promoCodeList.add(new PromoList(promoname,promovalue,mprice,description));
                                 }else{
-                                    //CreateDialogBoxError();
+                                    CreateDialogBoxError();
                                 }
 
 
@@ -157,7 +157,7 @@ public class PromoCodeActivity extends AppCompatActivity {
 
                             }
                         }).show();
-                //Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         }
         ){
