@@ -38,7 +38,7 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_favourite, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_recy_swiggy_like_vendorlist, parent, false);
         return new MyViewHolder(view);
     }
 

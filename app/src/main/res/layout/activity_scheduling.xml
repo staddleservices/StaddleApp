@@ -11,13 +11,15 @@
         android:id="@+id/HeaderLayout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/app_color_2"
         android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/backbtntiming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/backarrowbtn"
+            android:src="@drawable/icbackarrowbtn"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="25dp"
             />
@@ -26,21 +28,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mainboldfont"
-            android:text="When would you like your services?"
+            android:text="Schedule your service"
             android:layout_toEndOf="@+id/backbtntiming"
             android:layout_marginTop="25dp"
-            android:textSize="13sp"
+            android:textSize="15dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:layout_marginLeft="10dp"/>
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5sp"
-        android:layout_marginTop="15dp"
-        />
+    <View android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/HeaderLayout"
+        android:background="@drawable/toolbardropshadow"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,7 +60,7 @@
             android:text="Select the day or date"
             android:textSize="13dp"/>
 
-        <EditText
+        <TextView
             android:id="@+id/getDateEditext"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -72,7 +74,6 @@
             android:paddingLeft="10dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:maxLines="1"
             android:fontFamily="@font/mainboldfont"
             android:textColor="@color/app_color_2"
             android:textColorHint="@color/app_color_2"
@@ -126,6 +127,7 @@
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
                             android:layout_height="40dp"
+                            android:clickable="false"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
                             android:text="10 - 10:30 am"
@@ -150,6 +152,7 @@
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
                             android:layout_height="40dp"
+                            android:clickable="false"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
                             android:text="10:30 - 11 am"
@@ -187,6 +190,7 @@
                             android:layout_width="120dp"
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
+                            android:clickable="false"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
@@ -212,6 +216,7 @@
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
                             android:layout_height="40dp"
+                            android:clickable="false"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
                             android:text="11:30 - 12 pm"
@@ -249,6 +254,7 @@
                             android:layout_width="120dp"
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
+                            android:clickable="false"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
@@ -274,6 +280,7 @@
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
                             android:layout_height="40dp"
+                            android:clickable="false"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
                             android:text="12:30 - 1 pm"
@@ -312,6 +319,7 @@
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
                             android:layout_height="40dp"
+                            android:clickable="false"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
                             android:text="1 - 1:30 pm"
@@ -337,6 +345,7 @@
                             android:layout_width="120dp"
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
+                            android:clickable="false"
                             android:layout_height="40dp"
                             android:fontFamily="@font/mainboldfont"
                             android:text="1:30 - 2 pm"
@@ -373,6 +382,7 @@
                             android:layout_width="120dp"
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
+                            android:clickable="false"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
@@ -401,6 +411,7 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/mainboldfont"
                             android:text="2:30 - 3:00 pm"
+                            android:clickable="false"
                             android:textSize="13dp"
                             android:textAlignment="center"
                             android:gravity="center_vertical"
@@ -440,6 +451,7 @@
                             android:fontFamily="@font/mainboldfont"
                             android:text="3 - 3:30 pm"
                             android:textSize="13dp"
+                            android:clickable="false"
                             android:textAlignment="center"
                             android:gravity="center_vertical"
                             android:textColor="#c9c9c9"
@@ -464,6 +476,7 @@
                             android:fontFamily="@font/mainboldfont"
                             android:text="3:30 - 4:00 pm"
                             android:textSize="13dp"
+                            android:clickable="false"
                             android:textAlignment="center"
                             android:gravity="center_vertical"
                             android:textColor="#c9c9c9"
@@ -503,6 +516,7 @@
                             android:text="4 - 4:30 am"
                             android:textSize="13dp"
                             android:textAlignment="center"
+                            android:clickable="false"
                             android:gravity="center_vertical"
                             android:textColor="#c9c9c9"
                             android:background="@drawable/mobileotpedittext"
@@ -528,6 +542,7 @@
                             android:textAlignment="center"
                             android:gravity="center_vertical"
                             android:textColor="#c9c9c9"
+                            android:clickable="false"
                             android:background="@drawable/mobileotpedittext"
                             android:layout_marginBottom="5dp" />
 

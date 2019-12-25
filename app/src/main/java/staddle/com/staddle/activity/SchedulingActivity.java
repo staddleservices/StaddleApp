@@ -52,10 +52,12 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
     String Nickname;
     String Address;
 
-    EditText editTextDate;
+    TextView editTextDate;
     String date;
     int atHome=0;
     String crTime="";
+    int currentTimeHour;
+    int currentTimeMinutes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +67,33 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
         Nickname=intent.getStringExtra("nickname");
         Address=intent.getStringExtra("address");
         atHome=Integer.parseInt(intent.getStringExtra("atHome"));
-        editTextDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+            public void onClick(View view) {
+                Calendar c = Calendar.getInstance();
+                DatePickerDialog dialog = new DatePickerDialog(SchedulingActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String _year = String.valueOf(year);
+                        String _month = (month+1) < 10 ? "0" + (month+1) : String.valueOf(month+1);
+                        String _date = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+                        String _pickedDate = year + "-" + _month + "-" + _date;
+                        Log.e("PickedDate: ", "Date: " + _pickedDate); //2019-02-12
+                        editTextDate.setText(_pickedDate);
+                        //editTextDate.setEnabled(false);
+                        SelectedDate=_pickedDate;
+                        Calendar c = Calendar.getInstance();
 
-                DatePickerDialog dialog = new DatePickerDialog(SchedulingActivity.this, SchedulingActivity.this::onDateSet,
-                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH));
+                        String sDate = c.get(Calendar.DAY_OF_MONTH)+"";
+                        if(sDate.equals(_date)){
+                            setEnabledZone();
+                        }else{
+                            setEnabledAll();
+                        }
+
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dialog.show();
             }
         });
@@ -81,20 +102,25 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
             @Override
             public void onClick(View view) {
 
-                if(atHome==1){
+                if(SelectedDate.equals("") || selectedTime.equals("")){
+                    Toast.makeText(context, "Please select proper date and time", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(atHome==1){
+                        Intent intent = new Intent();
+                        intent.putExtra("date", SelectedDate);
+                        intent.putExtra("time", selectedTime);
+                        setResult(ShoppingFragment.CAT1RESCODESALON, intent);
+                        finish();
+                    }
                     Intent intent = new Intent();
-                    intent.putExtra("date", SelectedDate);
-                    intent.putExtra("time", selectedTime);
-                    setResult(ShoppingFragment.CAT1RESCODESALON, intent);
+                    intent.putExtra(AllAddressActivity.SELECTEDDATEKEY, SelectedDate);
+                    intent.putExtra(AllAddressActivity.SELECTEDTIMEKEY, selectedTime);
+                    intent.putExtra("nickname",Nickname);
+                    intent.putExtra("address",Address);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
-                Intent intent = new Intent();
-                intent.putExtra(AllAddressActivity.SELECTEDDATEKEY, SelectedDate);
-                intent.putExtra(AllAddressActivity.SELECTEDTIMEKEY, selectedTime);
-                intent.putExtra("nickname",Nickname);
-                intent.putExtra("address",Address);
-                setResult(RESULT_OK, intent);
-                finish();
+
             }
         });
 
@@ -442,10 +468,26 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
         tp13=findViewById(R.id.tp13);
         tp14=findViewById(R.id.tp14);
         dateSelectBtn=findViewById(R.id.dateSelectBtn);
-        Calendar calender = Calendar.getInstance();
-        calender.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
-        Log.d("CRTIME",calender.get(Calendar.HOUR_OF_DAY) + ":" + calender.get(Calendar.MINUTE) +  ":" + calender.getActualMinimum(Calendar.SECOND));
+        setDisabledAll();
 
+
+    }
+
+    private void setDisabledAll() {
+        tp1.setEnabled(false);
+        tp2.setEnabled(false);
+        tp3.setEnabled(false);
+        tp4.setEnabled(false);
+        tp5.setEnabled(false);
+        tp6.setEnabled(false);
+        tp7.setEnabled(false);
+        tp8.setEnabled(false);
+        tp9.setEnabled(false);
+        tp10.setEnabled(false);
+        tp11.setEnabled(false);
+        tp12.setEnabled(false);
+        tp13.setEnabled(false);
+        tp14.setEnabled(false);
     }
 //    public static String Datetime()
 //    {
@@ -461,11 +503,285 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
             datePicker.getDayOfMonth();
             date=i2+"/"+i1+"/"+i;
             editTextDate.setText(date);
+            //editTextDate.setEnabled(false);
             SelectedDate=date;
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+    }
+
+    public void setEnabledZone(){
+        Calendar calender = Calendar.getInstance();
+        calender.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
+        Log.d("CRTIME",calender.get(Calendar.HOUR_OF_DAY) + ":" + calender.get(Calendar.MINUTE) +  ":" + calender.getActualMinimum(Calendar.SECOND));
+        currentTimeHour = calender.get(Calendar.HOUR_OF_DAY);
+        currentTimeMinutes = calender.get(Calendar.MINUTE);
+        String crtm = currentTimeHour+"."+currentTimeMinutes;
+        if(currentTimeHour==10)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(true);
+                tp3.setEnabled(true);
+                tp4.setEnabled(true);
+                tp5.setEnabled(true);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+
+                Log.d("EX-TIME","10.30+");
+            }else{
+                tp1.setEnabled(true);
+                tp2.setEnabled(true);
+                tp3.setEnabled(true);
+                tp4.setEnabled(true);
+                tp5.setEnabled(true);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","10.00+");
+            }
+        } else if(currentTimeHour==11)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(true);
+                tp5.setEnabled(true);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","11.30+");
+            }else{
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(true);
+                tp4.setEnabled(true);
+                tp5.setEnabled(true);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","11.00+");
+            }
+        }else if(currentTimeHour==12)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","12.30+");
+            }else{
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(true);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","12.00+");
+            }
+        }else if(currentTimeHour==1)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(false);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","1.30+");
+            }else{
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(true);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","1.00+");
+            }
+        }else if(currentTimeHour==2)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(false);
+                tp8.setEnabled(false);
+                tp9.setEnabled(false);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","2.30+");
+            }else{
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(true);
+                tp8.setEnabled(true);
+                tp9.setEnabled(true);
+                tp10.setEnabled(true);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","2.00+");
+            }
+        }else if(currentTimeHour==3)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(false);
+                tp8.setEnabled(false);
+                tp9.setEnabled(false);
+                tp10.setEnabled(false);
+                tp11.setEnabled(false);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","3.30+");
+            }else{
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(false);
+                tp8.setEnabled(false);
+                tp9.setEnabled(false);
+                tp10.setEnabled(false);
+                tp11.setEnabled(true);
+                tp12.setEnabled(true);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","3.00+");
+            }
+        }else if(currentTimeHour==4)
+        {
+            if(currentTimeMinutes>30){
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(false);
+                tp8.setEnabled(false);
+                tp9.setEnabled(false);
+                tp10.setEnabled(false);
+                tp11.setEnabled(false);
+                tp12.setEnabled(false);
+                tp13.setEnabled(false);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","11.30+");
+            }else{
+                tp1.setEnabled(false);
+                tp2.setEnabled(false);
+                tp3.setEnabled(false);
+                tp4.setEnabled(false);
+                tp5.setEnabled(false);
+                tp6.setEnabled(false);
+                tp7.setEnabled(false);
+                tp8.setEnabled(false);
+                tp9.setEnabled(false);
+                tp10.setEnabled(false);
+                tp11.setEnabled(false);
+                tp12.setEnabled(false);
+                tp13.setEnabled(true);
+                tp14.setEnabled(true);
+                Log.d("EX-TIME","11.00+");
+            }
+        }
+
+    }
+    private void setEnabledAll() {
+        tp1.setEnabled(true);
+        tp2.setEnabled(true);
+        tp3.setEnabled(true);
+        tp4.setEnabled(true);
+        tp5.setEnabled(true);
+        tp6.setEnabled(true);
+        tp7.setEnabled(true);
+        tp8.setEnabled(true);
+        tp9.setEnabled(true);
+        tp10.setEnabled(true);
+        tp11.setEnabled(true);
+        tp12.setEnabled(true);
+        tp13.setEnabled(true);
+        tp14.setEnabled(true);
     }
 }

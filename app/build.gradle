@@ -4,9 +4,9 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "staddle.com.staddle"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 20
+        versionCode 22
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.github.dimorinny:floating-text-button:0.0.4'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.google.android.libraries.places:places:1.1.0'
 
 
     //retrofit dependancy

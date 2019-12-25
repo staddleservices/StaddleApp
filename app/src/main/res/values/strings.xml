@@ -32,6 +32,7 @@
     <string name="home_address">Home Address</string>
     <string name="city">City</string>
     <string name="landmark">LandMark</string>
+    <string name="place_api" translatable="false">AIzaSyDQbT3t9VGgAitac_a4a9TtdsjFVu_cRP4</string>
     <string name="state">State</string>
     <string name="error_empty_fileds">This Filed Required</string>
     <string name="invalid_home_no">Invalid Flat/House No</string>
