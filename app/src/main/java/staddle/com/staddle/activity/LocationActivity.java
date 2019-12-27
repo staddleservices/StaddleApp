@@ -61,7 +61,7 @@ import staddle.com.staddle.utils.AppConstants;
 
 public class LocationActivity extends AppCompatActivity implements LocationListener {
 
-    EditText edt_search_location;
+    public static EditText edt_search_location;
 
     Button next;
     CardView currentLocation;
@@ -131,15 +131,10 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (NetworkAvailablity.chkStatus(LocationActivity.this)) {
-                    try {
-                        mContext = LocationActivity.this;
-                        Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build((Activity) mContext);
-                        startActivityForResult(intent, 1);
-                    } catch (GooglePlayServicesRepairableException e) {
-                        e.printStackTrace();
-                    } catch (GooglePlayServicesNotAvailableException e) {
-                        e.printStackTrace();
-                    }
+
+                        Intent intent = new Intent(LocationActivity.this,SelectFromMapAddressActivity.class);
+                        startActivity(intent);
+
                 } else {
                     Toast.makeText(LocationActivity.this, "Check Internet Connection !", Toast.LENGTH_SHORT).show();
                 }

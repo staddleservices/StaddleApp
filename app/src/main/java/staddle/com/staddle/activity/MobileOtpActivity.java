@@ -94,6 +94,7 @@ public class MobileOtpActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter your OTP",Toast.LENGTH_LONG).show();
 
 
+
                 }else {
 
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -104,6 +105,7 @@ public class MobileOtpActivity extends AppCompatActivity {
 
 
                     verifyVerificationCode(otpview.getValue());
+
                 }
             }
         });
@@ -162,7 +164,8 @@ public class MobileOtpActivity extends AppCompatActivity {
             //in this case the code will be null
             //so user has to manually enter the code
             if (code != null) {
-                //otpView.setValue(code);
+                otpview.setValue(code);
+                verifyVerificationCode(code);
                 //verifying the code
 
             }

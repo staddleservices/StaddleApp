@@ -141,7 +141,7 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     //SearchBox
-    EditText searchBox;
+    TextView searchBox;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -205,22 +205,15 @@ public class HomeActivity extends AppCompatActivity implements
 //            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 //        });
 
-        searchBox.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        searchBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public void onClick(View view) {
                 SearchFragment searchFragment=new SearchFragment();
                 toolbar.setVisibility(View.GONE);
                 replaceFragment(searchFragment);
             }
         });
-//        searchBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SearchFragment searchFragment=new SearchFragment();
-//                toolbar.setVisibility(View.GONE);
-//                replaceFragment(searchFragment);
-//            }
-//        });
 
         navigation.setOnNavigationItemSelectedListener(this);
 

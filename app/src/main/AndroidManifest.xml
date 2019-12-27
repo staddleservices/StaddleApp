@@ -25,6 +25,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".activity.SelectFromMapAddressActivity">
+
+        </activity>
         <activity android:name=".activity.SearchAddressActivity">
 
         </activity>
@@ -35,7 +38,7 @@
         <activity
             android:name=".activity.SelectDeliveryAddress"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
+            android:windowSoftInputMode="stateVisible|adjustResize">
 
         </activity>
         <activity
@@ -51,12 +54,11 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCUbINF0TOeTjqgyNics2I85KJBqVRMG_U" />
+            android:value="AIzaSyDQbT3t9VGgAitac_a4a9TtdsjFVu_cRP4" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_app_id"
             tools:replace="android:value" />
-
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name"
@@ -99,7 +101,9 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.LocationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
         <activity
             android:name=".activity.SorryActivity"
             android:screenOrientation="portrait" />

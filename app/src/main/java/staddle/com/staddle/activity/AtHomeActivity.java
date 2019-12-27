@@ -279,7 +279,6 @@ public class AtHomeActivity extends AppCompatActivity {
                                     vendor_list_recyclerview.setAdapter(categoryDetailsAdpater);
                                     vendor_list_recyclerview.setHasFixedSize(true);
                                     categoryDetailsAdpater.notifyDataSetChanged();
-
                                     categoryDetailsAdpater.setOnItemClickListener(productListCategoryModel -> {
                                         // New 09/04/2019
                                         Intent intent = new Intent(AtHomeActivity.this, VendorDetailsActivityNew.class);
@@ -302,6 +301,8 @@ public class AtHomeActivity extends AppCompatActivity {
                                         intent.putExtra("commision", productListCategoryModel.getCurrent_price());
                                         startActivity(intent);
                                     });
+
+
 
                                 } else {
                                     Toast.makeText(AtHomeActivity.this, "null ", Toast.LENGTH_SHORT).show();

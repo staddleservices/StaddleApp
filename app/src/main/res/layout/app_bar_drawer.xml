@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/searchservicesbox"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -96,6 +96,7 @@
                     android:background="@drawable/mobileotpedittext"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:paddingVertical="10dp"
                     android:fontFamily="@font/mainthinfont"
                     android:hint="Search for services"
                     android:textSize="12dp"

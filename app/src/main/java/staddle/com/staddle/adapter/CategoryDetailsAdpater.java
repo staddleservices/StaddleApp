@@ -2,6 +2,7 @@ package staddle.com.staddle.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import staddle.com.staddle.R;
+import staddle.com.staddle.activity.VendorDetailsActivityNew;
 import staddle.com.staddle.bean.ProductListCategoryModel;
 import staddle.com.staddle.bean.VendorListModel;
 
@@ -65,6 +67,8 @@ public class CategoryDetailsAdpater extends RecyclerView.Adapter<CategoryDetails
 
             holder.tv_item_rating.setText(productListCategoryModel.getRating());
 
+
+
             if (image.isEmpty()) {
                 holder.iv_offer_image.setImageResource(R.drawable.makeover);
             } else {
@@ -74,6 +78,7 @@ public class CategoryDetailsAdpater extends RecyclerView.Adapter<CategoryDetails
                         .error(R.mipmap.ic_launcher)
                         .into(holder.iv_offer_image);
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
