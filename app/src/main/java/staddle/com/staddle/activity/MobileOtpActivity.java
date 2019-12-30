@@ -44,6 +44,7 @@ import staddle.com.staddle.HomeActivity;
 import staddle.com.staddle.R;
 import staddle.com.staddle.bean.MySingleton;
 import staddle.com.staddle.retrofitApi.EndApi;
+import staddle.com.staddle.sheardPref.AppPreferences;
 
 public class MobileOtpActivity extends AppCompatActivity {
 
@@ -69,6 +70,7 @@ public class MobileOtpActivity extends AppCompatActivity {
     String email;
     String profilepic;
     public String singupStatus;
+    String DEVICE_TOKEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,8 @@ public class MobileOtpActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
         proceedBtnWithOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,6 +268,8 @@ public class MobileOtpActivity extends AppCompatActivity {
                                     intent.putExtra("USER_ID",uid);
                                     intent.putExtra("USER_NAME",username);
                                     intent.putExtra("USER_EMAIL",email);
+                                    DEVICE_TOKEN=AppPreferences.loadPreferences(MobileOtpActivity.this,"DEVICE_TOKEN");
+                                    updateDeviceToken(DEVICE_TOKEN,uid);
                                     intent.putExtra("USER_PROFILE_PIC",profilepic);
                                     progressDialog.dismiss();
                                     startActivity(intent);
@@ -325,6 +331,66 @@ public class MobileOtpActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<String,String>();
                 params.put("mobile",mobileNumber);
+
+
+
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
+    }
+
+    private void updateDeviceToken(String device_token, String uid) {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, EndApi.UPDATE_TOKEN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+
+
+                        Log.e("response",response);
+                        JSONArray jsonArray = null;
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String s = jsonObject.getString("status");
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responce", error.toString() );
+                new AlertDialog.Builder(MobileOtpActivity.this)
+                        .setTitle("Connection failed!")
+                        .setCancelable(false)
+                        .setMessage("Please check your internet connection or restart the App!")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+                //Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<String,String>();
+                params.put("token",device_token);
+                params.put("uid",uid);
 
 
 

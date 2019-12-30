@@ -1,13 +1,14 @@
 package staddle.com.staddle.activity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,8 +20,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.linkedin.platform.LISessionManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -28,10 +39,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import staddle.com.staddle.HomeActivity;
 import staddle.com.staddle.R;
+import staddle.com.staddle.bean.MySingleton;
 import staddle.com.staddle.retrofitApi.ApiClient;
 import staddle.com.staddle.retrofitApi.ApiInterface;
 import staddle.com.staddle.internetconnection.CheckNetwork;
 import staddle.com.staddle.ResponseClasses.SignUpResponse;
+import staddle.com.staddle.retrofitApi.EndApi;
 import staddle.com.staddle.sheardPref.AppPreferences;
 import staddle.com.staddle.utils.AppConstants;
 
@@ -151,9 +164,69 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    public void upload_token(String uid,String token){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, EndApi.UPLOAD_TOKEN,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+
+
+                        Log.e("response",response);
+                        JSONArray jsonArray = null;
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                //singupStatus = jsonObject.getString("status");
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responce", error.toString() );
+                new AlertDialog.Builder(SignUpActivity.this)
+                        .setTitle("Connection failed!")
+                        .setCancelable(false)
+                        .setMessage("Please check your internet connection or restart the App!")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+                //Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<String,String>();
+                params.put("token",token);
+                params.put("uid",uid);
+
+
+
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
+    }
+
     @SuppressLint("SetTextI18n")
     private void signUp(String username, String email, String password, String mobile, String uid) {
-
+          String device_token = AppPreferences.loadPreferences(SignUpActivity.this, "DEVICE_TOKEN");
+          upload_token(uid,device_token);
           Intent intent = new Intent(SignUpActivity.this, LocationActivity.class);
           intent.putExtra("USER_ID",uid);
           intent.putExtra("USER_NAME",email);
