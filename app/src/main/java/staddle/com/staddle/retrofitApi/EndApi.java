@@ -50,5 +50,6 @@ public class EndApi extends BaseApi {
     public static final String SAVE_ADDRESS="http://35.200.162.209/mobileapp/api/insertaddresses.php";
     public static final String UPDATE_TOKEN="http://35.200.162.209/mobileapp/api/update_token.php";
     public static final String UPLOAD_TOKEN="http://35.200.162.209/mobileapp/api/upload_token.php";
+    public static final String FETCH_NOTIFICATIONS="http://35.200.162.209/mobileapp/api/fetch_notifcations.php";
 
 }
