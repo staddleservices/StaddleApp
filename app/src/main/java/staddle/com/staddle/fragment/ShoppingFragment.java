@@ -1489,7 +1489,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 //        android.util.Log.e("PARAMETERS",NICKNAME);
 //        android.util.Log.e("PARAMETERS",ADDRESSSTRING);
 //        android.util.Log.e("PARAMETERS",SELECTEDTIME);
-//        android.util.Log.e("PARAMETERS",SELECTEDDATE);
+       android.util.Log.e("PARAMETERS",SELECTEDDATE);
 //        android.util.Log.e("PARAMETERS",paymentmethod);
 
 //        placeorderwithcashvolley(userId, vid_Selected_items,

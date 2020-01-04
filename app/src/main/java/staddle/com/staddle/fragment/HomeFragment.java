@@ -301,9 +301,9 @@ public class HomeFragment extends Fragment {
             if ((int) ratingBar.getRating() == 0) {
                 Toast.makeText(mContext, "Please select an rating.", Toast.LENGTH_SHORT).show();
             } else {
-                quantRatingAlert.dismiss();
+                //quantRatingAlert.dismiss();
                 makeRating(order_id, String.valueOf(ratingBar.getRating()));
-                quantRatingAlert.dismiss();
+                //quantRatingAlert.dismiss();
             }
 
         });
