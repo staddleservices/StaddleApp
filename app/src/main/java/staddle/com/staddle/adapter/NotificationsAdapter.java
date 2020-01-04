@@ -43,7 +43,12 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(notificationsDataModels.get(position).getTitle());
+        if(notificationsDataModels.get(position).getStatus().equals("A")){
+            holder.title.setText("Order Confirmed");
+        }else if(notificationsDataModels.get(position).getStatus().equals("C")){
+            holder.title.setText("Order Completed");
+        }
+
         holder.content.setText(notificationsDataModels.get(position).getContent());
     }
 

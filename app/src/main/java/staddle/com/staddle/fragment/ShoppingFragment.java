@@ -83,6 +83,7 @@ import staddle.com.staddle.adapter.CustomSpinnerAdapter;
 import staddle.com.staddle.adapter.ShoppingAdapter;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.MySingleton;
+import staddle.com.staddle.fcm.DBManager;
 import staddle.com.staddle.paytm.module.GetCheckSum;
 import staddle.com.staddle.retrofitApi.ApiClient;
 import staddle.com.staddle.retrofitApi.ApiInterface;
@@ -1510,6 +1511,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                             String message = responsee.getMessage();
                             int status = responsee.getStatus();
                             if (status == 1) {
+
                                 myCartArrayList.clear();
                                 //Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
                                 new Handler().postDelayed(() -> {

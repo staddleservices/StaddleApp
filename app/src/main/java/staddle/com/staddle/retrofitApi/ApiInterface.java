@@ -43,7 +43,8 @@ public interface ApiInterface {
     Call<SignUpResponse> UserSignUp(@Query("username") String username,
                                     @Query("email") String email,
                                     @Query("password") String password,
-                                    @Query("mobile") String mobile);
+                                    @Query("mobile") String mobile,
+                                    @Query("token") String token);
 
     @POST(EndApi.USER_LOGIN_API)
     Call<LoginResponse> UserLogin(@Query("email") String email,
@@ -167,7 +168,8 @@ public interface ApiInterface {
 
     @GET(EndApi.MAKE_RATING)
     Call<MyOrderListResponse> makeRating(@Query("oid") String oid,
-                                         @Query("rate") String rate);
+                                         @Query("rate") String rate,
+                                         @Query("user_id") String user_id);
 
     @GET(EndApi.GET_HELP_LIST)
     Call<MyHelpListResponse> getMyHelpListUser(@Query("uid") String uid);

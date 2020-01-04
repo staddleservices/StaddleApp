@@ -191,7 +191,7 @@ public class MyOrderActivity extends AppCompatActivity {
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<MyOrderListResponse> call = apiInterface.makeRating(oid, rating);
+        Call<MyOrderListResponse> call = apiInterface.makeRating(oid, rating,AppPreferences.loadPreferences(MyOrderActivity.this,"USER_ID"));
 
         call.enqueue(new Callback<MyOrderListResponse>() {
             @Override

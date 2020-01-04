@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -74,6 +75,7 @@ import staddle.com.staddle.activity.SettingActivity;
 import staddle.com.staddle.activity.WalletActivity;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.UserInfoModule;
+import staddle.com.staddle.fcm.DBManager;
 import staddle.com.staddle.fragment.BeautyFragment;
 import staddle.com.staddle.fragment.FavoriteFragment;
 import staddle.com.staddle.fragment.HomeFragment;
@@ -91,6 +93,8 @@ import staddle.com.staddle.sheardPref.AppPreferences;
 import staddle.com.staddle.utils.AppConstants;
 
 import static android.graphics.Color.TRANSPARENT;
+import static staddle.com.staddle.fcm.MyFireBaseMessagingService.CURRENT_ORDER_ID_KEY;
+import static staddle.com.staddle.fcm.MyFireBaseMessagingService.CURRENT_ORDER_STATUS_KEY;
 
 public class HomeActivity extends AppCompatActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {
@@ -243,6 +247,15 @@ public class HomeActivity extends AppCompatActivity implements
             Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
             startActivity(intent);
         });
+        ;
+
+        if(AppPreferences.loadPreferences(HomeActivity.this,CURRENT_ORDER_ID_KEY)!= null){
+            String status=AppPreferences.loadPreferences(HomeActivity.this,CURRENT_ORDER_STATUS_KEY);
+            if(status.equals("C")){
+                //Show Rating box
+                Toast.makeText(mContext, "Show rating box", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -292,6 +305,8 @@ public class HomeActivity extends AppCompatActivity implements
         navigation = findViewById(R.id.navigation);
         toolbar = findViewById(R.id.toolbar);
         searchBox=findViewById(R.id.searchservicesbox);
+
+        Toast.makeText(HomeActivity.this, "+"+AppPreferences.loadPreferences(HomeActivity.this,CURRENT_ORDER_ID_KEY), Toast.LENGTH_SHORT).show();
         replaceFragment(new HomeFragment());
 
     }

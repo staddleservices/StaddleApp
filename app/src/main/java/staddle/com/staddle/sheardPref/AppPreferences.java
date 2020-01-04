@@ -25,7 +25,15 @@ public class AppPreferences {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String value = settings.getString(key, "");
 
+
         return value;
+    }
+    public static void deletePref(Context context, String key) {
+        SharedPreferences settings;
+
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        settings.edit().remove(key).apply();
+
     }
 
     public static String savePreferencesCount(Context context, String key, int value)

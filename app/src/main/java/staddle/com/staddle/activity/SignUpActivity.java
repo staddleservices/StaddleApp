@@ -118,8 +118,9 @@ public class SignUpActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.setMessage("Loading Please Wait...");
         pd.show();
-
-        Call<SignUpResponse> call = apiInterface.UserSignUp(username, email, password, mobile);
+        String DEVICE_TOKEN;
+        DEVICE_TOKEN=AppPreferences.loadPreferences(SignUpActivity.this,"DEVICE_TOKEN");
+        Call<SignUpResponse> call = apiInterface.UserSignUp(username, email, password, mobile,DEVICE_TOKEN);
 
         call.enqueue(new Callback<SignUpResponse>() {
             @Override

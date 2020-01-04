@@ -104,18 +104,12 @@ public class NotificationActivity extends AppCompatActivity {
                             jsonArray = new JSONArray(response);
 
                             for (int i = 0; i < jsonArray.length(); i++) {
-
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if(jsonObject.getString("order_status").equals("P")){
-                                    notificationsDataModels.add(new NotificationsDataModels("Order Confirmed!",jsonObject.getString("content"),"0"));
-                                }
-                                NotificationsAdapter notificationsAdapter = new NotificationsAdapter(NotificationActivity.this,notificationsDataModels);
-                                notifications.setAdapter(notificationsAdapter);
-                                notifications.hasFixedSize();
-
-
-
+                                notificationsDataModels.add(new NotificationsDataModels(jsonObject.getString("content"),jsonObject.getString("order_status")));
                             }
+                            NotificationsAdapter notificationsAdapter = new NotificationsAdapter(NotificationActivity.this,notificationsDataModels);
+                            notifications.setAdapter(notificationsAdapter);
+                            notifications.hasFixedSize();
 
 
 

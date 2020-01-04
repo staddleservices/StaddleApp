@@ -26,6 +26,8 @@ import static com.facebook.login.widget.ProfilePictureView.TAG;
 
 public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
+    public static final String CURRENT_ORDER_ID_KEY="CR_OR";
+    public static final String CURRENT_ORDER_STATUS_KEY="CR_STS";
     @Override
     public void onNewToken(String refreshedToken) {
         super.onNewToken(refreshedToken);
@@ -38,24 +40,30 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            Log.d("ORDER_NOTIFICATION", "Message data payload: " + remoteMessage.getData());
             String title = remoteMessage.getData().get("title");
             String body = remoteMessage.getData().get("body");
-            sendNotification(remoteMessage.toString());
+            String status=remoteMessage.getData().get("order_status");
+            String order_id = remoteMessage.getData().get("order_id");
+            sendNotification(remoteMessage.toString(),status,order_id);
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d("ORDER_NOTIFICATION", "Message Notification Body: " + remoteMessage.getData());
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
-            sendNotification(body);
+            String status=remoteMessage.getData().get("order_status");
+            String order_id = remoteMessage.getData().get("order_id");
+            sendNotification(body,status,order_id);
         }
 
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String messageBody,String status,String order_id) {
         Intent intent = new Intent(this, HomeActivity.class);
+        AppPreferences.savePreferences(getApplicationContext(),CURRENT_ORDER_ID_KEY,order_id);
+        AppPreferences.savePreferences(getApplicationContext(),CURRENT_ORDER_STATUS_KEY,status);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Random random = new Random();

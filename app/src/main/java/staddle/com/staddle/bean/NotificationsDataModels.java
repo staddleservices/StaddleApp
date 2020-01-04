@@ -2,22 +2,20 @@ package staddle.com.staddle.bean;
 
 public class NotificationsDataModels {
 
-    String title;
+
     String content;
-    String code;// offers and normal information=0 and orders notification =1
-
-    public NotificationsDataModels(String title, String content, String code) {
-        this.title = title;
+    String status;
+    public NotificationsDataModels( String content,String status) {
         this.content = content;
-        this.code = code;
+        this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getContent() {
@@ -28,11 +26,4 @@ public class NotificationsDataModels {
         this.content = content;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 }

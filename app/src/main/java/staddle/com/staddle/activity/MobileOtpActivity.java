@@ -358,6 +358,7 @@ public class MobileOtpActivity extends AppCompatActivity {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String s = jsonObject.getString("status");
+                                Toast.makeText(MobileOtpActivity.this, "Token updated!", Toast.LENGTH_SHORT).show();
                             }
 
 

@@ -45,7 +45,8 @@ public class EndApi extends BaseApi {
     public static final String MAKE_RATING = "add_rateing.php?";
     public static final String CHECK_USERS="http://35.200.162.209/mobileapp/api/checkuserexist.php";
     public static final String FETCH_COUPONS="http://35.200.162.209/mobileapp/api/fetchoffers.php";
-    public static final String SEARCH_COUPONS="http://35.200.162.209mobileapp/api/searchpromo.php";
+    public static final String SEARCH_COUPONS="http://35.200.162.209/mobileapp/api/searchpromo.php";
+    public static final String RATING_BOX_CHECK="http://35.200.162.209/mobileapp/api/rating_box.php";
     public static final String FETCH_SAVED_ADDRESS="http://35.200.162.209/mobileapp/api/fetchsavedaddress.php";
     public static final String SAVE_ADDRESS="http://35.200.162.209/mobileapp/api/insertaddresses.php";
     public static final String UPDATE_TOKEN="http://35.200.162.209/mobileapp/api/update_token.php";
