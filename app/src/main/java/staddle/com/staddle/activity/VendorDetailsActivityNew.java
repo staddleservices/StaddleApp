@@ -278,6 +278,8 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
     }
 
     private void setUpView() {
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(VendorDetailsActivityNew.this));
         vendorSubCategoryListAdapter = new VendorSubCategoryListAdapter(VendorDetailsActivityNew.this, categoryMenuList, "", vname);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(vendorSubCategoryListAdapter);
@@ -321,7 +323,7 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
         floatingTextButton = findViewById(R.id.fab_action_button);
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(VendorDetailsActivityNew.this));
+
     }
 
     private void hideOption() {

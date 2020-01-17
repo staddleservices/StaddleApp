@@ -83,6 +83,7 @@ public class SubCategoryDetailsActivity extends AppCompatActivity {
 
         if (CheckNetwork.isNetworkAvailable(this)) {
             subCategoryTreeDetailsListt(cid);
+            productListcategory(cid, "");
         } else {
             Alerts.showAlert(this);
         }
@@ -168,6 +169,7 @@ public class SubCategoryDetailsActivity extends AppCompatActivity {
                                 if (subcategoryTreeListModelArrayList != null) {
                                     subCategoryDetailsAdapter = new SubCategoryDetailsAdapter(SubCategoryDetailsActivity.this, subcategoryTreeListModelArrayList);
                                     category_list_recyclerview.setAdapter(subCategoryDetailsAdapter);
+                                    category_list_recyclerview.setHasFixedSize(true);
                                     category_list_recyclerview.setVisibility(View.VISIBLE);
                                     rl_no_details.setVisibility(View.GONE);
                                     subCategoryDetailsAdapter.notifyDataSetChanged();
@@ -180,7 +182,7 @@ public class SubCategoryDetailsActivity extends AppCompatActivity {
                                     category_list_recyclerview.setVisibility(View.GONE);
                                 }
                             }
-                            productListcategory(cid, "");
+
                         }
                     } else {
                         Toast.makeText(SubCategoryDetailsActivity.this, "Response Fail !!", Toast.LENGTH_SHORT).show();
@@ -217,7 +219,7 @@ public class SubCategoryDetailsActivity extends AppCompatActivity {
         call.enqueue(new Callback<ProductListCategoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<ProductListCategoryResponse> call, @NonNull Response<ProductListCategoryResponse> response) {
-                progressDialog.dismiss();
+
                 try {
                     if (response.isSuccessful()) {
                         productListCategoryModelArrayListt.clear();
@@ -233,6 +235,7 @@ public class SubCategoryDetailsActivity extends AppCompatActivity {
                                     rvProductList.setAdapter(categoryDetailsAdpater);
                                     rvProductList.setHasFixedSize(true);
                                     categoryDetailsAdpater.notifyDataSetChanged();
+                                    progressDialog.dismiss();
 
                                     categoryDetailsAdpater.setOnItemClickListener(productListCategoryModel -> {
                                         // New 09/04/2019

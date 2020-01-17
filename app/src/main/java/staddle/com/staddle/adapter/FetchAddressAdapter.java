@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class FetchAddressAdapter extends RecyclerView.Adapter<FetchAddressAdapte
 
         myViewHolder.nickName.setText(addresses.get(position).getNickName());
         myViewHolder.addressString.setText(addresses.get(position).getAddressString());
-        myViewHolder.addressItme.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.button_select_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(ShoppingFragment.cid.equals("4")) {
@@ -97,13 +98,14 @@ public class FetchAddressAdapter extends RecyclerView.Adapter<FetchAddressAdapte
         TextView nickName;
         TextView addressString;
         RelativeLayout addressItme;
+        Button button_select_address;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             nickName = itemView.findViewById(R.id.addressNickName);
             addressString = itemView.findViewById(R.id.addressfielditem);
             addressItme=itemView.findViewById(R.id.addressItemLayout);
-
+            button_select_address = itemView.findViewById(R.id.button_select_address);
         }
     }
 }

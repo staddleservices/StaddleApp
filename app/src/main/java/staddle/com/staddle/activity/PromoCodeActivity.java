@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class PromoCodeActivity extends AppCompatActivity {
     String vid;
     public static float discount;
     public static String promovalue="";
+    ImageView backbtnpromoact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,13 @@ public class PromoCodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_promo_code);
         init();
         fetchpromocodes(vid,totalprice);
+
+        backbtnpromoact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         searchApplybtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +95,7 @@ public class PromoCodeActivity extends AppCompatActivity {
         vid=intent.getStringExtra("vid");
         //Log.d("VID",vid);
         promoCodeList=new ArrayList<>();
+        backbtnpromoact = findViewById(R.id.backbtnpromoact);
         promolistRecycler=findViewById(R.id.promocodeslist);
         searchPromoCode=findViewById(R.id.searchpromocode_edittext);
         searchApplybtn=findViewById(R.id.searchApplybtn);

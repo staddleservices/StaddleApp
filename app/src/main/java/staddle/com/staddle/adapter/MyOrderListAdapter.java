@@ -58,6 +58,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
         holder.tv_order_date.setText(myOrderListModel.getCreate_date());
         holder.txtBookBook.setText(myOrderListModel.getBooked_date() + " " + myOrderListModel.getBooking_slot());
         holder.xItems.setText(dataArrayList.size()+" X Items");
+        holder.OTP_text.setText(myOrderListModel.getOrder_otp());
 
         if (myOrderListModel.getStatus().equalsIgnoreCase("A"))
             holder.txtStatus.setText("Accepted");
@@ -95,7 +96,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, tv_total_amount, tv_order_date, txtBookBook, txtStatus,xItems;
+        TextView txtName, tv_total_amount, tv_order_date, txtBookBook, txtStatus,xItems,OTP_text;
         Button btnRate;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -107,6 +108,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             txtStatus = itemView.findViewById(R.id.txtStatus);
             btnRate = itemView.findViewById(R.id.btnRate);
             xItems=itemView.findViewById(R.id.xItems);
+            OTP_text = itemView.findViewById(R.id.txt_otp_show);
         }
     }
 

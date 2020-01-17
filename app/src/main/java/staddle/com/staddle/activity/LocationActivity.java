@@ -81,6 +81,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     String uid;
     String email;
     String profilepic;
+    String mobile_number;
 
 
     @Override
@@ -109,6 +110,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
                 AppPreferences.savePreferences(LocationActivity.this, "USER_NAME", username);
                 AppPreferences.savePreferences(LocationActivity.this, "USER_EMAIL", email);
                 AppPreferences.savePreferences(LocationActivity.this, "LOGIN_STATUS", "1");
+                AppPreferences.savePreferences(LocationActivity.this, "USER_MOBILE", mobile_number);
                 AppPreferences.savePreferences(LocationActivity.this, "isLogin", "Y");
                 Intent intent = new Intent(LocationActivity.this, HomeActivity.class);
                 startActivity(intent);
@@ -166,6 +168,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         username=intent.getStringExtra("USER_NAME");
         email=intent.getStringExtra("USER_EMAIL");
         profilepic=intent.getStringExtra("USER_PROFILE_PIC");
+        mobile_number = intent.getStringExtra("MOBILE");
 
         edt_search_location = findViewById(R.id.edt_search_location);
 

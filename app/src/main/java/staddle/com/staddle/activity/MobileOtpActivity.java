@@ -53,6 +53,7 @@ public class MobileOtpActivity extends AppCompatActivity {
     String mobileNumber;
     Button proceedBtnWithOtp;
     ImageButton backArrowBtn;
+    TextView resend_otp;
     TextView timerText;
     CountDownTimer t;
     Pinview otpview;
@@ -89,13 +90,23 @@ public class MobileOtpActivity extends AppCompatActivity {
             }
         });
 
+        timerText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendVerificationCode(mobileNumber);
+                Toast.makeText(MobileOtpActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
         proceedBtnWithOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(otpview.getPinLength()==0){
+                int otp=otpview.getPinLength();
+                if(otp<6){
                     Toast.makeText(getApplicationContext(),"Enter your OTP",Toast.LENGTH_LONG).show();
+                    checkuserdb(mobileNumber);
 
 
 
@@ -142,6 +153,7 @@ public class MobileOtpActivity extends AppCompatActivity {
         timerText=findViewById(R.id.timerText);
         timerText.setClickable(false);
         otpview=findViewById(R.id.pinview);
+        //resend_otp = findViewById(R.id.buttonResendOtp);
         progressDialog=new ProgressDialog(MobileOtpActivity.this);
     }
 
@@ -268,6 +280,7 @@ public class MobileOtpActivity extends AppCompatActivity {
                                     intent.putExtra("USER_ID",uid);
                                     intent.putExtra("USER_NAME",username);
                                     intent.putExtra("USER_EMAIL",email);
+                                    intent.putExtra("MOBILE",mobileNumber);
                                     DEVICE_TOKEN=AppPreferences.loadPreferences(MobileOtpActivity.this,"DEVICE_TOKEN");
                                     updateDeviceToken(DEVICE_TOKEN,uid);
                                     intent.putExtra("USER_PROFILE_PIC",profilepic);

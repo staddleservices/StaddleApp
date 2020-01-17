@@ -25,12 +25,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.SelectFromMapAddressActivity">
-
-        </activity>
-        <activity android:name=".activity.SearchAddressActivity">
-
-        </activity>
+        <activity android:name=".activity.SearchServicesActivity"></activity>
+        <activity android:name=".activity.PaymentMethodsActivtiy" />
+        <activity android:name=".activity.SelectFromMapAddressActivity" />
+        <activity android:name=".activity.SearchAddressActivity" />
         <activity android:name=".activity.AllAddressActivity" />
         <activity
             android:name=".activity.SchedulingActivity"
@@ -38,9 +36,7 @@
         <activity
             android:name=".activity.SelectDeliveryAddress"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".activity.PromoCodeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -49,7 +45,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.MobileLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".activity.MyOrderDetailsActivity" />
 
         <meta-data
@@ -59,6 +56,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_app_id"
             tools:replace="android:value" />
+
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name"
@@ -101,9 +99,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.LocationActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SorryActivity"
             android:screenOrientation="portrait" />

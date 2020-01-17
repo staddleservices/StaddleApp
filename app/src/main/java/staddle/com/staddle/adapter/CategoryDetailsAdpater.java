@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,13 @@ public class CategoryDetailsAdpater extends RecyclerView.Adapter<CategoryDetails
 
             holder.txtTiming.setText(productListCategoryModel.getOffer_start_date() + " To " + productListCategoryModel.getOffer_end_date());
 
-            holder.tv_item_rating.setText(productListCategoryModel.getRating());
+            if(productListCategoryModel.getRating().equals("0.0")||productListCategoryModel.getRating().equals("0")){
+                Log.d("RATING_RUN","if");
+                holder.tv_item_rating.setText("New");
+            }else  {
+                Log.d("RATING_RUN","else");
+                holder.tv_item_rating.setText(productListCategoryModel.getRating());
+            }
 
 
 

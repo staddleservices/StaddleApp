@@ -53,6 +53,7 @@ public class AllAddressActivity extends AppCompatActivity {
     String SelectedTime="";
     String FinalSetAddress="";
     String FinalSetNickname="";
+    ImageView imageView;
 
     public static RecyclerView addressListRecycler;
     ImageView closeSheet;
@@ -79,9 +80,18 @@ public class AllAddressActivity extends AppCompatActivity {
         SearchAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), SearchAddressActivity.class);
+                startActivityForResult(intent, ShoppingFragment.REQUESTCODEREFRES);
 
             }
         });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
     }
 
     private void init(){
@@ -90,6 +100,7 @@ public class AllAddressActivity extends AppCompatActivity {
         shimmerFrameLayout=findViewById(R.id.shimmerviewaddresses);
         AddNewAddress=findViewById(R.id.addnewunderSavedList);
         SearchAddress = findViewById(R.id.addnewunderSavedListviasearch);
+        imageView = findViewById(R.id.back_btn);
         addressListRecycler=findViewById(R.id.savedaddress);
         noaddressfoundlayout=findViewById(R.id.noaddressfoundlayout);
         addressListRecycler.setLayoutManager(new LinearLayoutManager(AllAddressActivity.this));

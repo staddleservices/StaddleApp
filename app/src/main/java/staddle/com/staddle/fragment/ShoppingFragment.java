@@ -282,11 +282,13 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         if(myCartArrayList.size()==0){
             mainContainerLayout.setVisibility(View.GONE);
             txtEmptyCart.setVisibility(View.VISIBLE);
+            HomeActivity.toolbar.setVisibility(View.VISIBLE);
             couponlayout.setVisibility(View.GONE);
             paychckoutlayout.setVisibility(View.GONE);
         }else {
             mainContainerLayout.setVisibility(View.VISIBLE);
             txtEmptyCart.setVisibility(View.GONE);
+            HomeActivity.toolbar.setVisibility(View.GONE);
             couponlayout.setVisibility(View.VISIBLE);
             paychckoutlayout.setVisibility(View.VISIBLE);
         }
@@ -303,7 +305,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                     data = gson.toJson(myCartArrayList);
 
                     PlaceOrderOnCash(userId, vid_Selected_items, data, totalp,  discount,per, appliedpomodes,promoValue,promotiondiscount,
-                            total,NICKNAMESTRING,ADDRESSSTRING,SELECTEDDATE,SELECTEDTIME,"cash");
+                            total,NICKNAMESTRING,ADDRESSSTRING,SELECTEDDATE,SELECTEDTIME,"cash","-");
 
 
                 }else if(SelectedPaymentMethod.equals("Online")){
@@ -516,7 +518,10 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                     break;
                 }
                 case  "4":{
-                    chooseHome("4");
+                    Intent intent=new Intent(getContext(), SchedulingActivity.class);
+                    intent.putExtra("atHome","1");
+                    startActivityForResult(intent,CAT1REQCODESALON);
+                    break;
 
                 }
             }
@@ -537,10 +542,10 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
             intent.putExtra("atHome","1");
             startActivityForResult(intent,CAT1REQCODESALON);
         }else{
-            assert getArguments() != null;
-            String Category = getArguments().getString("Category") + ",Cancel";
+//            assert getArguments() != null;
+//            String Category = getArguments().getString("Category") + ",Cancel";
 
-            final String[] options = Category.split(",");
+            final String[] options = {"At Home","At Salon"};
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
             builder.setTitle("Choose Service.");
 
@@ -565,7 +570,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                         dialog.dismiss();
                         break;
                     default:
-                        Toast.makeText(getContext(), "Address required", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Address required", Toast.LENGTH_SHORT).show();
 
                         //addressDialog(mContext);
                         break;
@@ -607,11 +612,13 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
                         //btn_checkout.setVisibility(View.GONE);
                         AddressLayoutCheckout.setVisibility(View.GONE);
                         txtEmptyCart.setVisibility(View.VISIBLE);
+                        HomeActivity.toolbar.setVisibility(View.VISIBLE);
                     } else {
                         cardView.setVisibility(View.VISIBLE);
                         //btn_checkout.setVisibility(View.VISIBLE);
                         AddressLayoutCheckout.setVisibility(View.VISIBLE);
                         txtEmptyCart.setVisibility(View.GONE);
+                        HomeActivity.toolbar.setVisibility(View.GONE);
                     }
                 }else{
                     couponlayoutapplied.setVisibility(View.GONE);
@@ -1449,7 +1456,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     private void PlaceOrderOnCash(String userId, String vid_Selected_items, String order_list,
                                   String order_price, String discount, String discount_price,
                                    String appliedpomodes,
-                                  String appliedpromovalue, String promotiondiscount,String total, String NICKNAME, String ADDRESSSTRING, String SELECTEDDATE, String SELECTEDTIME, String paymentmethod) {
+                                  String appliedpromovalue, String promotiondiscount,String total, String NICKNAME, String ADDRESSSTRING, String SELECTEDDATE, String SELECTEDTIME, String paymentmethod,String online_payment_id) {
 
         float s = shoppingAdapter.getTotalPrice();
 
@@ -1497,7 +1504,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 //                commision, String.valueOf(totalPrice),NICKNAME,ADDRESSSTRING,SELECTEDTIME,SELECTEDDATE,paymentmethod);
         Call<AddFavouriteResponse> call = apiInterface.addOfferSave(userId, vid_Selected_items,
                 order_list,String.valueOf(discountsPrice) , String.valueOf(discounts),appliedpomodes,appliedpromovalue,promotiondiscount, order_price,
-                commision, String.valueOf(total),NICKNAME,ADDRESSSTRING,SELECTEDTIME,SELECTEDDATE,paymentmethod);
+                commision, String.valueOf(total),NICKNAME,ADDRESSSTRING,SELECTEDTIME,SELECTEDDATE,paymentmethod,myCartArrayList.size()+"",AppPreferences.loadPreferences(mContext,"USER_MOBILE"),AppPreferences.loadPreferences(mContext,"USER_NAME"),online_payment_id);
 
         call.enqueue(new Callback<AddFavouriteResponse>() {
             @Override
@@ -1551,7 +1558,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 //        "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>"
 
         // Live
-        getChecksum("pLxUTB00403908468779", orderId, "cust123", "9799224434", "staddleservices@gmail.com",
+        getChecksum("pLxUTB00403908468779", orderId, "cust123", AppPreferences.loadPreferences(mContext,"USER_MOBILE"), "staddleservices@gmail.com",
                 "WAP", total, "WEBSTAGING", "Retail", "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=" + orderId);
     }
 
@@ -1559,7 +1566,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
     public String generateRandomNumber() {
         SecureRandom secureRandom = new SecureRandom();
-        StringBuilder s = new StringBuilder("order");
+        StringBuilder s = new StringBuilder("OR");
         for (int i = 0; i < 4; i++) {
             int number = secureRandom.nextInt(9);
             if (number == 0 && i == 0) { // to prevent the Zero to be the first number as then it will reduce the length of generated pin to three or even more if the second or third number came as zero
@@ -1661,6 +1668,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         // choosing between PayTM staging and production
 //        PaytmPGService pgService = PaytmPGService.getStagingService();
         PaytmPGService pgService = PaytmPGService.getProductionService();
+        String online_payment_id = params.get("ORDER_ID");
 
         PaytmOrder Order = new PaytmOrder((HashMap<String, String>) params);
         pgService.initialize(Order, null);
@@ -1671,7 +1679,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
             public void onTransactionResponse(Bundle inResponse) {
                 String message = inResponse.getString("RESPMSG");
-                addOrder("Payment Transaction response " + inResponse.getString("RESPMSG"));
+                addOrder("Payment Transaction response " + inResponse.getString("RESPMSG"),online_payment_id);
             }
 
             public void networkNotAvailable() {
@@ -1698,21 +1706,14 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     @SuppressLint("NewApi")
-    public void addOrder(String message) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage(message);
-        alertDialogBuilder.setPositiveButton("yes", (arg0, arg1) -> {
-//            if (message.equalsIgnoreCase("Payment Transaction response Txn Success"))
-//                addOfferSave(userId, vid_Selected_items, data, totalp, discount, per,
-//                        total, HouseNo, City, State, LandMark, BookSlot, BookDate, "online");
-//            else
-//                arg0.dismiss();
-        });
-        alertDialogBuilder.setNegativeButton("", (dialog, which) -> {
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.setCancelable(false);
-        alertDialog.show();
+    public void addOrder(String message, String online_payment_id) {
+
+            if (message.equalsIgnoreCase("Payment Transaction response Txn Success"))
+                PlaceOrderOnCash(userId, vid_Selected_items, data, totalp,  discount,per, appliedpomodes,promoValue,promotiondiscount,
+                        total,NICKNAMESTRING,ADDRESSSTRING,SELECTEDDATE,SELECTEDTIME,"online",online_payment_id);
+            else
+                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+
     }
 
 

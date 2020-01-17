@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,6 +102,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
     EditText landmark;
     EditText pincode;
     EditText nickname;
+    ImageView backbtn;
 
     public static final String DATEKEY="dateaddress";
     public static final String TIMEKEY="timeaddress";
@@ -134,6 +136,13 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
                 if (mLastLocation != null) {
                     changeMap(mLastLocation);
                 }
+            }
+        });
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
@@ -232,6 +241,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
 
     }
 
+
     private void saveAddressOnServer(String nickname, String completeAddress) {
         String uid = AppPreferences.loadPreferences(SelectDeliveryAddress.this, "USER_ID");
 
@@ -297,6 +307,7 @@ public class SelectDeliveryAddress extends AppCompatActivity implements OnMapRea
         landmark=findViewById(R.id.landmarkfield);
         pincode=findViewById(R.id.pincodeField);
         nickname=findViewById(R.id.nickname);
+        backbtn = findViewById(R.id.ic_back);
     }
 
 

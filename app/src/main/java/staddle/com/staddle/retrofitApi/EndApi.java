@@ -15,6 +15,7 @@ public class EndApi extends BaseApi {
     public static final String GET_CATEGORY_SUBCATEGORY_LIST = "wsGetCategorySubcategoryList.php";
     public static final String GET_SLIDER_IMAGES = "getHomeSilderList.php";
     public static final String GET_VENDOR_LIST ="getVenderList.php";
+    public static final String GET_VENDOR_SERVICES = "http://staddle.in/mobileapp/api/search_items.php";
     public static final String GET_CATEGORY_SUBCATEGORY_TREE_LIST = "wsGetSubcategoryTreeList.php";
     public static final String GET_VENDOR_MENU_LIST = "getVendermenulist.php";
     public static final String GET_PRODUCT_LIST_CATEGORY = "wsProductListCategory.php";

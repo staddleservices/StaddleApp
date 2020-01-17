@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import staddle.com.staddle.HomeActivity;
 import staddle.com.staddle.R;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.SubcategoryTreeListModel;
@@ -82,11 +83,13 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
             if(ci ==0){
                 mainContainerLayout.setVisibility(View.GONE);
                 txtEmptyCart.setVisibility(View.VISIBLE);
+                HomeActivity.toolbar.setVisibility(View.VISIBLE);
                 couponlayout.setVisibility(View.GONE);
                 paychckoutlayout.setVisibility(View.GONE);
             }else{
                 mainContainerLayout.setVisibility(View.VISIBLE);
                 txtEmptyCart.setVisibility(View.GONE);
+                HomeActivity.toolbar.setVisibility(View.GONE);
                 couponlayout.setVisibility(View.VISIBLE);
                 paychckoutlayout.setVisibility(View.VISIBLE);
                 GetVendorSubCategoryMenuListModule.MenuList menuList2 = myOrderListModelArrayList.get(position);
@@ -109,6 +112,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
                     if(i==0){
                         mainContainerLayout.setVisibility(View.GONE);
                         txtEmptyCart.setVisibility(View.VISIBLE);
+                        HomeActivity.toolbar.setVisibility(View.VISIBLE);
                         couponlayout.setVisibility(View.GONE);
                         paychckoutlayout.setVisibility(View.GONE);
                     }

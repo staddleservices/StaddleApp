@@ -233,6 +233,7 @@ public class SignUpActivity extends AppCompatActivity {
           intent.putExtra("USER_NAME",email);
           intent.putExtra("USER_EMAIL",password);
           intent.putExtra("USER_PROFILE_PIC","");
+          intent.putExtra("MOBILE",mobile);
           startActivity(intent);
           finish();
           overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);

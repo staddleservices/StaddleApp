@@ -54,6 +54,11 @@ public class VendorListNewAdapter extends RecyclerView.Adapter<VendorListNewAdap
         return super.getItemId(position);
     }
 
+    @Override
+    public int getItemCount() {
+        return vendorListModelArrayList.size();
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -115,10 +120,7 @@ public class VendorListNewAdapter extends RecyclerView.Adapter<VendorListNewAdap
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return vendorListModelArrayList == null ? 0 : vendorListModelArrayList.size();
-    }
+
 
     @Override
     public Filter getFilter() {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
 
     DatePicker datePicker;
     Context context;
+    ImageView backbtn;
 
     //TimePickerTextViews
     TextView tp1;
@@ -67,6 +69,13 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
         Nickname=intent.getStringExtra("nickname");
         Address=intent.getStringExtra("address");
         atHome=Integer.parseInt(intent.getStringExtra("atHome"));
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -467,8 +476,10 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
         tp12=findViewById(R.id.tp12);
         tp13=findViewById(R.id.tp13);
         tp14=findViewById(R.id.tp14);
+        backbtn = findViewById(R.id.backbtntiming);
         dateSelectBtn=findViewById(R.id.dateSelectBtn);
         setDisabledAll();
+
 
 
     }
@@ -625,7 +636,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                 tp14.setEnabled(true);
                 Log.d("EX-TIME","12.00+");
             }
-        }else if(currentTimeHour==1)
+        }else if(currentTimeHour==13)
         {
             if(currentTimeMinutes>30){
                 tp1.setEnabled(false);
@@ -660,7 +671,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                 tp14.setEnabled(true);
                 Log.d("EX-TIME","1.00+");
             }
-        }else if(currentTimeHour==2)
+        }else if(currentTimeHour==14)
         {
             if(currentTimeMinutes>30){
                 tp1.setEnabled(false);
@@ -695,7 +706,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                 tp14.setEnabled(true);
                 Log.d("EX-TIME","2.00+");
             }
-        }else if(currentTimeHour==3)
+        }else if(currentTimeHour==15)
         {
             if(currentTimeMinutes>30){
                 tp1.setEnabled(false);
@@ -730,7 +741,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                 tp14.setEnabled(true);
                 Log.d("EX-TIME","3.00+");
             }
-        }else if(currentTimeHour==4)
+        }else if(currentTimeHour==16)
         {
             if(currentTimeMinutes>30){
                 tp1.setEnabled(false);

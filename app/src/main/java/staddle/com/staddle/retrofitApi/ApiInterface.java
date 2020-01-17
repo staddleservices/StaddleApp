@@ -112,6 +112,9 @@ public interface ApiInterface {
     Call<VendorListResponse> getVendorList(@Query("lat") String lat,
                                            @Query("lng") String lng);
 
+    @GET(EndApi.GET_VENDOR_SERVICES)
+    Call<VendorListResponse> getVendorAccordingServices(@Query("search_query") String search_query);
+
     @GET(EndApi.GET_FILTER_LIST)
     Call<SubcategoryTreeListResponse> getSubCategoryTreeDetails(@Query("cid") String cid);
 
@@ -147,7 +150,11 @@ public interface ApiInterface {
                                             @Query("completeaddress") String completeAddress,
                                             @Query("booking_slot") String booking_slot,
                                             @Query("booked_date") String booked_date,
-                                            @Query("payment") String payment);
+                                            @Query("payment") String payment,
+                                            @Query("items") String items,
+                                            @Query("customer_mobile") String customer_mobile,
+                                            @Query("customer_name") String customer_name,
+                                            @Query("online_payment_id") String online_payment_id);
 
     @GET(EndApi.UPDATE_PRODUCT_STATUS_ACCEPT)
     Call<AddFavouriteResponse> updateProductSatusAccepted(@Query("pid") String pid);

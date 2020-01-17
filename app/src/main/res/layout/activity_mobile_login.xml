@@ -103,6 +103,8 @@
             android:textAlignment="center"
             android:background="@drawable/mobileotpedittext"
             android:hint="Mobile number"
+            android:inputType="number"
+
             android:layout_marginTop="5dp"
             android:layout_below="@+id/enterphnHeading"
             android:layout_height="50dp"

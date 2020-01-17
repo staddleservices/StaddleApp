@@ -6,7 +6,7 @@ android {
         applicationId "staddle.com.staddle"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 24
+        versionCode 27
         versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

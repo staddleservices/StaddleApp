@@ -22,6 +22,7 @@ public class MyOrderListModel implements Parcelable {
     private String vName;
     private String booked_date;
     private String booking_slot;
+    private String order_otp;
 
     private ArrayList<Data> data;
 
@@ -41,7 +42,9 @@ public class MyOrderListModel implements Parcelable {
         vName = in.readString();
         booked_date = in.readString();
         booking_slot = in.readString();
+        order_otp = in.readString();
     }
+
 
     public static final Creator<MyOrderListModel> CREATOR = new Creator<MyOrderListModel>() {
         @Override
@@ -54,6 +57,14 @@ public class MyOrderListModel implements Parcelable {
             return new MyOrderListModel[size];
         }
     };
+
+    public String getOrder_otp() {
+        return order_otp;
+    }
+
+    public void setOrder_otp(String order_otp) {
+        this.order_otp = order_otp;
+    }
 
     public String getId() {
         return id;

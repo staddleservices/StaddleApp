@@ -46,6 +46,7 @@ import staddle.com.staddle.ResponseClasses.UserInfoResponse;
 import staddle.com.staddle.activity.AboutUsActivity;
 import staddle.com.staddle.activity.HelpActivity;
 import staddle.com.staddle.activity.LocationActivity;
+import staddle.com.staddle.activity.PaymentMethodsActivtiy;
 import staddle.com.staddle.activity.PolicyActivity;
 import staddle.com.staddle.activity.ProfileActivity;
 import staddle.com.staddle.adapter.MyOrderListAdapter;
@@ -93,6 +94,7 @@ public class ProfileFragment extends Fragment {
     RelativeLayout aboutUsLayout;
     RelativeLayout layoutLogout;
     LinearLayout contentlayout;
+    RelativeLayout payment_methods;
 
 
     TextView appVersionName;
@@ -183,6 +185,14 @@ public class ProfileFragment extends Fragment {
                 logOut();
             }
         });
+
+        payment_methods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), PaymentMethodsActivtiy.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -209,6 +219,7 @@ public class ProfileFragment extends Fragment {
         String versionName = BuildConfig.VERSION_NAME;
         appVersionName.setText("App version : "+versionName);
         contentlayout = view.findViewById(R.id.layoutprofilecontent);
+        payment_methods = view.findViewById(R.id.payment_methods);
 
 
     }
@@ -322,12 +333,14 @@ public class ProfileFragment extends Fragment {
                                 shimmerFrameLayout.stopShimmer();
                                 shimmerFrameLayout.setVisibility(View.GONE);
                                 myorderlist.setVisibility(View.GONE);
+                                contentlayout.setVisibility(View.VISIBLE);
                             }
                         }
                     } else {
                         Toast.makeText(getContext(), "Response Fail !!", Toast.LENGTH_SHORT).show();
                         shimmerFrameLayout.stopShimmer();
                         shimmerFrameLayout.setVisibility(View.GONE);
+                        contentlayout.setVisibility(View.VISIBLE);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

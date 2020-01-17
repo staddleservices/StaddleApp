@@ -91,9 +91,10 @@ import static staddle.com.staddle.fragment.ShoppingFragment.appliedpromovalue;
 public class HomeFragment extends Fragment {
 
     Context mContext;
-    ViewPager viewpager_home_slider;
+    //RecyclerView viewpager_home_slider;
+    RecyclerView banners;
     SliderImageAdapter sliderImageAdapter;
-    private ArrayList<SliderImagesModule> imageUrl;
+    private List<SliderImagesModule> imageUrl;
     TextView[] dots;
     int page_position = 0;
     LinearLayout ll_dots;
@@ -141,26 +142,26 @@ public class HomeFragment extends Fragment {
         imageUrl = new ArrayList<>();
         productlist_recyclerview.setNestedScrollingEnabled(false);
 
-        init();
+        //init();
 
-        addBottomDots(0);
+        //addBottomDots(0);
 
-        final Handler handler = new Handler();
-        final Runnable update = () -> {
-            if (page_position == imageUrl.size()) {
-                page_position = 0;
-            } else {
-                page_position = page_position + 1;
-            }
-            viewpager_home_slider.setCurrentItem(page_position, true);
-        };
+//        final Handler handler = new Handler();
+//        final Runnable update = () -> {
+//            if (page_position == imageUrl.size()) {
+//                page_position = 0;
+//            } else {
+//                page_position = page_position + 1;
+//            }
+//            viewpager_home_slider.setCurrentItem(page_position, true);
+//        };
 
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        }, 100, 3000);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                handler.post(update);
+//            }
+//        }, 100, 3000);
 
         LinearLayout linearLayout1 = rootView.findViewById(R.id.ll_beauty);
         LinearLayout linearLayout2 = rootView.findViewById(R.id.ll_spa);
@@ -196,6 +197,7 @@ public class HomeFragment extends Fragment {
         if (CheckNetwork.isNetworkAvailable(mContext)) {
             getHomeSliderImages();
             vendorList();
+
         } else {
             Alerts.showAlert(mContext);
         }
@@ -347,16 +349,21 @@ public class HomeFragment extends Fragment {
 
     private void find_All_IDs(View view) {
         nested_scroll_view  = view.findViewById(R.id.nested_scroll_view);
-        viewpager_home_slider = view.findViewById(R.id.viewpager_home_slider);
+        banners = view.findViewById(R.id.viewpager_home_slider);
         ll_dots = view.findViewById(R.id.ll_dots);
         txtNoMeassage = view.findViewById(R.id.txtNoMeassage);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         productlist_recyclerview = view.findViewById(R.id.productlist_recyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManagerbanner = new LinearLayoutManager(mContext);
+        linearLayoutManagerbanner.setOrientation(LinearLayoutManager.HORIZONTAL);
+        banners.setLayoutManager(linearLayoutManagerbanner);
+        banners.setHasFixedSize(true);
+        //banners.setItemViewCacheSize(20);
         productlist_recyclerview.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
         productlist_recyclerview.setHasFixedSize(true);
-        productlist_recyclerview.setItemViewCacheSize(20);
+        //productlist_recyclerview.setItemViewCacheSize(20);
         productlist_recyclerview.setNestedScrollingEnabled(false);
 
     }
@@ -385,6 +392,7 @@ public class HomeFragment extends Fragment {
                                 if (vendorListModelArrayList != null) {
                                     vendorListNewAdapter = new VendorListNewAdapter(mContext, vendorListModelArrayList);
                                     vendorListNewAdapter.setHasStableIds(true);
+                                    productlist_recyclerview.setHasFixedSize(true);
                                     productlist_recyclerview.setAdapter(vendorListNewAdapter);
                                 } else {
                                     //Toast.makeText(mContext, "" + vendorListResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -426,8 +434,12 @@ public class HomeFragment extends Fragment {
                     imageUrl = response.body().getInfo();
                     String status = response.body().getStatus();
                     if (status.equalsIgnoreCase("1")) {
-                        sliderImageAdapter = new SliderImageAdapter(mContext, imageUrl);
-                        viewpager_home_slider.setAdapter(sliderImageAdapter);
+                        sliderImageAdapter = new SliderImageAdapter(getContext(), imageUrl);
+                        banners.setAdapter(sliderImageAdapter);
+                        //rvFavourite.setVisibility(View.VISIBLE);
+                        //rl_no_fav.setVisibility(View.GONE);
+                        banners.setHasFixedSize(true);
+                        sliderImageAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(mContext, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -444,22 +456,22 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void init() {
-        viewpager_home_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                addBottomDots(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-    }
+//    private void init() {
+//        viewpager_home_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                addBottomDots(position);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//            }
+//        });
+//    }
 
     private void addBottomDots(int currentPage) {
 

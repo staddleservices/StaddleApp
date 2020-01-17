@@ -33,6 +33,7 @@ public class ApiClient {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
                 .setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)
                 .addNetworkInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -41,9 +42,9 @@ public class ApiClient {
                     }
                 })
 //                .addInterceptor(interceptor)
-                .readTimeout(120, TimeUnit.SECONDS)
-                .connectTimeout(120, TimeUnit.SECONDS)
-                .writeTimeout(120, TimeUnit.SECONDS);
+                .readTimeout(180, TimeUnit.SECONDS)
+                .connectTimeout(180, TimeUnit.SECONDS)
+                .writeTimeout(180, TimeUnit.SECONDS);
         return httpClient.build();
     }
 }

@@ -71,6 +71,8 @@ import staddle.com.staddle.activity.NotificationActivity;
 import staddle.com.staddle.activity.OfferAndPromoActivity;
 import staddle.com.staddle.activity.PolicyActivity;
 import staddle.com.staddle.activity.ProfileActivity;
+import staddle.com.staddle.activity.SearchAddressActivity;
+import staddle.com.staddle.activity.SearchServicesActivity;
 import staddle.com.staddle.activity.SettingActivity;
 import staddle.com.staddle.activity.WalletActivity;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
@@ -189,6 +191,7 @@ public class HomeActivity extends AppCompatActivity implements
             bundle.putString("vid",vid);
             bundle.putString("vname",vaname);
             fragmentShopping = ShoppingFragment.newInstance(bundle);
+            toolbar.setVisibility(View.GONE);
             navigation.setSelectedItemId(R.id.navigation_shopping);
             replaceFragment(fragmentShopping);
         }
@@ -213,9 +216,11 @@ public class HomeActivity extends AppCompatActivity implements
         searchBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SearchFragment searchFragment=new SearchFragment();
-                toolbar.setVisibility(View.GONE);
-                replaceFragment(searchFragment);
+                Intent intent = new Intent(HomeActivity.this, SearchServicesActivity.class);
+                startActivity(intent);
+//                SearchFragment searchFragment=new SearchFragment();
+//                toolbar.setVisibility(View.GONE);
+//                replaceFragment(searchFragment);
             }
         });
 
@@ -486,7 +491,7 @@ public class HomeActivity extends AppCompatActivity implements
                                     Picasso.get().load(R.drawable.user_profile).error(R.drawable.user_profile).into(iv_user_profile_pic);
                                 } else if (userProfilePicture.contains(".png")) {
                                     Picasso.get()
-                                            .load("http://127.0.0.1/mobileapp/post_image/"
+                                            .load("http://staddle.in/mobileapp/post_image/"
                                                     + userProfilePicture)
                                             .error(R.drawable.user_profile)
                                             .into(iv_user_profile_pic);
@@ -571,7 +576,7 @@ public class HomeActivity extends AppCompatActivity implements
                     Bundle bundle = new Bundle();
                     bundle.putString("Tag", tag);
                     fragment = ShoppingFragment.newInstance(bundle);
-                    toolbar.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_Favorite:
                     fragment = new FavoriteFragment();
