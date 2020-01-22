@@ -44,14 +44,15 @@ public class EndApi extends BaseApi {
     public static final String GET_PRODUCT_LIST = "getVenderListCategoryWise.php?";
     public static final String GET_HELP_LIST = "getHelpList.php?";
     public static final String MAKE_RATING = "add_rateing.php?";
-    public static final String CHECK_USERS="http://35.200.162.209/mobileapp/api/checkuserexist.php";
-    public static final String FETCH_COUPONS="http://35.200.162.209/mobileapp/api/fetchoffers.php";
-    public static final String SEARCH_COUPONS="http://35.200.162.209/mobileapp/api/searchpromo.php";
-    public static final String RATING_BOX_CHECK="http://35.200.162.209/mobileapp/api/rating_box.php";
-    public static final String FETCH_SAVED_ADDRESS="http://35.200.162.209/mobileapp/api/fetchsavedaddress.php";
-    public static final String SAVE_ADDRESS="http://35.200.162.209/mobileapp/api/insertaddresses.php";
-    public static final String UPDATE_TOKEN="http://35.200.162.209/mobileapp/api/update_token.php";
-    public static final String UPLOAD_TOKEN="http://35.200.162.209/mobileapp/api/upload_token.php";
-    public static final String FETCH_NOTIFICATIONS="http://35.200.162.209/mobileapp/api/fetch_notifcations.php";
+    public static final String CHECK_USERS="http://staddle.in/mobileapp/api/checkuserexist.php";
+    public static final String FETCH_COUPONS="http://staddle.in/mobileapp/api/fetchoffers.php";
+    public static final String SEARCH_COUPONS="http://staddle.in/mobileapp/api/searchpromo.php";
+    public static final String RATING_BOX_CHECK="http://staddle.in/mobileapp/api/rating_box.php";
+    public static final String FETCH_SAVED_ADDRESS="http://staddle.in/mobileapp/api/fetchsavedaddress.php";
+    public static final String SAVE_ADDRESS="http://staddle.in/mobileapp/api/insertaddresses.php";
+    public static final String UPDATE_TOKEN="http://staddle.in/mobileapp/api/update_token.php";
+    public static final String UPLOAD_TOKEN="http://staddle.in/mobileapp/api/upload_token.php";
+    public static final String FETCH_NOTIFICATIONS="http://staddle.in/mobileapp/api/fetch_notifcations.php";
 
+    public static String FETCH_GLOBAL_CODES = "http://staddle.in/mobileapp/api/fetch_global_codes.php";
 }

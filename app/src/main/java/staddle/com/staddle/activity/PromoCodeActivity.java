@@ -24,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ import staddle.com.staddle.bean.MySingleton;
 import staddle.com.staddle.bean.PromoList;
 import staddle.com.staddle.fragment.ShoppingFragment;
 import staddle.com.staddle.retrofitApi.EndApi;
+import staddle.com.staddle.sheardPref.AppPreferences;
 
 import static staddle.com.staddle.fragment.ShoppingFragment.appliedpomodes;
 import static staddle.com.staddle.fragment.ShoppingFragment.appliedpromovalue;
@@ -68,7 +70,7 @@ public class PromoCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_code);
         init();
-        fetchpromocodes(vid,totalprice);
+        getGlobalCodes(vid,totalprice);
 
         backbtnpromoact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -337,6 +339,95 @@ public class PromoCodeActivity extends AppCompatActivity {
 
     public String getMyData() {
         return String.valueOf(discount);
+    }
+
+
+    private void getGlobalCodes(String vid, String totalprice){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, EndApi.FETCH_GLOBAL_CODES,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+
+
+                        Log.e("response",response);
+                        //JSONArray jsonArray = null;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            //for (int i = 0; i < jsonArray.length(); i++) {
+
+                                //JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String status = jsonObject.getString("ans");
+                                //String codes = jsonObject.getString("codes");
+                                //if(Integer.parseInt(status)==1){
+                                //CreateDialogBoxError();}else
+                                if(status.equals("found")){
+                                    JSONArray jsonArray1 = jsonObject.getJSONArray("codes");
+                                    for(int k = 0;k <jsonArray1.length();k++){
+                                        JSONObject jsonObject1 = jsonArray1.getJSONObject(k);
+                                        String promoname = jsonObject1.getString("code_name");
+                                        String promovalue  = jsonObject1.getString("code_off_value");
+                                        String mprice  = jsonObject1.getString("code_minimum");
+                                        String description  = jsonObject1.getString("description");
+                                        promoCodeList.add(new PromoList(promoname,promovalue,mprice,description));
+                                    }
+
+
+
+                                }else{
+                                    //CreateDialogBoxError();
+                                }
+
+
+
+
+                            fetchpromocodes(vid,totalprice);
+//                            PomoCodeAdapter pomoCodeAdapter=new PomoCodeAdapter(promoCodeList,PromoCodeActivity.this);
+//                            promolistRecycler.setAdapter(pomoCodeAdapter);
+//                            progressDialog.dismiss();
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responce", error.toString() );
+                new AlertDialog.Builder(getApplicationContext())
+                        .setTitle("Connection failed!")
+                        .setCancelable(false)
+                        .setMessage("Please check your internet connection or restart the App!")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<String,String>();
+                // params.put("total",totalprice);
+                //Log.e("USERID",AppPreferences.loadPreferences(getApplicationContext(),"USER_ID"));
+                params.put("user_id",AppPreferences.loadPreferences(getApplicationContext(),"USER_ID"));
+                //params.put("totalprice", PromoCodeActivity.totalprice);
+
+
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
+
     }
 
 
