@@ -3,9 +3,11 @@ package staddle.com.staddle.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
+
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.core.content.ContextCompat;
 
 import staddle.com.staddle.R;
 

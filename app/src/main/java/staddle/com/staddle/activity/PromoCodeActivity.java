@@ -7,10 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,18 +37,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import staddle.com.staddle.HomeActivity;
 import staddle.com.staddle.R;
 import staddle.com.staddle.adapter.PomoCodeAdapter;
 import staddle.com.staddle.bean.MySingleton;
 import staddle.com.staddle.bean.PromoList;
-import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.fcm.DBManager;
+import staddle.com.staddle.fragment.CartFragment;
 import staddle.com.staddle.retrofitApi.EndApi;
 import staddle.com.staddle.sheardPref.AppPreferences;
 
-import static staddle.com.staddle.fragment.ShoppingFragment.appliedpomodes;
-import static staddle.com.staddle.fragment.ShoppingFragment.appliedpromovalue;
-import static staddle.com.staddle.fragment.ShoppingFragment.tv_item_total;
+import static staddle.com.staddle.fragment.CartFragment.appliedpomodes;
+import static staddle.com.staddle.fragment.CartFragment.appliedpromovalue;
+
 
 public class PromoCodeActivity extends AppCompatActivity {
 
@@ -64,13 +66,25 @@ public class PromoCodeActivity extends AppCompatActivity {
     public static float discount;
     public static String promovalue="";
     ImageView backbtnpromoact;
+    DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_code);
+        dbManager = new DBManager(getApplicationContext());
+        dbManager.open();
+        Intent intent=getIntent();
+        totalprice=intent.getStringExtra("total");
+        Toast.makeText(PromoCodeActivity.this, "total: "+totalprice, Toast.LENGTH_SHORT).show();
+
+        Log.d("TOTALPRICE",":::::"+dbManager.getTotal());
+        vid=intent.getStringExtra("vid");
+        Log.e("VENDOR_ID",vid);
         init();
-        getGlobalCodes(vid,totalprice);
+        //getGlobalCodes(vid,totalprice);
+        fetchpromocodes(vid,totalprice);
+        dbManager.close();
 
         backbtnpromoact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,11 +104,7 @@ public class PromoCodeActivity extends AppCompatActivity {
     }
 
     private void init(){
-        Intent intent=getIntent();
-        totalprice=intent.getStringExtra("total");
 
-        Log.d("TOTALPRICE",totalprice);
-        vid=intent.getStringExtra("vid");
         //Log.d("VID",vid);
         promoCodeList=new ArrayList<>();
         backbtnpromoact = findViewById(R.id.backbtnpromoact);
@@ -119,29 +129,35 @@ public class PromoCodeActivity extends AppCompatActivity {
 
 
                         Log.e("response",response);
-                        JSONArray jsonArray = null;
+                        JSONObject jsonObject = null;
                         try {
-                            jsonArray = new JSONArray(response);
-                            for (int i = 0; i < jsonArray.length(); i++) {
+                            jsonObject = new JSONObject(response);
 
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String status = jsonObject.getString("status");
-                                //if(Integer.parseInt(status)==1){
-                                    //CreateDialogBoxError();}else
-                                if(Integer.parseInt(status)==0){
-                                    String promoname = jsonObject.getString("promonames");
-                                    String promovalue  = jsonObject.getString("promovalue");
-                                    String mprice  = jsonObject.getString("mprice");
-                                    String description  = jsonObject.getString("description");
+                            JSONArray jsonArray  = jsonObject.getJSONArray("codes");
+                            if(jsonArray==null || jsonObject.getString("status")==null){
+                                CreateDialogBoxError(jsonObject.getString("message"));
+                            }else{
+                                for (int i = 0; i < jsonArray.length(); i++) {
+
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                    String promoname = jsonObject1.getString("promonames");
+                                    String promovalue = jsonObject1.getString("promovalue");
+                                    String mprice = jsonObject1.getString("mprice");
+                                    String description = jsonObject1.getString("description");
 
                                     promoCodeList.add(new PromoList(promoname,promovalue,mprice,description));
-                                }else{
-                                    CreateDialogBoxError();
+
+//                                if(Integer.parseInt(status)==0){
+//
+//                                }else{
+//                                    CreateDialogBoxError();
+//                                }
+
+
+
                                 }
-
-
-
                             }
+
 
                             PomoCodeAdapter pomoCodeAdapter=new PomoCodeAdapter(promoCodeList,PromoCodeActivity.this);
                             promolistRecycler.setAdapter(pomoCodeAdapter);
@@ -159,7 +175,7 @@ public class PromoCodeActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("responce", error.toString() );
-                new AlertDialog.Builder(getApplicationContext())
+                new AlertDialog.Builder(PromoCodeActivity.this)
                         .setTitle("Connection failed!")
                         .setCancelable(false)
                         .setMessage("Please check your internet connection or restart the App!")
@@ -177,8 +193,12 @@ public class PromoCodeActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<String,String>();
                // params.put("total",totalprice);
+                dbManager.open();
+                int b = Math.round(dbManager.getTotal());
                 params.put("vid",vid);
-                params.put("totalprice",totalprice);
+                params.put("user_id",AppPreferences.loadPreferences(PromoCodeActivity.this,"USER_ID"));
+                params.put("total",String.valueOf((b)));
+                dbManager.close();
 
 
                 return params;
@@ -206,7 +226,7 @@ public class PromoCodeActivity extends AppCompatActivity {
                                 String status = jsonObject.getString("status");
                                 if (Integer.parseInt(status) == 1) {
                                     //nopromofound
-                                    CreateDialogBoxError();
+                                    CreateDialogBoxError("No Promo code found");
                                 } else if (Integer.parseInt(status) == 0) {
                                     String promoname = jsonObject.getString("promonames");
                                     String promovalue = jsonObject.getString("promovalue");
@@ -214,12 +234,12 @@ public class PromoCodeActivity extends AppCompatActivity {
                                     String description = jsonObject.getString("description");
                                     appliedpomodes = promoname;
                                     appliedpromovalue = promovalue;
-                                    ShoppingFragment.appliedpromomprice = mprice;
+                                    CartFragment.appliedpromomprice = mprice;
                                     CreateDialogBox();
 
                                     //finish();
                                 } else {
-                                    CreateDialogBoxError();
+                                    //CreateDialogBoxError();
                                     //error
                                 }
 
@@ -258,6 +278,7 @@ public class PromoCodeActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("total",totalprices);
                 params.put("promoname", promoname);
+                params.put("user_id",AppPreferences.loadPreferences(PromoCodeActivity.this,"USER_ID"));
 
 
 
@@ -289,12 +310,12 @@ public class PromoCodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 quantAlert.dismiss();
-                ShoppingFragment.couponlayoutapplied.setVisibility(View.VISIBLE);
-                ShoppingFragment.couponlayout.setVisibility(View.GONE);
-                ShoppingFragment.appliedcoupontag.setText(appliedpomodes);
+                CartFragment.couponlayoutapplied.setVisibility(View.VISIBLE);
+                CartFragment.couponlayout.setVisibility(View.GONE);
+                CartFragment.appliedcoupontag.setText(appliedpomodes);
                 Intent intent = new Intent();
-                intent.putExtra(ShoppingFragment.DISCOUNTKEY, discount+"");
-                setResult(ShoppingFragment.RESULT_CODE, intent); // You can also send result without any data using setResult(int resultCode)
+                intent.putExtra(CartFragment.DISCOUNTKEY, discount+"");
+                setResult(CartFragment.RESULT_CODE, intent); // You can also send result without any data using setResult(int resultCode)
                 finish();
 
             }
@@ -310,12 +331,17 @@ public class PromoCodeActivity extends AppCompatActivity {
         progressDialog.dismiss();
     }
 
-    public void CreateDialogBoxError() {
+    public void CreateDialogBoxError(String message) {
 
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View formElementsView = inflater.inflate(R.layout.promofailed,
+        final View formElementsView = inflater.inflate(R.layout.custom_error_box,
                 null, false);
-        final TextView okay=(TextView)formElementsView.findViewById(R.id.invalidboxokaybtn);
+
+        //final ImageView close_btn_erbx = (ImageView)formElementsView.findViewById(R.id.close_btn_erbx);
+
+        final TextView messagetext = (TextView) formElementsView.findViewById(R.id.errortext);
+        messagetext.setText(message);
+        final TextView okay=(TextView)formElementsView.findViewById(R.id.okaybtn);
 
 
 
@@ -342,93 +368,7 @@ public class PromoCodeActivity extends AppCompatActivity {
     }
 
 
-    private void getGlobalCodes(String vid, String totalprice){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, EndApi.FETCH_GLOBAL_CODES,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-
-
-
-                        Log.e("response",response);
-                        //JSONArray jsonArray = null;
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            //for (int i = 0; i < jsonArray.length(); i++) {
-
-                                //JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String status = jsonObject.getString("ans");
-                                //String codes = jsonObject.getString("codes");
-                                //if(Integer.parseInt(status)==1){
-                                //CreateDialogBoxError();}else
-                                if(status.equals("found")){
-                                    JSONArray jsonArray1 = jsonObject.getJSONArray("codes");
-                                    for(int k = 0;k <jsonArray1.length();k++){
-                                        JSONObject jsonObject1 = jsonArray1.getJSONObject(k);
-                                        String promoname = jsonObject1.getString("code_name");
-                                        String promovalue  = jsonObject1.getString("code_off_value");
-                                        String mprice  = jsonObject1.getString("code_minimum");
-                                        String description  = jsonObject1.getString("description");
-                                        promoCodeList.add(new PromoList(promoname,promovalue,mprice,description));
-                                    }
-
-
-
-                                }else{
-                                    //CreateDialogBoxError();
-                                }
-
-
-
-
-                            fetchpromocodes(vid,totalprice);
-//                            PomoCodeAdapter pomoCodeAdapter=new PomoCodeAdapter(promoCodeList,PromoCodeActivity.this);
-//                            promolistRecycler.setAdapter(pomoCodeAdapter);
-//                            progressDialog.dismiss();
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("responce", error.toString() );
-                new AlertDialog.Builder(getApplicationContext())
-                        .setTitle("Connection failed!")
-                        .setCancelable(false)
-                        .setMessage("Please check your internet connection or restart the App!")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        }).show();
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params=new HashMap<String,String>();
-                // params.put("total",totalprice);
-                //Log.e("USERID",AppPreferences.loadPreferences(getApplicationContext(),"USER_ID"));
-                params.put("user_id",AppPreferences.loadPreferences(getApplicationContext(),"USER_ID"));
-                //params.put("totalprice", PromoCodeActivity.totalprice);
-
-
-                return params;
-            }
-        };
-        stringRequest.setShouldCache(false);
-        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
-
-    }
 
 
 

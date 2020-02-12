@@ -2,8 +2,8 @@ package staddle.com.staddle.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +12,25 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-import staddle.com.staddle.HomeActivity;
 import staddle.com.staddle.R;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
-import staddle.com.staddle.bean.SubcategoryTreeListModel;
-import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.fcm.DBManager;
+import staddle.com.staddle.sheardPref.AppPreferences;
 
-import static staddle.com.staddle.fragment.ShoppingFragment.AddressLayoutCheckout;
-import static staddle.com.staddle.fragment.ShoppingFragment.couponlayout;
-import static staddle.com.staddle.fragment.ShoppingFragment.mainContainerLayout;
-import static staddle.com.staddle.fragment.ShoppingFragment.paychckoutlayout;
-import static staddle.com.staddle.fragment.ShoppingFragment.txtEmptyCart;
+import static staddle.com.staddle.activity.VendorDetailsActivityNew.CR_OR_META_DATA;
+import static staddle.com.staddle.fragment.CartFragment.discount_value_show;
+import static staddle.com.staddle.fragment.CartFragment.item_total_fare;
+import static staddle.com.staddle.fragment.CartFragment.nested_scroll_view_cart;
+import static staddle.com.staddle.fragment.CartFragment.paychckoutlayout;
+import static staddle.com.staddle.fragment.CartFragment.price_saved_text;
+import static staddle.com.staddle.fragment.CartFragment.topay_cart;
+import static staddle.com.staddle.fragment.CartFragment.txtEmptyCart;
+
 
 public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyViewHolder> {
 
@@ -32,8 +38,9 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
     private ShoppingAdapter.OnItemClickListener listener;
     private ArrayList<GetVendorSubCategoryMenuListModule.MenuList> myOrderListModelArrayList;
     private int lastPosition = -1;
-    private PlusButtonClickListener plusButtonClickListener;
 
+    float total;
+    DBManager dbManager;
     public ShoppingAdapter(Context mContext, ArrayList<GetVendorSubCategoryMenuListModule.MenuList> myOrderListModelArrayList) {
         this.mContext = mContext;
         this.myOrderListModelArrayList = myOrderListModelArrayList;
@@ -43,6 +50,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_shopping, parent, false);
+        dbManager = new DBManager(mContext);
         return new MyViewHolder(view);
     }
 
@@ -57,102 +65,106 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
         holder.tv_quantity_old.setText("" + myOrderListModel.getCount());
 
         holder.img_increase.setOnClickListener(view -> {
-            GetVendorSubCategoryMenuListModule.MenuList menuList2 = myOrderListModelArrayList.get(position);
-            int count = menuList2.getCount() + 1;
-            holder.tv_quantity_old.setText(" " + count);
-            int res = Integer.parseInt(menuList2.getMenu_price());
-            int totalPrice = count * res;
-            menuList2.setMenu_name(menuList2.getMenu_name());
-            menuList2.setMenu_price(menuList2.getMenu_price());
-            menuList2.setCount(count);
-            menuList2.setVid(menuList2.getVid());
-            menuList2.setTotalPrice(totalPrice);
-            myOrderListModelArrayList.set(position, menuList2);
-
+            dbManager.open();
+            double newtotal = Double.valueOf(myOrderListModel.getTotalPrice())+Double.valueOf(myOrderListModel.getMenu_price());
+            int newQuantity = myOrderListModel.getCount()+1;
+            Log.d("SHOPPING ADAPTOR", newtotal+":"+newQuantity);
+            dbManager.updateQuantity(myOrderListModel.getId(),String.valueOf(newQuantity),String.valueOf(newtotal));
+            myOrderListModel.setCount(newQuantity);
+            myOrderListModel.setTotalPrice(newtotal);
             notifyDataSetChanged();
-            try {
-                plusButtonClickListener.onPlusButtonClickListener(position, myOrderListModel);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+            String discount = AppPreferences.loadPreferences(mContext,"CRORDISCOUNT");
+            float total = dbManager.getTotal();
+
+
+
+
+                float topay = total- ((Float.valueOf(discount)/100)*total);
+                item_total_fare.setText("₹ "+String.valueOf(total));
+                discount_value_show.setText(" - ₹ "+(Float.valueOf(discount)/100)*total);
+
+                topay_cart.setText("₹ "+topay);
+
+                price_saved_text.setText("You have saved ₹ "+(Float.valueOf(discount)/100)*total +" on the bill.");
+
+
+
+
+
+            dbManager.close();
+
+
         });
 
         holder.img_decrease.setOnClickListener(view -> {
+            if(myOrderListModel.getCount()==1){
 
-            int  ci=myOrderListModelArrayList.size();
-            if(ci ==0){
-                mainContainerLayout.setVisibility(View.GONE);
-                txtEmptyCart.setVisibility(View.VISIBLE);
-                HomeActivity.toolbar.setVisibility(View.VISIBLE);
-                couponlayout.setVisibility(View.GONE);
-                paychckoutlayout.setVisibility(View.GONE);
+                dbManager.open();
+
+                dbManager.delete(myOrderListModel.getId());
+
+                float total = dbManager.getTotal();
+
+                String discount = AppPreferences.loadPreferences(mContext,"CRORDISCOUNT");
+
+
+
+
+                float topay = total- ((Float.valueOf(discount)/100)*total);
+                item_total_fare.setText("₹ "+String.valueOf(total));
+                discount_value_show.setText(" - ₹ "+(Float.valueOf(discount)/100)*total);
+
+                topay_cart.setText("₹ "+topay);
+
+                price_saved_text.setText("You have saved ₹ "+(Float.valueOf(discount)/100)*total +" on the bill.");
+                myOrderListModelArrayList.remove(position);
+                notifyDataSetChanged();
+                dbManager.close();
+                Log.d("CARTSIZE","cash"+myOrderListModelArrayList.size());
+                dbManager.open();
+                if(myOrderListModelArrayList.size()==0){
+                    AppPreferences.deletePref(mContext,CR_OR_META_DATA);
+                    dbManager.truncate();
+                    txtEmptyCart.setVisibility(View.VISIBLE);
+                    nested_scroll_view_cart.setVisibility(View.GONE);
+                    paychckoutlayout.setVisibility(View.GONE);
+                }
+                dbManager.close();
+
             }else{
-                mainContainerLayout.setVisibility(View.VISIBLE);
-                txtEmptyCart.setVisibility(View.GONE);
-                HomeActivity.toolbar.setVisibility(View.GONE);
-                couponlayout.setVisibility(View.VISIBLE);
-                paychckoutlayout.setVisibility(View.VISIBLE);
-                GetVendorSubCategoryMenuListModule.MenuList menuList2 = myOrderListModelArrayList.get(position);
-                int count = menuList2.getCount();
-                if (count != 0) {
-                    count = count - 1;
-                    holder.tv_quantity_old.setText("" + count);
-                    int totalPrice = menuList2.getTotalPrice() - Integer.parseInt(menuList2.getMenu_price());
-                    menuList2.setMenu_name(menuList2.getMenu_name());
-                    menuList2.setMenu_price(menuList2.getMenu_price());
-                    menuList2.setCount(count);
-                    menuList2.setVid(menuList2.getVid());
-                    menuList2.setTotalPrice(totalPrice);
-                    myOrderListModelArrayList.set(position, menuList2);
+                dbManager.open();
+                double newtotal = Double.valueOf(myOrderListModel.getTotalPrice())-Double.valueOf(myOrderListModel.getMenu_price());
+                int newQuantity = myOrderListModel.getCount()-1;
+                Log.d("SHOPPING ADAPTOR", newtotal+":"+newQuantity);
+                dbManager.updateQuantity(myOrderListModel.getId(),String.valueOf(newQuantity),String.valueOf(newtotal));
+                myOrderListModel.setCount(newQuantity);
+                myOrderListModel.setTotalPrice(newtotal);
+                notifyDataSetChanged();
 
-                }
-                if (count == 0) {
-                    listener.onItemClick(myOrderListModel, position);
-                    int  i=myOrderListModelArrayList.size();
-                    if(i==0){
-                        mainContainerLayout.setVisibility(View.GONE);
-                        txtEmptyCart.setVisibility(View.VISIBLE);
-                        HomeActivity.toolbar.setVisibility(View.VISIBLE);
-                        couponlayout.setVisibility(View.GONE);
-                        paychckoutlayout.setVisibility(View.GONE);
-                    }
+                float total = dbManager.getTotal();
 
-                }else {
+                String discount = AppPreferences.loadPreferences(mContext,"CRORDISCOUNT");
 
 
 
 
-                    notifyDataSetChanged();
-                    try {
-                        plusButtonClickListener.onPlusButtonClickListener(position, myOrderListModel);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                float topay = total- ((Float.valueOf(discount)/100)*total);
+                item_total_fare.setText("₹ "+String.valueOf(total));
+                discount_value_show.setText(" - ₹ "+(Float.valueOf(discount)/100)*total);
 
+                topay_cart.setText("₹ "+topay);
+
+                price_saved_text.setText("You have saved ₹ "+(Float.valueOf(discount)/100)*total +" on the bill.");
+
+                dbManager.close();
             }
+
+
+
 
         });
 
-//        holder.iv_delete.setOnClickListener(view -> {
-//            GetVendorSubCategoryMenuListModule.MenuList menuList2 = myOrderListModelArrayList.get(position);
-//            holder.tv_quantity_old.setText("" + 0);
-//            int totalPrice = menuList2.getTotalPrice() - Integer.parseInt(menuList2.getMenu_price());
-//            menuList2.setMenu_name(menuList2.getMenu_name());
-//            menuList2.setMenu_price(menuList2.getMenu_price());
-//            menuList2.setCount(0);
-//            menuList2.setVid(menuList2.getVid());
-//            menuList2.setTotalPrice(totalPrice);
-//            myOrderListModelArrayList.set(position, menuList2);
-//            listener.onItemClick(myOrderListModel, position);
-//            notifyDataSetChanged();
-//            try {
-//                plusButtonClickListener.onPlusButtonClickListener(position, myOrderListModel);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//        });
 
 
     }
@@ -178,22 +190,11 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
 
         }
 
-        void bind(final GetVendorSubCategoryMenuListModule.MenuList mInbox, final int position, final ShoppingAdapter.OnItemClickListener listener) {
-            try {
-                //iv_delete.setOnClickListener(v -> listener.onItemClick(mInbox, position));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
     public int getTotalPrice() {
-        int total = 0;
-        for (int i = 0; i < myOrderListModelArrayList.size(); i++) {
-            int cprice = myOrderListModelArrayList.get(i).getTotalPrice();
-            total += cprice;
-        }
-        return total;
+       return 0;
     }
 
     private void setAnimation(View viewToAnimate, int position) {
@@ -204,13 +205,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
         lastPosition = position;
     }
 
-    public interface PlusButtonClickListener {
-        void onPlusButtonClickListener(int position, GetVendorSubCategoryMenuListModule.MenuList menuList);
-    }
 
-    public void setCPlusButtonClickListener(PlusButtonClickListener listener) {
-        this.plusButtonClickListener = listener;
-    }
 
     public void setOnItemClickListener(ShoppingAdapter.OnItemClickListener listener) {
         this.listener = listener;

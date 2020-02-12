@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.crashlytics.android.Crashlytics;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import rx.functions.Action1;
@@ -29,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         AppConstants.ChangeStatusBarColor(SplashActivity.this);
 
         CheckPermissions();
+
     }
 
     void CheckPermissions() {

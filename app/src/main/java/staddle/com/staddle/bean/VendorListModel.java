@@ -8,7 +8,7 @@ public class VendorListModel{
     private String sub_category;
     private String email;
     private String mobile;
-    private String password;
+
     private String image;
     private String location;
     private String cid;
@@ -76,13 +76,6 @@ public class VendorListModel{
         this.mobile = mobile;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getImage() {
         return image;

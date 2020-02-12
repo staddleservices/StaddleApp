@@ -3,28 +3,23 @@ package staddle.com.staddle.activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 import staddle.com.staddle.R;
-import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.fragment.CartFragment;
 
 public class SchedulingActivity extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener {
 
@@ -118,7 +113,7 @@ public class SchedulingActivity extends AppCompatActivity implements  DatePicker
                         Intent intent = new Intent();
                         intent.putExtra("date", SelectedDate);
                         intent.putExtra("time", selectedTime);
-                        setResult(ShoppingFragment.CAT1RESCODESALON, intent);
+                        setResult(CartFragment.CAT1RESCODESALON, intent);
                         finish();
                     }
                     Intent intent = new Intent();

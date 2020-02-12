@@ -11,9 +11,7 @@ import android.content.pm.Signature;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +20,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -49,15 +52,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
-import com.linkedin.platform.APIHelper;
-import com.linkedin.platform.DeepLinkHelper;
-import com.linkedin.platform.LISessionManager;
-import com.linkedin.platform.errors.LIApiError;
-import com.linkedin.platform.errors.LIAuthError;
-import com.linkedin.platform.listeners.ApiListener;
-import com.linkedin.platform.listeners.ApiResponse;
-import com.linkedin.platform.listeners.AuthListener;
-import com.linkedin.platform.utils.Scope;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -150,22 +145,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         ll_linked_in.setOnClickListener(v -> {
             ll_inkedInOnClick = true;
-            LISessionManager.getInstance(getApplicationContext())
-                    .init(LoginActivity.this, buildScope(), new AuthListener() {
-                        @Override
-                        public void onAuthSuccess() {
-                            if (CheckNetwork.isNetworkAvailable(LoginActivity.this)) {
-                                fetchLinkedInInfo();
-                            } else {
-                                Alerts.showAlert(LoginActivity.this);
-                            }
-                        }
-
-                        @Override
-                        public void onAuthError(LIAuthError error) {
-                            Toast.makeText(getApplicationContext(), "Connection Not available failed ", Toast.LENGTH_LONG).show();
-                        }
-                    }, true);
+//            LISessionManager.getInstance(getApplicationContext())
+//                    .init(LoginActivity.this, buildScope(), new AuthListener() {
+//                        @Override
+//                        public void onAuthSuccess() {
+//                            if (CheckNetwork.isNetworkAvailable(LoginActivity.this)) {
+//                                fetchLinkedInInfo();
+//                            } else {
+//                                Alerts.showAlert(LoginActivity.this);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onAuthError(LIAuthError error) {
+//                            Toast.makeText(getApplicationContext(), "Connection Not available failed ", Toast.LENGTH_LONG).show();
+//                        }
+//                    }, true);
         });
 
         ll_facebook.setOnClickListener(v -> {
@@ -250,53 +245,53 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    //for linkedin
-    private static Scope buildScope() {
-        return Scope.build(Scope.R_BASICPROFILE, Scope.R_EMAILADDRESS);
-    }
+//    //for linkedin
+//    private static Scope buildScope() {
+//        return RestrictTo.Scope.build(RestrictTo.Scope.R_BASICPROFILE, RestrictTo.Scope.R_EMAILADDRESS);
+//    }
 
-    public void fetchLinkedInInfo() {
-        pd = new ProgressDialog(LoginActivity.this);
-        pd.setMessage("Loading Please Wait...");
-        pd.setCancelable(false);
-        pd.show();
-        // String url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name)";
-        String url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,public-profile-url,picture-url,email-address,picture-urls::(original))";
-
-        APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
-        apiHelper.getRequest(LoginActivity.this, url, new ApiListener() {
-            @Override
-            public void onApiSuccess(ApiResponse apiResponse) {
-                JSONObject jsonObject = apiResponse.getResponseDataAsJson();
-                pd.dismiss();
-                Log.d(TAG + "Response >>>> :", String.valueOf(apiResponse));
-                try {
-                    String linkedIn_ID = jsonObject.getString("id");
-                    String firstName = jsonObject.getString("firstName");
-                    String lastName = jsonObject.getString("lastName");
-                    String linkedIn_userName = firstName + " " + lastName;
-                    String linkedInEmail = jsonObject.getString("emailAddress");
-                    String linkedInMobile = "123456789";
-                    String linkedIn_Profile_pic = jsonObject.getString("pictureUrl");
-
-                    if (CheckNetwork.isNetworkAvailable(LoginActivity.this)) {
-                        // ========== Api Call =============
-                        socialLinkedInLogin(linkedIn_ID, linkedIn_userName, linkedInEmail, linkedInMobile, linkedIn_Profile_pic);
-                    } else {
-                        Alerts.showAlert(LoginActivity.this);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "Error found! Please retry...", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onApiError(LIApiError liApiError) {
-                Toast.makeText(LoginActivity.this, "Error found! Please retry...", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    public void fetchLinkedInInfo() {
+//        pd = new ProgressDialog(LoginActivity.this);
+//        pd.setMessage("Loading Please Wait...");
+//        pd.setCancelable(false);
+//        pd.show();
+//        // String url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name)";
+//        String url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,public-profile-url,picture-url,email-address,picture-urls::(original))";
+//
+//        APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
+//        apiHelper.getRequest(LoginActivity.this, url, new ApiListener() {
+//            @Override
+//            public void onApiSuccess(ApiResponse apiResponse) {
+//                JSONObject jsonObject = apiResponse.getResponseDataAsJson();
+//                pd.dismiss();
+//                Log.d(TAG + "Response >>>> :", String.valueOf(apiResponse));
+//                try {
+//                    String linkedIn_ID = jsonObject.getString("id");
+//                    String firstName = jsonObject.getString("firstName");
+//                    String lastName = jsonObject.getString("lastName");
+//                    String linkedIn_userName = firstName + " " + lastName;
+//                    String linkedInEmail = jsonObject.getString("emailAddress");
+//                    String linkedInMobile = "123456789";
+//                    String linkedIn_Profile_pic = jsonObject.getString("pictureUrl");
+//
+//                    if (CheckNetwork.isNetworkAvailable(LoginActivity.this)) {
+//                        // ========== Api Call =============
+//                        socialLinkedInLogin(linkedIn_ID, linkedIn_userName, linkedInEmail, linkedInMobile, linkedIn_Profile_pic);
+//                    } else {
+//                        Alerts.showAlert(LoginActivity.this);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(LoginActivity.this, "Error found! Please retry...", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onApiError(LIApiError liApiError) {
+//                Toast.makeText(LoginActivity.this, "Error found! Please retry...", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void facebookLogin() {
         callbackManager = CallbackManager.Factory.create();
@@ -401,9 +396,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if (ll_inkedInOnClick) {
                 ll_googleOnClick = false;
                 ll_facebookOnClick = false;
-                LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
-                DeepLinkHelper deepLinkHelper = DeepLinkHelper.getInstance();
-                deepLinkHelper.onActivityResult(this, requestCode, resultCode, data);
+//                LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
+//                DeepLinkHelper deepLinkHelper = DeepLinkHelper.getInstance();
+//                deepLinkHelper.onActivityResult(this, requestCode, resultCode, data);
             } else if (ll_facebookOnClick) {
                 ll_googleOnClick = false;
                 ll_inkedInOnClick = false;

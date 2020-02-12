@@ -3,8 +3,8 @@ package staddle.com.staddle.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -50,6 +53,8 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             holder.btnRate.setVisibility(View.GONE);
 
         holder.txtName.setText(myOrderListModel.getvName());
+
+        Log.e("TAG",myOrderListModel.getOrder_price()+"::::::");
         float tot = Float.parseFloat(myOrderListModel.getOrder_price());
         float comm = Float.parseFloat(myOrderListModel.getDiscount());
         float totalPrice = tot - comm;
@@ -78,8 +83,9 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             intent.putExtra("DATE", myOrderListModelArrayList.get(position).getCreate_date());
             intent.putExtra("ORDER_PRICE", myOrderListModelArrayList.get(position).getOrder_price());
             intent.putExtra("ORDER_STATUS", myOrderListModelArrayList.get(position).getStatus());
-            intent.putExtra("DICS_PRICE", myOrderListModelArrayList.get(position).getDiscount_price());
-            intent.putExtra("DICSCOUNT", myOrderListModelArrayList.get(position).getDiscount());
+            intent.putExtra("DICS_PRICE", myOrderListModelArrayList.get(position).getDiscount());
+            //intent.putExtra("TOPAY",myOrderListModelArrayList.get(position).getOrder_price());
+            intent.putExtra("DICSCOUNT", myOrderListModelArrayList.get(position).getDiscount_price());
             mContext.startActivity(intent);
 
         });

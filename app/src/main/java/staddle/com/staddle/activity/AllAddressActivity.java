@@ -3,17 +3,20 @@ package staddle.com.staddle.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,7 +38,7 @@ import staddle.com.staddle.R;
 import staddle.com.staddle.adapter.FetchAddressAdapter;
 import staddle.com.staddle.bean.MySingleton;
 import staddle.com.staddle.bean.SavedAddressList;
-import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.fragment.CartFragment;
 import staddle.com.staddle.retrofitApi.EndApi;
 import staddle.com.staddle.sheardPref.AppPreferences;
 
@@ -74,14 +77,14 @@ public class AllAddressActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), SelectDeliveryAddress.class);
-                startActivityForResult(intent, ShoppingFragment.REQUESTCODEREFRES);
+                startActivityForResult(intent, CartFragment.REQUESTCODEREFRES);
             }
         });
         SearchAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), SearchAddressActivity.class);
-                startActivityForResult(intent, ShoppingFragment.REQUESTCODEREFRES);
+                startActivityForResult(intent, CartFragment.REQUESTCODEREFRES);
 
             }
         });
@@ -126,7 +129,7 @@ public class AllAddressActivity extends AppCompatActivity {
                intent.putExtra("time",SelectedTime);
                intent.putExtra("nickname",FinalSetNickname);
                intent.putExtra("address",FinalSetAddress);
-               setResult(ShoppingFragment.CAT1RESCODEHOME, intent);
+               setResult(CartFragment.CAT1RESCODEHOME, intent);
                finish();
            }
         }

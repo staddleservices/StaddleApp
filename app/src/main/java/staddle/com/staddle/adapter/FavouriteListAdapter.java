@@ -3,8 +3,8 @@ package staddle.com.staddle.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -55,8 +58,16 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
         else
             holder.txt_discount.setText(favouriteListModel.getUser_discount());
 
+        if(favouriteListModel.getRating().equals("0.0")){
+            Log.d("RATING_RUN","if");
+            holder.tv_item_rating.setText("New");
+        }else  {
+            Log.d("RATING_RUN","else");
+            holder.tv_item_rating.setText(favouriteListModel.getRating());
+        }
+
         holder.txtTiming.setText(favouriteListModel.getOpening_time() + " To " + favouriteListModel.getClosing_time());
-        holder.tv_item_rating.setText(favouriteListModel.getRating());
+
 
         String image_url = BaseApi.IMAGE_BASE_POST_URL + favouriteListModel.getImage();
         Picasso.get()
@@ -70,6 +81,7 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
             Intent intent = new Intent(mContext, VendorDetailsActivityNew.class);
             if (favouriteListModelArrayList.get(position).getCid().equals("1")) {
                 intent.putExtra("Tag", "HomeVender");
+
                 intent.putExtra("Category", favouriteListModelArrayList.get(position).getSub_category());
             } else if (!favouriteListModelArrayList.get(position).getCid().equals("2")) {
                 intent.putExtra("Tag", "HOUSE");
@@ -80,7 +92,8 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
             intent.putExtra("location", favouriteListModelArrayList.get(position).getLocation());
             intent.putExtra("rating", favouriteListModelArrayList.get(position).getRating());
             intent.putExtra("image", favouriteListModelArrayList.get(position).getImage());
-            intent.putExtra("vid", favouriteListModelArrayList.get(position).getVid());
+            intent.putExtra("vid", favouriteListModelArrayList.get(position).getid());
+            Log.e("Favorite_Vendor",favouriteListModelArrayList.get(position).getid());
             intent.putExtra("cid", favouriteListModelArrayList.get(position).getCid());
             intent.putExtra("closingTime", favouriteListModelArrayList.get(position).getClosing_time());
             intent.putExtra("openingTime", favouriteListModelArrayList.get(position).getOpening_time());

@@ -54,14 +54,27 @@ public class GetVendorSubCategoryMenuListModule implements Parcelable {
     public static class MenuList {
         private String id;
         private String vid;
-        private String menu_price;
+        private double menu_price;
+
         private String menu_name;
         private int count = 0;
-        private int totalPrice;
+        private  double totalPrice;
 
         public MenuList() {
 
         }
+
+        public MenuList(String id, String vid, double menu_price, String menu_name, int count, double totalPrice) {
+            this.id = id;
+            this.vid = vid;
+            this.menu_price = menu_price;
+            this.menu_name = menu_name;
+            this.count = count;
+            this.totalPrice = totalPrice;
+
+        }
+
+
 
         public String getId() {
             return id;
@@ -79,11 +92,11 @@ public class GetVendorSubCategoryMenuListModule implements Parcelable {
             this.vid = vid;
         }
 
-        public String getMenu_price() {
+        public Double getMenu_price() {
             return menu_price;
         }
 
-        public void setMenu_price(String menu_price) {
+        public void setMenu_price(Double menu_price) {
             this.menu_price = menu_price;
         }
 
@@ -103,11 +116,11 @@ public class GetVendorSubCategoryMenuListModule implements Parcelable {
             this.count = count;
         }
 
-        public int getTotalPrice() {
+        public double getTotalPrice() {
             return totalPrice;
         }
 
-        public void setTotalPrice(int totalPrice) {
+        public void setTotalPrice(double totalPrice) {
             this.totalPrice = totalPrice;
         }
     }

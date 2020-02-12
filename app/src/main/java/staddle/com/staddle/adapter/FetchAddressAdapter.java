@@ -4,37 +4,32 @@ package staddle.com.staddle.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import staddle.com.staddle.R;
 import staddle.com.staddle.activity.AllAddressActivity;
 import staddle.com.staddle.activity.SchedulingActivity;
-import staddle.com.staddle.bean.OfferAndPromoModel;
 import staddle.com.staddle.bean.SavedAddressList;
-import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.fragment.CartFragment;
 
-import static staddle.com.staddle.fragment.ShoppingFragment.AddressLayoutCheckout;
-import static staddle.com.staddle.fragment.ShoppingFragment.REQUEST_CODETIME;
+import static staddle.com.staddle.fragment.CartFragment.AddressLayoutCheckout;
+import static staddle.com.staddle.fragment.CartFragment.paychckoutlayout;
+import static staddle.com.staddle.fragment.CartFragment.selectAddressShowLayout;
+import static staddle.com.staddle.fragment.CartFragment.serviceAddressNickNameT;
+import static staddle.com.staddle.fragment.CartFragment.serviceAddressT;
 
-import static staddle.com.staddle.fragment.ShoppingFragment.paychckoutlayout;
-import static staddle.com.staddle.fragment.ShoppingFragment.selectAddressShowLayout;
-import static staddle.com.staddle.fragment.ShoppingFragment.serviceAddressNickNameT;
-import static staddle.com.staddle.fragment.ShoppingFragment.serviceAddressT;
 
 public class FetchAddressAdapter extends RecyclerView.Adapter<FetchAddressAdapter.MyViewHolder> {
 
@@ -65,14 +60,14 @@ public class FetchAddressAdapter extends RecyclerView.Adapter<FetchAddressAdapte
         myViewHolder.button_select_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ShoppingFragment.cid.equals("4")) {
+                if(CartFragment.cid.equals("4")) {
                     AddressLayoutCheckout.setVisibility(View.GONE);
                     paychckoutlayout.setVisibility(View.VISIBLE);
                     selectAddressShowLayout.setVisibility(View.VISIBLE);
                     serviceAddressT.setText(addresses.get(position).getAddressString());
                     serviceAddressNickNameT.setText(addresses.get(position).getNickName());
-                    ShoppingFragment.serviceAddress = addresses.get(position).getAddressString();
-                    ShoppingFragment.serviceAddressNickName = addresses.get(position).getNickName();
+                    CartFragment.serviceAddress = addresses.get(position).getAddressString();
+                    CartFragment.serviceAddressNickName = addresses.get(position).getNickName();
                 }else{
                     Intent intent=new Intent(context, SchedulingActivity.class);
                     intent.putExtra("nickname",addresses.get(position).getNickName());

@@ -6,14 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.login.LoginManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -46,12 +48,15 @@ import staddle.com.staddle.ResponseClasses.UserInfoResponse;
 import staddle.com.staddle.activity.AboutUsActivity;
 import staddle.com.staddle.activity.HelpActivity;
 import staddle.com.staddle.activity.LocationActivity;
+import staddle.com.staddle.activity.LoginActivity;
+import staddle.com.staddle.activity.MobileLoginActivity;
 import staddle.com.staddle.activity.PaymentMethodsActivtiy;
 import staddle.com.staddle.activity.PolicyActivity;
 import staddle.com.staddle.activity.ProfileActivity;
 import staddle.com.staddle.adapter.MyOrderListAdapter;
 import staddle.com.staddle.bean.MyOrderListModel;
 import staddle.com.staddle.bean.UserInfoModule;
+import staddle.com.staddle.fcm.DBManager;
 import staddle.com.staddle.internetconnection.CheckNetwork;
 import staddle.com.staddle.retrofitApi.ApiClient;
 import staddle.com.staddle.retrofitApi.ApiInterface;
@@ -62,6 +67,7 @@ import static android.graphics.Color.TRANSPARENT;
 import static staddle.com.staddle.HomeActivity.mAuth;
 import static staddle.com.staddle.HomeActivity.mGoogleSignInClient;
 import static staddle.com.staddle.HomeActivity.toolbar;
+import static staddle.com.staddle.activity.VendorDetailsActivityNew.CR_OR_META_DATA;
 
 public class ProfileFragment extends Fragment {
     View view;
@@ -220,6 +226,12 @@ public class ProfileFragment extends Fragment {
         appVersionName.setText("App version : "+versionName);
         contentlayout = view.findViewById(R.id.layoutprofilecontent);
         payment_methods = view.findViewById(R.id.payment_methods);
+        DBManager db = new DBManager(getContext());
+//        db.open();
+//        db.truncate();
+//        db.close();
+//        AppPreferences.deletePref(getContext(),CR_OR_META_DATA);
+
 
 
     }
@@ -414,7 +426,7 @@ public class ProfileFragment extends Fragment {
 
             mAuth.signOut();
             mGoogleSignInClient.signOut();
-            Intent intent = new Intent(getContext(), LocationActivity.class);
+            Intent intent = new Intent(getContext(), MobileLoginActivity.class);
            /* intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/

@@ -5,8 +5,8 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,27 +14,26 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -48,6 +47,13 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -62,30 +68,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import staddle.com.staddle.ResponseClasses.UserInfoResponse;
-import staddle.com.staddle.activity.AboutUsActivity;
-import staddle.com.staddle.activity.HelpActivity;
 import staddle.com.staddle.activity.LocationActivity;
-import staddle.com.staddle.activity.MyOrderActivity;
-import staddle.com.staddle.activity.MyWishListActivity;
 import staddle.com.staddle.activity.NotificationActivity;
-import staddle.com.staddle.activity.OfferAndPromoActivity;
-import staddle.com.staddle.activity.PolicyActivity;
-import staddle.com.staddle.activity.ProfileActivity;
-import staddle.com.staddle.activity.SearchAddressActivity;
 import staddle.com.staddle.activity.SearchServicesActivity;
-import staddle.com.staddle.activity.SettingActivity;
-import staddle.com.staddle.activity.WalletActivity;
+import staddle.com.staddle.bean.CurrentOrderMetaData;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.UserInfoModule;
-import staddle.com.staddle.fcm.DBManager;
 import staddle.com.staddle.fragment.BeautyFragment;
+import staddle.com.staddle.fragment.CartFragment;
 import staddle.com.staddle.fragment.FavoriteFragment;
 import staddle.com.staddle.fragment.HomeFragment;
 import staddle.com.staddle.fragment.HouseKeepingFragment;
 import staddle.com.staddle.fragment.ProfileFragment;
 import staddle.com.staddle.fragment.SearchFragment;
 import staddle.com.staddle.fragment.SecurityFragment;
-import staddle.com.staddle.fragment.ShoppingFragment;
 import staddle.com.staddle.fragment.WalletFragment;
 import staddle.com.staddle.internetconnection.CheckNetwork;
 import staddle.com.staddle.internetconnection.NetworkAvailablity;
@@ -97,9 +93,11 @@ import staddle.com.staddle.utils.AppConstants;
 import static android.graphics.Color.TRANSPARENT;
 import static staddle.com.staddle.fcm.MyFireBaseMessagingService.CURRENT_ORDER_ID_KEY;
 import static staddle.com.staddle.fcm.MyFireBaseMessagingService.CURRENT_ORDER_STATUS_KEY;
+import static staddle.com.staddle.fragment.CartFragment.REQUEST_CODE;
+
 
 public class HomeActivity extends AppCompatActivity implements
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        BottomNavigationView.OnNavigationItemSelectedListener, OnSuccessListener<AppUpdateInfo> {
     ApiInterface apiInterface;
     String TAG = getClass().getSimpleName();
     String userId, userName, userEmail, userMobile, userProfilePicture;
@@ -145,6 +143,10 @@ public class HomeActivity extends AppCompatActivity implements
     public static RelativeLayout toolbar;
     private String Category = "";
 
+    AppUpdateManager appUpdateManager;
+
+
+
 
     //SearchBox
     TextView searchBox;
@@ -158,6 +160,7 @@ public class HomeActivity extends AppCompatActivity implements
         AppConstants.ChangeStatusBarColor(HomeActivity.this);
 
         find_All_IDs();
+
 
 //        Intent intent1=getIntent();
 //        userId=intent1.getStringExtra("USER_ID");
@@ -175,25 +178,25 @@ public class HomeActivity extends AppCompatActivity implements
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey("openF2")) {
             openF2 = extras.getBoolean("openF2");
-            tag = extras.getString("Tag");
-            Category = extras.getString("Category");
-            discount = extras.getString("discount");
-            commision = extras.getString("commision");
-            vid=extras.getString("vid");
-            cid=extras.getString("CID");
-            vaname=extras.getString("vname");
+//            tag = extras.getString("Tag");
+//            Category = extras.getString("Category");
+//            discount = extras.getString("discount");
+//            commision = extras.getString("commision");
+//            vid=extras.getString("vid");
+//            cid=extras.getString("CID");
+//            vaname=extras.getString("vname");
         }
         if (openF2) {
-            Bundle bundle = new Bundle();
-            bundle.putString("Tag", tag);
-            bundle.putString("Category", Category);
-            bundle.putString("CID", cid);
-            bundle.putString("vid",vid);
-            bundle.putString("vname",vaname);
-            fragmentShopping = ShoppingFragment.newInstance(bundle);
+            //Bundle bundle = new Bundle();
+//            bundle.putString("Tag", tag);
+//            bundle.putString("Category", Category);
+//            bundle.putString("CID", cid);
+//            bundle.putString("vid",vid);
+//            bundle.putString("vname",vaname);
+            CartFragment cartFragment  = new CartFragment();
             toolbar.setVisibility(View.GONE);
             navigation.setSelectedItemId(R.id.navigation_shopping);
-            replaceFragment(fragmentShopping);
+            replaceFragment(cartFragment);
         }
 
         if (CheckNetwork.isNetworkAvailable(HomeActivity.this)) {
@@ -261,6 +264,10 @@ public class HomeActivity extends AppCompatActivity implements
                 Toast.makeText(mContext, "Show rating box", Toast.LENGTH_SHORT).show();
             }
         }
+
+        appUpdateManager= AppUpdateManagerFactory.create(getApplicationContext());
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(HomeActivity.this);
+
     }
 
     @Override
@@ -313,6 +320,8 @@ public class HomeActivity extends AppCompatActivity implements
 
         Toast.makeText(HomeActivity.this, "+"+AppPreferences.loadPreferences(HomeActivity.this,CURRENT_ORDER_ID_KEY), Toast.LENGTH_SHORT).show();
         replaceFragment(new HomeFragment());
+
+
 
     }
 
@@ -575,7 +584,8 @@ public class HomeActivity extends AppCompatActivity implements
                 case R.id.navigation_shopping:
                     Bundle bundle = new Bundle();
                     bundle.putString("Tag", tag);
-                    fragment = ShoppingFragment.newInstance(bundle);
+                    fragment = new CartFragment();
+                    //fragment = ShoppingFragment.newInstance(bundle);
                     toolbar.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_Favorite:
@@ -685,4 +695,32 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
 
+    @Override
+    public void onSuccess(AppUpdateInfo appUpdateInfo) {
+        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+            if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo,
+                            AppUpdateType.IMMEDIATE,
+                            this,
+                            REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+                //handle immediate flow
+            } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo,
+                            AppUpdateType.FLEXIBLE,
+                            this,
+                            REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+                //handle flexible flow
+            }
+        }
+    }
 }

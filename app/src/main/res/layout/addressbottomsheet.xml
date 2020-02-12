@@ -11,7 +11,7 @@
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/currentlocfab"
         android:layout_width="40dp"
         android:layout_height="40dp"

@@ -1,9 +1,11 @@
 package staddle.com.staddle.activity;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import staddle.com.staddle.R;
 

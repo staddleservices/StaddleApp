@@ -54,7 +54,7 @@
             android:textColor="@color/app_color_2"
             android:layout_below="@+id/toolbar_searchh"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.cardview.widget.CardView
             android:id="@+id/beautysalon_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

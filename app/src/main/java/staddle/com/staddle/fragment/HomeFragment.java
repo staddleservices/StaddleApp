@@ -11,19 +11,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
+
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +27,12 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -85,8 +81,7 @@ import staddle.com.staddle.utils.Alerts;
 import staddle.com.staddle.utils.CheckNetwork;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
-import static staddle.com.staddle.fragment.ShoppingFragment.appliedpomodes;
-import static staddle.com.staddle.fragment.ShoppingFragment.appliedpromovalue;
+
 
 public class HomeFragment extends Fragment {
 
@@ -166,7 +161,7 @@ public class HomeFragment extends Fragment {
         LinearLayout linearLayout1 = rootView.findViewById(R.id.ll_beauty);
         LinearLayout linearLayout2 = rootView.findViewById(R.id.ll_spa);
         LinearLayout linearLayout3 = rootView.findViewById(R.id.ll_house);
-        LinearLayout linearLayout4 = rootView.findViewById(R.id.ll_security);
+        //LinearLayout linearLayout4 = rootView.findViewById(R.id.ll_security);
 
         linearLayout1.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, AtHomeActivity.class);
@@ -187,12 +182,12 @@ public class HomeFragment extends Fragment {
             mContext.startActivity(intent);
         });
 
-        linearLayout4.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, AtHomeActivity.class);
-            intent.putExtra("cid", "3");
-            intent.putExtra("Tag", "Security");
-            startActivity(intent);
-        });
+//        linearLayout4.setOnClickListener(view -> {
+//            Intent intent = new Intent(mContext, AtHomeActivity.class);
+//            intent.putExtra("cid", "3");
+//            intent.putExtra("Tag", "Security");
+//            startActivity(intent);
+//        });
 
         if (CheckNetwork.isNetworkAvailable(mContext)) {
             getHomeSliderImages();

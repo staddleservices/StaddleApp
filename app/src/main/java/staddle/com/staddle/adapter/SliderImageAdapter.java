@@ -4,15 +4,15 @@ package staddle.com.staddle.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +21,7 @@ import java.util.List;
 
 import staddle.com.staddle.R;
 
+import staddle.com.staddle.activity.AtHomeActivity;
 import staddle.com.staddle.bean.SliderImagesModule;
 
 public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.MyViewHolder>  {
@@ -54,6 +55,15 @@ public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AtHomeActivity.class);
+                intent.putExtra("cid",image_arraylist.get(i).getCid());
+                context.startActivity(intent);
+            }
+        });
 
     }
 

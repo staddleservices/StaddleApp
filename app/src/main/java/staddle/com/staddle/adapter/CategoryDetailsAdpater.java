@@ -2,9 +2,7 @@ package staddle.com.staddle.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,9 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -67,10 +68,10 @@ public class CategoryDetailsAdpater extends RecyclerView.Adapter<CategoryDetails
             holder.txtTiming.setText(productListCategoryModel.getOffer_start_date() + " To " + productListCategoryModel.getOffer_end_date());
 
             if(productListCategoryModel.getRating().equals("0.0")||productListCategoryModel.getRating().equals("0")){
-                Log.d("RATING_RUN","if");
+                //Log.d("RATING_RUN","if");
                 holder.tv_item_rating.setText("New");
             }else  {
-                Log.d("RATING_RUN","else");
+                //Log.d("RATING_RUN","else");
                 holder.tv_item_rating.setText(productListCategoryModel.getRating());
             }
 
@@ -81,7 +82,7 @@ public class CategoryDetailsAdpater extends RecyclerView.Adapter<CategoryDetails
             } else {
                 Picasso.get()
                         .load(image)
-                        .placeholder(R.mipmap.ic_launcher)
+                        .placeholder(R.mipmap.ic_app_logo)
                         .error(R.mipmap.ic_launcher)
                         .into(holder.iv_offer_image);
             }

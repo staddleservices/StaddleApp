@@ -7,26 +7,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import staddle.com.staddle.R;
 import staddle.com.staddle.activity.PromoCodeActivity;
 import staddle.com.staddle.bean.PromoList;
-import staddle.com.staddle.fragment.ShoppingFragment;
+import staddle.com.staddle.fragment.CartFragment;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static staddle.com.staddle.activity.PromoCodeActivity.quantAlert;
-import static staddle.com.staddle.fragment.ShoppingFragment.appliedpomodes;
-import static staddle.com.staddle.fragment.ShoppingFragment.appliedpromovalue;
 
 public class PomoCodeAdapter extends RecyclerView.Adapter<PomoCodeAdapter.ViewHolder>{
     private List<PromoList> listdata;
@@ -97,8 +95,8 @@ public class PomoCodeAdapter extends RecyclerView.Adapter<PomoCodeAdapter.ViewHo
         final  TextView okaywesometext=(TextView)formElementsView.findViewById(R.id.okaywesometext);
 
         couponname.setText(promoname);
-
-        PromoCodeActivity.discount=((Float.valueOf(PromoCodeActivity.totalprice)*Float.valueOf(promovalue)/100));
+        Log.e("TOTAL: ",PromoCodeActivity.totalprice+"::"+promovalue+":");
+        PromoCodeActivity.discount=((Float.valueOf(PromoCodeActivity.totalprice)*Float.valueOf(promovalue)/100.00f));
         Log.e("TotalDiscount",""+PromoCodeActivity.discount);
         ttldiscountam.setText(PromoCodeActivity.discount+"");
         descdiscountam.setText("You have availed total discount of ₹"+PromoCodeActivity.discount);
@@ -107,15 +105,15 @@ public class PomoCodeAdapter extends RecyclerView.Adapter<PomoCodeAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 quantAlert.dismiss();
-                appliedpomodes = promoname;
-                ShoppingFragment.couponlayoutapplied.setVisibility(View.VISIBLE);
-                ShoppingFragment.couponlayout.setVisibility(View.GONE);
-                ShoppingFragment.appliedcoupontag.setText(promoname);
+                CartFragment.appliedpomodes = promoname;
+                CartFragment.couponlayoutapplied.setVisibility(View.VISIBLE);
+                CartFragment.couponlayout.setVisibility(View.GONE);
+                CartFragment.appliedcoupontag.setText(promoname);
                 Intent intent = new Intent();
-                intent.putExtra(ShoppingFragment.DISCOUNTKEY, PromoCodeActivity.discount+"");
+                intent.putExtra(CartFragment.DISCOUNTKEY, PromoCodeActivity.discount+"");
                 intent.putExtra("promovalue",promovalue);
 
-                contextt.setResult(ShoppingFragment.RESULT_CODE, intent); // You can also send result without any data using setResult(int resultCode)
+                contextt.setResult(CartFragment.RESULT_CODE, intent); // You can also send result without any data using setResult(int resultCode)
                 contextt.finish();
 
             }

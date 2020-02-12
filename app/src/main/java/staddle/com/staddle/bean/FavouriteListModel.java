@@ -25,7 +25,7 @@ public class FavouriteListModel implements Parcelable {
     private String subcat;
     private String sub_category;
     private String user_discount;
-    private String vid;
+    private String id;
     private String rating;
     private String image1;
     private String image2;
@@ -92,7 +92,7 @@ public class FavouriteListModel implements Parcelable {
         subcat = in.readString();
         sub_category = in.readString();
         user_discount = in.readString();
-        vid = in.readString();
+        id = in.readString();
         rating = in.readString();
         image1 = in.readString();
         image2 = in.readString();
@@ -242,12 +242,12 @@ public class FavouriteListModel implements Parcelable {
         this.user_discount = user_discount;
     }
 
-    public String getVid() {
-        return vid;
+    public String getid() {
+        return id;
     }
 
-    public void setVid(String vid) {
-        this.vid = vid;
+    public void setVid(String id) {
+        this.id = id;
     }
 
     public String getRating() {
@@ -281,7 +281,7 @@ public class FavouriteListModel implements Parcelable {
         dest.writeString(subcat);
         dest.writeString(sub_category);
         dest.writeString(user_discount);
-        dest.writeString(vid);
+        dest.writeString(id);
         dest.writeString(rating);
         dest.writeString(image1);
         dest.writeString(image2);

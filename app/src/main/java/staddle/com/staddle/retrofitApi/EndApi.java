@@ -29,7 +29,7 @@ public class EndApi extends BaseApi {
     public static final String UPDATE_PRODUCT_STATUS_REJECTED = "wsUpdateProductStatusRejected.php";
     public static final String HELP = "add_help.php";
     public static final String GET_FAVOURITE_LIST = "getFavList.php";
-    public static final String GET_FAVOURITE_LISTVID="http://35.200.162.209/mobileapp/api/getFavVendorlist.php";
+    public static final String GET_FAVOURITE_LISTVID="http://staddle.in/mobileapp/api/getFavVendorlist.php";
     public static final String ADD_OFFER_SAVE = "add_offer_save.php";
     public static final String ADD_ORDER_DETAILS = "add_order_details.php";
     public static final String CHECKPOSTORDER = "chechpostorder.php";
@@ -45,7 +45,7 @@ public class EndApi extends BaseApi {
     public static final String GET_HELP_LIST = "getHelpList.php?";
     public static final String MAKE_RATING = "add_rateing.php?";
     public static final String CHECK_USERS="http://staddle.in/mobileapp/api/checkuserexist.php";
-    public static final String FETCH_COUPONS="http://staddle.in/mobileapp/api/fetchoffers.php";
+    public static final String FETCH_COUPONS="http://staddle.in/mobileapp/api/show_all_promo.php";
     public static final String SEARCH_COUPONS="http://staddle.in/mobileapp/api/searchpromo.php";
     public static final String RATING_BOX_CHECK="http://staddle.in/mobileapp/api/rating_box.php";
     public static final String FETCH_SAVED_ADDRESS="http://staddle.in/mobileapp/api/fetchsavedaddress.php";

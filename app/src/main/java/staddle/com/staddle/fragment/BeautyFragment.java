@@ -2,15 +2,18 @@ package staddle.com.staddle.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.support.v4.app.Fragment;
+
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ import staddle.com.staddle.retrofitApi.ApiInterface;
 
 public class BeautyFragment extends Fragment {
     Context mContext;
-    RecyclerView  productlist_recyclerview;
+    RecyclerView productlist_recyclerview;
     ApiInterface apiInterface;
     //vendor list
     ArrayList<VendorListModel> vendorListModelArrayList;

@@ -5,15 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -26,11 +18,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -42,6 +46,7 @@ import staddle.com.staddle.ResponseClasses.AddFavouriteResponse;
 import staddle.com.staddle.ResponseClasses.CheckFavoriteResponse;
 import staddle.com.staddle.ResponseClasses.GetVendorSubCategoryMenuListResponse;
 import staddle.com.staddle.adapter.VendorSubCategoryListAdapter;
+import staddle.com.staddle.bean.CurrentOrderMetaData;
 import staddle.com.staddle.bean.GetVendorSubCategoryListModule;
 import staddle.com.staddle.bean.GetVendorSubCategoryMenuListModule;
 import staddle.com.staddle.bean.VendorOfferListModel;
@@ -66,7 +71,7 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
     private ApiInterface apiInterface;
     private ImageView img_back, iv_vendor, img1, img2, img3, img4, img5, img_vendor_logo ;
     public static  RelativeLayout img_cart;
-    private String vid = "", rating = "", cid = "",  location = "", image = "", closingTime = "", openingTime = "",
+    public static  String vid = "", rating = "", cid = "",  location = "", image = "", closingTime = "", openingTime = "",
             image1 = "", image2 = "", image3 = "", image4 = "", image5 = "", userId, discount = "", commision = "";
     public static String vname = "";
     //private ru.dimorinny.floatingtextbutton.FloatingTextButton floatingTextButton;
@@ -74,9 +79,13 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
     private int lastPosition = -1;
     private Dialog dialog;
     private String fav;
-    private String tag = "", Category = "";
+    public static  String tag = "", Category = "";
     private ShimmerFrameLayout mShimmerViewContainer;
     private CoordinatorLayout container;
+
+    public static List<CurrentOrderMetaData> currentOrderMetaData;
+    public static String CR_OR_META_DATA = "CR_OR_META_DATA";
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -89,6 +98,8 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
         userId = AppPreferences.loadPreferences(VendorDetailsActivityNew.this, "USER_ID");
 
         categoryMenuList = new ArrayList<>();
+        currentOrderMetaData = new ArrayList<>();
+
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -102,6 +113,8 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
             //Log.e("VIDDETAILS:",vid);
             cid = intent.getStringExtra("cid");
             discount = intent.getStringExtra("discount");
+
+            //Log.e("PRINT_DIS",Float.parseFloat(discount)+"");
             commision = intent.getStringExtra("commision");
             AppPreferences.savePreferences(VendorDetailsActivityNew.this, "cidAtVendorDetails", cid);
             openingTime = intent.getStringExtra("openingTime");
@@ -172,24 +185,36 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
             Intent intent1 = new Intent(VendorDetailsActivityNew.this, HomeActivity.class);
             intent1.putExtra("openF2", true);
             if (discount.equalsIgnoreCase(""))
-                intent1.putExtra("discount", "0%");
-            else if (!discount.contains("%"))
-                intent1.putExtra("discount", discount + "%");
+                //intent1.putExtra("discount", "0%");
+                discount = "0";
+//            else if (!discount.contains("%"))
+//                //intent1.putExtra("discount", discount + "%");
+//                discount = discount + "%";
             else
-                intent1.putExtra("discount", discount);
+                //intent1.putExtra("discount", discount);
 
             if (commision.equalsIgnoreCase(""))
-                intent1.putExtra("commision", "0%");
-            else if (!commision.contains("%"))
-                intent1.putExtra("commision", commision + "%");
+                //intent1.putExtra("commision", "0%");
+                commision = "0";
+//            else if (!commision.contains("%"))
+//                //intent1.putExtra("commision", commision + "%");
+//                commision = commision + "%";
             else
-                intent1.putExtra("commision", commision);
+                //intent1.putExtra("commision", commision);
 
-            intent1.putExtra("Tag", tag);
-            intent1.putExtra("Category", Category);
-            intent1.putExtra("CID", cid);
-            intent1.putExtra("vid",vid);
-            intent.putExtra("vname",vname);
+//            intent1.putExtra("Tag", tag);
+//            intent1.putExtra("Category", Category);
+//            intent1.putExtra("CID", cid);
+//            intent1.putExtra("vid",vid);
+//            intent1.putExtra("vname",vname);
+
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CRORDISCOUNT",discount);
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CRORTAG",tag);
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CRORCAT",Category);
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CROR_CID",cid);
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CROR_VID",vid);
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CROR_VNAME",vname);
+            AppPreferences.savePreferences(VendorDetailsActivityNew.this,"CROR_COMMISION",commision);
 
             overridePendingTransition(0, 0);
             intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -225,6 +250,7 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
         setUpView();
 
         if (CheckNetwork.isNetworkAvailable(this)) {
+            Log.e("Favorite_Vendor",vid);
             getVendorSubCategoryMenuListApi(vid);
         } else {
             Alerts.showAlert(this);
@@ -539,4 +565,6 @@ public class VendorDetailsActivityNew extends AppCompatActivity {
         }
 
     }
+
+
 }

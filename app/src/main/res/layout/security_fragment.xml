@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/margin_10">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.cardview.widget.CardView
         android:id="@+id/rvBeautySalon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
